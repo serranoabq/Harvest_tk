@@ -11,7 +11,7 @@
 
 // Set the content width based on the theme's design and stylesheet.
 if ( ! isset( $content_width ) )
-	$content_width = 750; /* pixels */
+	$content_width = 960; /* pixels */
 
 if ( ! function_exists( 'harvest_tk_setup' ) ) :
 // Set up theme defaults and register support for various WordPress features.
@@ -171,9 +171,6 @@ require THEME_DIR_PATH . '/includes/custom-header.php';
 // Custom template tags for this theme.
 require THEME_DIR_PATH . '/includes/template-tags.php';
 
-// Custom functions that act independently of the theme templates.
-require THEME_DIR_PATH . '/includes/extras.php';
-
 // Customizer additions.
 require THEME_DIR_PATH . '/includes/customizer.php';
 
@@ -188,6 +185,9 @@ require THEME_DIR_PATH . '/includes/ctc-support.php';
 
 // Load RSS feed custom functions.
 require THEME_DIR_PATH . '/includes/feeds.php';
+
+// Load additional display support.
+require THEME_DIR_PATH . '/includes/display.php';
 
 // Adds WooCommerce support
 // add_action( 'after_setup_theme', 'woocommerce_support' );

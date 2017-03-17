@@ -2,12 +2,11 @@
 /**
  * The template for displaying 404 pages (Not Found).
  *
- * @package _tk
+ * @package harvest_tk
  */
 
 get_header(); ?>
 
-	<?php // add the class "panel" below here to wrap the content-padder in Bootstrap style ;) ?>
 	<section class="content-padder error-404 not-found">
 
 		<header>
@@ -16,13 +15,10 @@ get_header(); ?>
 
 		<div class="page-content">
 
-			<p><?php _e( 'Nothing could be found at this location. Maybe try a search?', 'harvest_tk' ); ?></p>
-
-			<?php get_search_form(); ?>
+			<p><?php _e( 'We\'re sorry, but the page you requested could not be found.', 'harvest_tk' ); ?></p>
 
 		</div><!-- .page-content -->
 
 	</section><!-- .content-padder -->
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>

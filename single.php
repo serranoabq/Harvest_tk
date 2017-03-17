@@ -2,14 +2,14 @@
 /**
  * The Template for displaying all single posts.
  *
- * @package _tk
+ * @package harvest_tk
  */
 
 get_header(); ?>
 
 	<?php while ( have_posts() ) : the_post(); ?>
 
-		<?php get_template_part( 'includes/components/content', 'single' ); ?>
+		<?php get_template_part( 'components/content', 'single' ); ?>
 
 		<?php // harvest_tk_content_nav( 'nav-below' ); ?>
 		<?php harvest_tk_pagination(); ?>
@@ -22,5 +22,4 @@ get_header(); ?>
 
 	<?php endwhile; // end of the loop. ?>
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>

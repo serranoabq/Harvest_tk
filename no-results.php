@@ -4,7 +4,7 @@
  *
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
- * @package _tk
+ * @package harvest_tk
  */
 ?>
 
@@ -21,11 +21,6 @@
 		<?php elseif ( is_search() ) : ?>
 
 			<p><?php _e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'harvest_tk' ); ?></p>
-			<?php get_search_form(); ?>
-
-		<?php else : ?>
-
-			<p><?php _e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'harvest_tk' ); ?></p>
 			<?php get_search_form(); ?>
 
 		<?php endif; ?>

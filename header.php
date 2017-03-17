@@ -23,18 +23,16 @@
 		
 	<header id="masthead" class="site-header" role="banner">
 	
-		<?php get_template_part( 'includes/components/site', 'header' ); ?>
+		<?php get_template_part( 'components/site', 'header' ); ?>
 	
 	</header><!-- #masthead -->
-
-	<nav class="site-navigation">
-
-		<?php get_template_part( 'includes/components/site', 'navigation' ); ?>
 	
-	</nav><!-- .site-navigation -->
-
 	<div class="main-content">
+		<div class="pre-content">
+			<div class="pre-content-bg"></div>
+			<?php harvest_tk_precontent(); ?>
+		</div> <!-- .pre-content -->
 		<div class="container">
 			<div class="row">
-				<div id="content" class="main-content-inner col-sm-12 col-md-8">
+				<div id="content" class="main-content-inner col-md-12">
 

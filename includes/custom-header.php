@@ -13,7 +13,7 @@
 	<?php } // if ( ! empty( $header_image ) ) ?>
 
  *
- * @package _tk
+ * @package harvest_tk
  */
 
 /**
@@ -23,7 +23,7 @@
  * @uses harvest_tk_admin_header_style()
  * @uses harvest_tk_admin_header_image()
  *
- * @package _tk
+ * @package harvest_tk
  */
 function harvest_tk_custom_header_setup() {
 	if ( function_exists( 'add_theme_support' ) ) {

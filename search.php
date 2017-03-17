@@ -2,7 +2,7 @@
 /**
  * The template for displaying Search Results pages.
  *
- * @package _tk
+ * @package harvest_tk
  */
 
 get_header(); ?>
@@ -16,7 +16,7 @@ get_header(); ?>
 		<?php // start the loop. ?>
 		<?php while ( have_posts() ) : the_post(); ?>
 
-			<?php get_template_part( 'content', 'search' ); ?>
+			<?php get_template_part( 'components/content', 'search' ); ?>
 
 		<?php endwhile; ?>
 
@@ -24,7 +24,7 @@ get_header(); ?>
 
 	<?php else : ?>
 
-		<?php get_template_part( 'no-results', 'search' ); ?>
+		<?php get_template_part( 'components/no-results', 'search' ); ?>
 
 	<?php endif; // end of loop. ?>
 

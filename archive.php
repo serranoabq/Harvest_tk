@@ -4,12 +4,11 @@
  *
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
- * @package _tk
+ * @package harvest_tk
  */
 
 get_header(); ?>
 
-	<?php // add the class "panel" below here to wrap the content-padder in Bootstrap style ;) ?>
 	<div class="content-padder">
 
 		<?php if ( have_posts() ) : ?>

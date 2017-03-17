@@ -4,7 +4,7 @@
  *
  * Eventually, some of the functionality here could be replaced by core features
  *
- * @package _tk
+ * @package harvest_tk
  */
 
 if ( ! function_exists( 'harvest_tk_content_nav' ) ) :
@@ -257,7 +257,7 @@ add_action( 'edit_category', 'harvest_tk_category_transient_flusher' );
 add_action( 'save_post',     'harvest_tk_category_transient_flusher' );
 
 
-// _tk Bootstrap pagination function
+// harvest_tk Bootstrap pagination function
 // original: http://fellowtuts.com/wordpress/bootstrap-3-pagination-in-wordpress/
 /**
  * 

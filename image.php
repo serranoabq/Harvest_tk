@@ -2,7 +2,7 @@
 /**
  * The template for displaying image attachments.
  *
- * @package _tk
+ * @package harvest_tk
  */
 
 get_header(); ?>

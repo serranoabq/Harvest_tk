@@ -1,8 +1,8 @@
 <?php
 /**
- * _tk Theme Customizer
+ * harvest_tk Theme Customizer
  *
- * @package _tk
+ * @package harvest_tk
  */
 
 /**

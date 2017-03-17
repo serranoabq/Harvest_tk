@@ -1,8 +1,8 @@
 <?php
 /**
- * The template for displaying search forms in _tk
+ * The template for displaying search forms in harvest_tk
  *
- * @package _tk
+ * @package harvest_tk
  */
 ?>
 <form role="search" method="get" class="search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">

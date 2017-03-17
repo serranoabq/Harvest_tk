@@ -1,0 +1,94 @@
+x	\404.php
+x	\header.php
+x	\footer.php
+x	\no-results.php
+x	\single.php
+x	\searchform.php
+x	\page.php
+x	\single-ctc_event.php
+x	\single-ctc_sermon.php
+
+
+g	\comments.php
+g	\index.php
+g	\sidebar.php
+g	\search.php
+
+w	\style.css
+w	\screenshot.png
+
+w	\functions.php
+w	\image.php
+w	\archive-product.php
+w	\archive.php
+
+
+
+	x = OK
+	g = good for now
+	w = needs work
+	
+	
+	
+	\components\content-page.php
+	\components\content-people_grid.php
+	\components\content-related-sermons.php
+	\components\content-single-event.php
+	\components\content-single-location.php
+	\components\content-single-person-grid.php
+	\components\content-single-person.php
+	\components\content-single-sermon.php
+	\components\content-single.php
+	\components\content.php
+	\components\site-header.php
+	\components\site-navigation.php
+
+	\includes\bootstrap-wp-navwalker.php
+	\includes\ctc-support.php
+	\includes\custom-header.php
+	\includes\customizer.php
+	\includes\display.php
+	\includes\extras.php
+	\includes\feeds.php
+	\includes\jetpack.php
+	\includes\template-tags.php
+
+	\includes\css\bootstrap-wp.css
+	\includes\css\font-awesome.css
+	\includes\css\font-awesome.min.css
+
+	\includes\fonts\fontawesome-webfont.eot
+	\includes\fonts\fontawesome-webfont.svg
+	\includes\fonts\fontawesome-webfont.ttf
+	\includes\fonts\fontawesome-webfont.woff
+	\includes\fonts\FontAwesome.otf
+
+	\includes\js\bootstrap-wp.js
+	\includes\js\customizer.js
+	\includes\js\keyboard-image-navigation.js
+	\includes\js\skip-link-focus-fix.js
+
+
+
+	\includes\resources\bootstrap
+	\includes\resources\bootstrap\config.json
+	\includes\resources\bootstrap\css
+	\includes\resources\bootstrap\fonts
+	\includes\resources\bootstrap\js
+	\includes\resources\bootstrap\css\bootstrap-theme.css
+	\includes\resources\bootstrap\css\bootstrap-theme.css.map
+	\includes\resources\bootstrap\css\bootstrap-theme.min.css
+	\includes\resources\bootstrap\css\bootstrap-theme.min.css.map
+	\includes\resources\bootstrap\css\bootstrap.css
+	\includes\resources\bootstrap\css\bootstrap.css.map
+	\includes\resources\bootstrap\css\bootstrap.min.css
+	\includes\resources\bootstrap\css\bootstrap.min.css.map
+	\includes\resources\bootstrap\fonts\glyphicons-halflings-regular.eot
+	\includes\resources\bootstrap\fonts\glyphicons-halflings-regular.svg
+	\includes\resources\bootstrap\fonts\glyphicons-halflings-regular.ttf
+	\includes\resources\bootstrap\fonts\glyphicons-halflings-regular.woff
+	\includes\resources\bootstrap\fonts\glyphicons-halflings-regular.woff2
+	\includes\resources\bootstrap\js\bootstrap.js
+	\includes\resources\bootstrap\js\bootstrap.min.js
+	\includes\resources\bootstrap\js\npm.js
+
