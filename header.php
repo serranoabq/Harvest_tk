@@ -28,11 +28,18 @@
 	</header><!-- #masthead -->
 	
 	<div class="main-content">
+	
 		<div class="pre-content">
+		
 			<div class="pre-content-bg"></div>
+			
 			<?php harvest_tk_precontent(); ?>
+			
 		</div> <!-- .pre-content -->
+		
 		<div class="container">
-			<div class="row">
-				<div id="content" class="main-content-inner col-md-12">
+		
+			<div class="row justify-content-center">
+			
+				<div id="content" class="main-content-inner col-lg-10">
 

@@ -11,15 +11,18 @@
 	$has_audio = ! empty( $ctc_data[ 'audio' ] );
 	$has_video = ! empty( $ctc_data[ 'video' ] );
 
+	// Bail if either audio or video is missing
 	if ( ! $has_audio || ! $has_video )
 		return;
+	
 	$active = 'btn-primary active';
 	$inactive = 'btn-secondary';
 ?>
 
-	<div class="ctc-sermon-chooser">
-		<div class="btn-group" role="group" aria-label="Choose Audio or Video">
-			<a href="<?php echo add_query_arg( [ 'media' => 'video' ] ); ?>" class="btn btn-default <?php echo $do_media=='video' ? $active: $inactive; ?>">Video</a>
-			<a href="<?php echo add_query_arg( [ 'media' => 'audio' ] ); ?>" class="btn btn-default <?php echo $do_media=='audio' ? $active: $inactive; ?>">Audio</a>
+	<div class="ctc-sermon-chooser col-12">
+		<div class="btn-group" role="group" aria-label="<?php _e( 'Choose Audio or Video', 'harvest_tk' ); ?>">
+			<a href="<?php echo add_query_arg( [ 'media' => 'video' ] ); ?>" class="btn <?php echo $do_media=='video' ? $active: $inactive; ?>" title="<?php _e( 'Play Video', 'harvest_tk' ); ?>"><?php _e( 'Watch', 'harvest_tk' ); ?></a>
+			<a href="<?php echo add_query_arg( [ 'media' => 'audio' ] ); ?>" class="btn <?php echo $do_media=='audio' ? $active: $inactive; ?>" title="<?php _e( 'Play Audio', 'harvest_tk' ); ?>"><?php _e( 'Listen', 'harvest_tk' ); ?></a>
+			<a href="<?php echo $ctc_data[ 'audio' ]; ?>" class="btn btn-secondary" title="<?php _e( 'Download Audio', 'harvest_tk' ); ?>" ><i class="fa fa-download" aria-hidden="true"></i></a>
 		</div>
 	</div> <!-- .ctc-sermon-chooser -->

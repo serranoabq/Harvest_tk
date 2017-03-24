@@ -24,7 +24,7 @@
 	$has_audio = ! empty( $ctc_data[ 'audio' ] );
 	$has_video = ! empty( $ctc_data[ 'video' ] );
 	$has_image = ! empty( $ctc_data[ 'img' ] );
-	$has_map = $ctc_data[ 'map_used' ];
+	$has_map = ! empty( $ctc_data[ 'map_used' ] ) && $ctc_data[ 'map_used' ];
 
 	// Determine possible media to display
 	$pos_media = array();

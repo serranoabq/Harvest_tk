@@ -2,27 +2,23 @@
 /**
  * Template part for displaying related sermons
  *
- * @package Cultiv8
+ * @package harvest_tk
  */
 ?>
 
 <?php
-	$data = cultiv8_get_sermon_data( $post->ID );
-
-	if( $data[ 'series' ] ):
+	global $ctc_data;
+	if ( empty( $ctc_data ) )
+		$ctc_data = harvest_tk_get_sermon_data( get_the_ID() );
+	
+	if( $ctc_data[ 'series' ] ):
 		$tax_query[] = array(
 				'taxonomy'	=> 'ctc_sermon_series',
 				'field'			=> 'slug',
-				'terms'			=> $data[ 'series_slug' ],
+				'terms'			=> $ctc_data[ 'series_slug' ],
 		);
-		if( $data[ 'topic' ] ) {
-			$tax_query[] = array( 
-				'taxonomy'	=> 'ctc_sermon_topic',
-				'field'			=> 'slug',
-				'terms'			=> $data[ 'topic_slug' ],	
-			);
-			$tax_query['relation'] = 'AND';
-		}
+		
+		
 		$args = array( 
 			'post_type' 			=> 'ctc_sermon',  
 			'tax_query'				=> $tax_query,
@@ -33,41 +29,43 @@
 		);
 		$related_pages = new WP_Query ( $args );
 
-		$topic_name = cultiv8_get_option( 'ctc-sermon-topic', __( 'Topic', 'cultiv8' ) );
-		$topic = explode( '/', $topic_name );
-		$topic = strtolower( array_pop( $topic ) );
-		$series_name = cultiv8_get_option( 'ctc-sermon-series', __( 'Series', 'cultiv8' ) );
-		$series = explode( '/', $series_name );
-		$series = strtolower( array_pop( $series ) );
 		
 ?>
 
 <?php if ( $related_pages->have_posts() ) : ?>
+<div class="ctc-related-sermons">
+	<h2><?php echo  __( 'Other messages from this series', 'harvest_tk')  ?></h2>
 
-<h2><?php echo  __( 'Other messages from this ', 'cultiv8') . strtolower( $series ) . ( $data['topic'] ? _x( ' and ', 'Space before and after', 'cultiv8' ) . strtolower( $topic ) : '' ); ?></h2>
+	<div class="row">
+		
+		<?php while ( $related_pages->have_posts() ) : $related_pages->the_post(); 
+			
+			$mdata = harvest_tk_get_sermon_data( get_the_ID() );
+			$img = $mdata[ 'img' ];
+			$has_video = ! empty( $mdata[ 'video' ] );
+			$has_audio = ! empty( $mdata[ 'audio' ] );
+			$id = harvest_tk_get_attachment_id( $img );
+			$img_src = wp_get_attachment_image( $id, 'harvest_tk-hero', '', ['class'=>'ctc-image card-img-top'] );
+			$permalink = $mdata[ 'permalink' ];
 
-<div class="pique-grid-three">
+		?>
+		<div class="col-sm-6">
+			<div <?php post_class( 'card' ); ?>>
+				<?php //if ( $img ) :  echo $img_src; endif; ?>
+				<div class="card-block">
+					<a href="<?php echo $permalink; ?>"><?php the_title( '<h5 class="card-title">' , '</h5>' ); ?></a>
+					<h6 class="card-subtitle mb-2 text-muted"><?php the_date(); ?></h6>
+					<div class="ctc_capability">
+						<?php if ( $has_audio ): ?><i class="fa fa-volume-up" title="<?php _e('Audio Available', 'harvest_tk'); ?>"></i><?php endif; ?> 
+						<?php if ( $has_video ): ?><i class="fa fa-film" title="<?php _e('Video Available', 'harvest_tk'); ?>"></i><?php endif; ?> 
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php endwhile; ?>
 
-	<?php while ( $related_pages->have_posts() ) : $related_pages->the_post(); 
-		$mdata = cultiv8_get_sermon_data( get_the_ID() );
-		$img = $mdata[ 'img' ];
-		$permalink = $mdata[ 'permalink' ];
-
-	?>
-		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-
-			<?php if ( $img ) : ?>
-				<img class="ctc-sermon-img" src="<?php echo $img; ?>" width="320" height="180" />
-			<?php endif; ?>
-
-			<a href="<?php echo $permalink; ?>"><?php the_title( '<h3>' , '</h3>' ); ?></a>
-
-		</article>
-
-	<?php endwhile; ?>
-
-</div><!-- .child-pages .grid -->
-
+	</div>
+</div><!-- .ctc-related-sermons -->
 <?php
 endif;
 wp_reset_postdata();

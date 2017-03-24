@@ -44,7 +44,7 @@ function harvest_tk_add_ctc(){
 	// Sermons
 	add_theme_support( 'ctc-sermons', array(
 			'taxonomies' => array(
-					'ctc_sermon_topic',
+					//'ctc_sermon_topic',
 					'ctc_sermon_series',
 					'ctc_sermon_speaker',
 			),

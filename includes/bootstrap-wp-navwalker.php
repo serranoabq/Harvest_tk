@@ -12,6 +12,57 @@
 
 class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 
+	private $classes; //additional classes 
+	
+	/**
+	 * Class Construct
+	 * @param array $classes Associative array of classes
+	 *	string $classes[ 'item' ] = classes to apply to li element
+	 *	string $classes[ 'link' ] = classes to apply to anchor element
+	 */
+	function __construct( $classes ){
+		if( empty( $classes) ) 
+			return;
+		
+		$this->classes = $classes;
+		
+		// Hooks
+		if( ! empty( $classes[ 'item' ] ) ){
+			add_filter( 'nav_menu_css_class', array( $this, 'nav_menu_css_class' ) );
+		}
+		if( ! empty( $classes[ 'link' ] ) ){
+			add_filter( 'nav_menu_link_attributes', array( $this, 'nav_menu_link_attributes' ) );
+		}
+			
+	}
+	/**
+	 * Add additional classes to the li element of menu items
+	 *
+	 * This is hooked to the nav_menu_css_class filter
+	 *
+	 * @param string $classes Classes to add to the li element in the menu.
+	 */
+	function nav_menu_css_class( $classes ){
+		$classes[] = $this->classes[ 'item' ];
+		return $classes;
+	}
+	
+	
+	/**
+	 * Add additional classes to the anchor element of a menu item. 
+	 * This is hooked to the nav_menu_link_attributes filter
+	 *
+	 * @param array $atts Array of attributes on the anchor element
+	 *
+	 */
+	function nav_menu_link_attributes( $atts ){
+		if( empty( $atts[ 'class' ] ) )
+			$atts['class'] = $this->classes[ 'link' ];
+		else
+			$atts['class'] .= ' ' . $this->classes[ 'link' ];
+		return $atts;
+	}
+	
 	/**
 	 * @see Walker::start_lvl()
 	 * @since 3.0.0

@@ -12,20 +12,20 @@ get_header();
 
 		<?php get_template_part( 'components/content', 'single-sermon' ); ?>
 
-		<div class="col-12">
-		<?php /*
+		<?php 
 			$meta_args = array(
 				'order' 		=> 'DESC',
 				'orderby' 	=> 'date',
 			);
 			harvest_tk_link_pages_by_meta( array(
-				'prev_text' => '<i class="fa fa-arrow-left"></i> &nbsp; Previous ',
-				'next_text' => 'Next &nbsp; <i class="fa fa-arrow-right"></i> ',
+				'prev_text' => '<span>' . esc_html__( 'Previous', 'harvest_tk' ) . '</span> %title',
+				'next_text' => '<span>' . esc_html__( 'Next', 'harvest_tk' ) . '</span> %title',
 			), $meta_args );
 
-		*/ ?>
-		</div>
-		
+		?>
+
+		<?php //get_template_part( 'components/content','related-sermons' ); ?>
+
 		<?php
 		// If comments are open or we have at least one comment, load up the comment template.
 		if ( comments_open() || get_comments_number() ) :

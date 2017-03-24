@@ -237,13 +237,17 @@ nav .form-control {
 
 
 /* These are custom styles for  CTC-specific stuff */
+.main-content{
+	/*overflow: hidden;*/
+}
+
 .pre-content{ 
 	position:relative;
 }
 .pre-content-bg{ 
 	position: absolute; 
 	left: 0;
-	top: 0;
+	top: -2px;
 	bottom: 33%;
 	width: 100%;
 	z-index: -1;
@@ -263,26 +267,67 @@ nav .form-control {
 	text-indent: -25px; /* = -fa_width */
 	margin-top: 4px;
 	margin-bottom: 12px;
-	line-height: 2.25rem;
 }
 .ctc-details .fa {
-	font-size: 1.8rem;
 	vertical-align: middle;
 	color: rgba(0,0,0,0.3);
 	text-indent: -5px;
 	width: 25px;
 }
-.ctc-details .btn {
-	color: #fff;
-	padding: 12px 20px;
-	border: none;
-	border-radius: 3px;
-	background: #005; /* Customize */
-}
 .ctc-details .btn .fa {
 	color: #fff; 
 }
+
+/* CTC Media chooser */
 .ctc-sermon-chooser{
 	text-align: center;
-	margin: 20px;
+	margin-top: 20px;
+}
+
+h1.page-title {
+	margin-top: 20px
+}
+
+.entry-footer{
+	margin-top: 25%;
+}
+#site-header-container{
+	padding-bottom: 0;
+}
+.pre-content-bg, .site-header{
+	background: #467290;
+}
+
+
+.ctc_capability {
+	color: rgba(0,0,0,0.5);
+}
+
+.navbar-white .navbar-toggler, 
+.navbar-white .navbar-nav .nav-link {
+	color: rgba( 255,255,255, 0.95 ) !important;
+}
+
+
+.navbar-white .navbar-toggler {
+	border-color: rgba(255, 255, 255, 0.1);
+}
+.navbar-white .navbar-toggler-icon {
+	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.95)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.ctc-card {
+	margin-top: 15px;
+	min-width: 200px;
+}
+
+@media (max-width: 768px){
+	.card-columns{
+		column-count: 2;
+	}
+}
+@media (max-width: 567px){
+	.card-columns{
+		column-count: 1;
+	}
 }
