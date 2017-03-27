@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying all single event posts.
+ * The template for displaying a single event
  *
  * @package harvest_tk
  */
@@ -10,7 +10,7 @@ get_header();
 
 	<?php while ( have_posts() ) : the_post(); ?>
 	
-		<?php get_template_part( 'components/content', 'single-event' ); ?>
+		<?php get_template_part( 'components/ctc-event', 'single' ); ?>
 
 		<?php 
 			$meta_args = array(
@@ -29,8 +29,8 @@ get_header();
 			);
 			
 			harvest_tk_link_pages_by_meta( array(
-				'prev_text' => '<span>' . esc_html__( 'Previous', 'pique' ) . '</span> %title',
-				'next_text' => '<span>' . esc_html__( 'Next', 'pique' ) . '</span> %title',
+				'prev_text' => '<i class="fa fa-chevron-left"></i> &nbsp; %title',
+				'next_text' => '%title &nbsp; <i class="fa fa-chevron-right"></i>',
 			), $meta_args );
 		
 		?>

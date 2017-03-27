@@ -124,6 +124,7 @@ function harvest_tk_get_recurrence_note( $post_obj ) {
 		return '';
 }
 
+// Helper is used to get options
 function harvest_tk_get_option( $option, $default = '' ){
 	if( class_exists( 'CTC_Extender' ) )
 		return ctcex_get_option( $option, $default );
@@ -133,6 +134,7 @@ function harvest_tk_get_option( $option, $default = '' ){
 	}
 }
 
+// GetCTC default data
 function harvest_tk_get_default_data( $post_id ) {
 	$data = array(
 		'permalink'   => get_permalink( $post_id ),
@@ -175,7 +177,7 @@ function harvest_tk_get_person_data( $post_id ){
 		return harvest_tk_get_default_data( $post_id ); 
 }
 
-
+// Boilerplate to get event details
 function harvest_tk_the_event_details( $post_id, $glyph = 'fa' ){
 	$classes = array(
 		'container'  => 'ctcex-events-container',
@@ -276,6 +278,7 @@ function harvest_tk_the_event_details( $post_id, $glyph = 'fa' ){
 	echo '<div id="ctcex-events" class="ctcex-events-list">' . $item_output . '</div>';
 }
 
+// Boilerplate to get sermon details
 function harvest_tk_the_sermon_details( $post_id, $glyph = 'fa' ){
 	$classes = array(
 		'container'  => 'ctcex-sermon-container',
@@ -380,6 +383,7 @@ function harvest_tk_the_sermon_details( $post_id, $glyph = 'fa' ){
 	echo $item_output;
 }
 
+// Boilerplate to get person details
 function harvest_tk_the_person_details( $post_id, $glyph = 'fa' ){
 	$classes = array(
 		'container'  => 'ctcex-person-container',
@@ -436,6 +440,7 @@ function harvest_tk_the_person_details( $post_id, $glyph = 'fa' ){
 	echo $item_output;
 }
 
+// Boilerplate to get location details
 function harvest_tk_the_location_details( $post_id, $glyph = 'fa' ){
 	$classes = array(
 		'container'  => 'ctcex-location-container',
@@ -523,4 +528,69 @@ function harvest_tk_the_location_details( $post_id, $glyph = 'fa' ){
 	);
 	
 	echo $item_output;
+}
+
+// Adjust the event query
+add_action( 'pre_get_posts', 'harvest_tk_pre_events' );
+function harvest_tk_pre_events( $query ){
+	global $wp_query;
+
+	if( ! array_key_exists( 'post_type', $query->query_vars ) )
+		return;
+	
+	if( 'ctc_event' != $query->query_vars[ 'post_type' ] )
+		return;
+		
+	$args = array(
+		'order' => 'ASC',
+		'orderby' => 'meta_value',
+		'meta_key' => '_ctc_event_start_date_start_time',
+		'meta_type' => 'DATETIME',
+		'posts_per_page' => 9,
+		'meta_query' => array(
+			array(
+				'key' => '_ctc_event_end_date_end_time',
+				'value' => date_i18n( 'Y-m-d H:i:s' ), // today localized
+				'compare' => '>=', // later than today
+				'type' => 'DATETIME',
+			),
+		)
+	);
+
+	$query_terms = array_merge( $args, $query->query_vars ); 
+	$query->query_vars = $query_terms;
+	
+}
+
+// Get the name from CTC extender
+function harvest_tk_get_ctc_name( $ctc_type, $is_singular = false ) {
+	
+	switch ( $ctc_type ) {
+		case 'ctc_sermon':
+			$names = __( 'Sermons/Sermon', 'harvest_tk' );
+			$option = 'ctc-sermons';
+			break;
+		case 'ctc_event':
+			$names = __( 'Events/Event', 'harvest_tk' );
+			$option = 'ctc-events';
+			break;
+		case 'ctc_person':
+			$names = __( 'People/Person', 'harvest_tk' );
+			$option = 'ctc-people';
+			break;
+		case 'ctc_location':
+			$names = __( 'Locations/Location', 'harvest_tk' );
+			$option = 'ctc-locations';
+			break;
+		case 'default':
+			return '';
+	}
+	
+	$name_array = explode( '/', harvest_tk_get_option( $option , $names ) );
+	
+	$name_plural = array_shift ( $name_array );
+	$name_singular = $name_array; 
+	
+	return $is_singular ? $name_singular : $name_plural;
+	
 }

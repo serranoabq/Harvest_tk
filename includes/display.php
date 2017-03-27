@@ -55,23 +55,23 @@ function harvest_tk_link_pages_by_meta( $args, $meta_args ){
 	// Prepare the navigation
 	$prevlink = '';
 	$nextlink = '';
+	if( $prev >= 0 ) {
 		$prevID = $pages[ $prev ];
 		$prevlink = str_replace( '%url', get_permalink( $prevID ), $link_template );
 		$prevlink = str_replace( '%link_text', $r[ 'prev_text' ], $prevlink );
 		$prevlink = str_replace( '%title', get_the_title( $prevID ), $prevlink );
 		$prevlink = str_replace( '%direction', 'previous', $prevlink );
 		$prevlink = str_replace( '%link', $prevlink, $navlink_template );
-	if( $prev <= 0 ) {
-		$prevlink = str_replace( '%active', 'disabled', $prevlink );
+		// $prevlink = str_replace( '%active', 'disabled', $prevlink );
 	}
+	if( $next < count( $pages ) ) {
 		$nextID = $pages[ $next ];
 		$nextlink = str_replace( '%url', get_permalink( $nextID ), $link_template );
 		$nextlink = str_replace( '%link_text', $r[ 'next_text' ], $nextlink );
 		$nextlink = str_replace( '%title', get_the_title( $nextID ), $nextlink );
 		$nextlink = str_replace( '%link', $nextlink, $navlink_template );
 		$nextlink = str_replace( '%direction', 'next', $nextlink );
-	if( $next >= count( $pages ) ) {
-		$nextlink = str_replace( '%active', 'disabled', $nextlink );
+		// $nextlink = str_replace( '%active', 'disabled', $nextlink );
 	}
 	$nav_link = sprintf( $nav_template, $r[ 'screen_reader_text' ], $prevlink . $nextlink );
 

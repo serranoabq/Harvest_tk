@@ -1,6 +1,6 @@
 <?php
 /**
- * Template for display CTC image
+ * Template part to display CTC image within the header -- only works on CTC event, sermon and location posts
  *
  * @package harvest_tk
  */
@@ -18,7 +18,7 @@
 		$ctc_data = harvest_tk_get_person_data( get_the_ID() );
 		break;
 	 default:
-		return;
+		return; // Skipped for non-CTC posts and CTC person posts
 	}
 	
 	$has_audio = ! empty( $ctc_data[ 'audio' ] );
@@ -109,13 +109,15 @@
 
 	elseif ( $has_image ):
 		// Display the image and if there's audio to play put the player under
-		$id = harvest_tk_get_attachment_id( $ctc_data[ 'img' ] );
-		$audio = esc_url( $ctc_data[ 'audio' ] );
+		$id = ! empty( $ctc_data[ 'img_id' ] ) ? $ctc_data[ 'img_id' ] : harvest_tk_get_attachment_id( $ctc_data[ 'img' ] );
+		
 ?>
 
 		<div class="ctc-media">
+			
 			<?php echo wp_get_attachment_image( $id, 'harvest_tk-hero', '', ['class'=>'ctc-image'] ); ?>
-			<?php if( $do_media == 'audio' ): echo wp_audio_shortcode( array( 'src' => $audio ) ); endif; ?>
+			
+			<?php if( $do_media == 'audio' ): echo wp_audio_shortcode( array( 'src' => $ctc_data[ 'audio' ] ) ); endif; ?>
 			
 		</div> 
 
@@ -127,7 +129,6 @@
 
 		<div class="ctc-media">
 			<?php echo wp_audio_shortcode( array( 'src' => $audio ) ); ?>
-			
 		</div> 
 
 <?php
