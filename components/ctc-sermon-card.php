@@ -10,7 +10,7 @@
 			$ctc_data = harvest_tk_get_sermon_data( get_the_ID() );
 			$has_audio = ! empty( $ctc_data[ 'audio' ] );
 			$has_video = ! empty( $ctc_data[ 'video' ] );
-			$id = $ctc_data[ 'img_id' ] ? $ctc_data[ 'img_id' ] :harvest_tk_get_attachment_id( $ctc_data[ 'img' ] );
+			$id = empty( $ctc_data[ 'img_id' ] ) ? harvest_tk_get_attachment_id( $ctc_data[ 'img' ] ) : $ctc_data[ 'img_id' ];
 		?>
 		
 	<div class="d-flex col-sm-6 col-md-4">
@@ -26,6 +26,7 @@
 					
 					<div class="ctc_capability">
 					
+						<div class="card-subtitle text-muted ctc_speaker"><?php echo $ctc_data[ 'speakers' ]; ?></div>
 						<div class="card-subtitle text-muted ctc_date"><?php the_date(); ?></div>
 						
 						<?php if ( $has_audio ): ?><i class="fa fa-volume-up" title="<?php _e('Audio Available', 'harvest_tk'); ?>"></i><?php endif; ?> 

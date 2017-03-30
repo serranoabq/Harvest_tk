@@ -175,8 +175,95 @@ function harvest_tk_wp_title( $title, $sep ) {
 }
 add_filter( 'wp_title', 'harvest_tk_wp_title', 10, 2 );
 
+// Function to add an image on the header above the content
 function harvest_tk_precontent(){
 	if ( is_singular( array( 'ctc_sermon', 'ctc_event', 'ctc_location', 'ctc_person' ) ) ) {
 		get_template_part( 'components/ctc','image' ); 
 	}
+}
+
+// Custom pagination display
+function harvest_tk_pagination(){
+	global $paged, $wp_query;
+	
+	// Check pages
+	if( empty( $paged ) ) $paged = 1;
+	$pages = $wp_query->max_num_pages;
+	if( ! $pages ) $pages = 1;
+
+	// Skip pagination if only one page
+	if( 1 == $pages ) 
+		return;
+	
+	// Make translatable text
+	$previous = __( 'Previous', 'harvest_tk' );
+	$next = __( 'Next', 'harvest_tk' );
+	
+	// Prep the arrows
+	$prev_arrow = '<i class="fa fa-chevron-left" aria-hidden="true"></i><span class="sr-only">' . $previous . '</span>';
+	$prev_available = ( 1 == $paged ? 'disabled' : '' );
+	$prev_href =  1 < $paged ? ' href="' . get_pagenum_link( $paged-1 ). '"  aria-label="'. $previous .'"' : ''; 
+	$prev_link = '';
+	$prev_link = '<a class="page-link"' .  $prev_href . '>' . $prev_arrow . '</a>';
+	$prev_item = '<li class="page-item '. $prev_available .'">' . $prev_link . '</li>';
+	
+	$next_arrow = '<i class="fa fa-chevron-right" aria-hidden="true"></i><span class="sr-only">' . $next . '</span>';
+	$next_available = ( $pages == $paged ? 'disabled' : '' );
+	$next_link = '';
+	$next_href = $pages != $paged ? ' href="' . get_pagenum_link( $paged+1 ). '"  aria-label="'. $next .'"' : '';
+	$next_link = '<a class="page-link"' . $next_href . '>' . $next_arrow . '</a>';
+	$next_item = '<li class="page-item '. $next_available .'">' . $next_link . '</li>';
+	
+	// Prepare the page links
+	$start = $paged - 1;
+	$end = $paged + 1;
+	if( $end > $pages - 1 ) {
+		$start = $start - 1;
+		$end = $pages - 1;
+	}
+	if( $start < 2 ) { 
+		$start = 2;
+		$end = $end + 1 < $pages ? $end + 1 : $end;
+	}
+	
+	if( 7 >= $pages ){
+		// For 7 or fewer pages, show all items
+		$page_nums = range( 1, $pages );
+		$start = 2;
+		$end = $pages - 1;
+	} else {
+		// Other cases, show first, current - 1, current, current + 1, last
+		$page_nums[] = 1;
+		for( $i = $start; $i <= $end; $i++ ){
+			$page_nums[] = $i;
+		}
+		$page_nums[] = $pages;
+	}
+	
+	$page_items = '';
+	$ellipsis = '<li class="page-item disabled hidden-xs-down"><a class="page-link">...</li>';
+	
+	foreach( $page_nums as $i => $page ){
+		if( $start == $page && 2 < $page ) {
+		 $page_items .= $ellipsis;
+		}
+		
+		$active = ( $page == $paged ) ? 'active' : 'hidden-xs-down';
+		$page_items .= '<li class="page-item ' . $active .'"><a class="page-link" href="' . get_pagenum_link( $page ) . '">' . $page . '</a></li>';
+		
+		if( $end == $page && $pages > $page + 1 ) {
+			$page_items .= $ellipsis;
+		}
+	}
+	
+?>
+	<nav aria-label="<?php _e( 'Page navigation', 'harvest_tk' ); ?>">
+		<ul class="pagination justify-content-center m-4">
+			<?php echo $prev_item; ?>
+			<?php echo $page_items; ?>
+			<?php echo $next_item; ?>
+		</ul>
+	</nav>
+
+<?php
 }

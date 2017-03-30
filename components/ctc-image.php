@@ -7,6 +7,7 @@
 	global $ctc_data, $do_media;
 
 	$cpt = get_post_type();
+	
 	switch ( $cpt ){
 	 case 'ctc_event':
 		$ctc_data = harvest_tk_get_event_data( get_the_ID() );
@@ -36,6 +37,15 @@
 	// On sermons, with no media, there's nothing to do
 	if( $cpt == 'ctc_sermon' && count( $pos_media ) == 0 )
 		return;
+	if( is_tax( 'ctc_sermon_series' ) ){
+		$has_video = false;
+		$has_audio = false;
+		$pos_media = array();
+		$term = get_queried_object();
+		$term_id = $term->id;
+		$term_img = ctcex_tax_img_url( $term_id );
+		$has_image = ! empty( $term_img );
+	}
 	
 	// Some logic to display video or audio
 	if( count( $pos_media ) == 0 )
@@ -73,7 +83,6 @@
 		} else {
 			// No iframe so assume a video URL
 			$video = esc_url( $ctc_data[ 'video' ] );
-			$video = add_query_arg( array( 'rel' => '0', 'autoplay' => (int)$has_image, 'showinfo' => '0' ), $video );
 			$video_args = array(
 				'src'    => $video,
 				'height' => 540,
@@ -108,9 +117,12 @@
 <?php
 
 	elseif ( $has_image ):
-		// Display the image and if there's audio to play put the player under
-		$id = ! empty( $ctc_data[ 'img_id' ] ) ? $ctc_data[ 'img_id' ] : harvest_tk_get_attachment_id( $ctc_data[ 'img' ] );
-		
+		if( is_tax( 'ctc_sermon_series' ) ){
+			$id = harvest_tk_get_attachment_id( $term_img );
+		} else {
+			// Display the image and if there's audio to play put the player under
+			$id = ! empty( $ctc_data[ 'img_id' ] ) ? $ctc_data[ 'img_id' ] : harvest_tk_get_attachment_id( $ctc_data[ 'img' ] );
+		}	
 ?>
 
 		<div class="ctc-media">
