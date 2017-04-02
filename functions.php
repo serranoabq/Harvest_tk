@@ -29,6 +29,7 @@ function harvest_tk_setup() {
 
 	// Define some image sizes
 	add_image_size( 'harvest_tk-featured-image', 640, 9999 );
+	add_image_size( 'harvest_tk-person', 500, 9999 );
 	add_image_size( 'harvest_tk-hero', 1280, 1000, true );
 	add_image_size( 'harvest_tk-thumbnail-avatar', 100, 100, true );
 
