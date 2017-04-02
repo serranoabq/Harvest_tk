@@ -16,7 +16,7 @@
 		$ctc_data = harvest_tk_get_sermon_data( get_the_ID() );
 		break;
 	 case 'ctc_location':
-		$ctc_data = harvest_tk_get_person_data( get_the_ID() );
+		$ctc_data = harvest_tk_get_location_data( get_the_ID() );
 		break;
 	 default:
 		return; // Skipped for non-CTC posts and CTC person posts
