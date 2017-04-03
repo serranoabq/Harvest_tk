@@ -42,9 +42,16 @@
 	if( $has_video )
 		$pos_media[] = 'video';
 	
+	if( 'ctc_person' == $cpt && ! $has_image ){
+		$person_img = harvest_tk_person_image( '', $ctc_data[ 'gender' ] );
+		$ctc_data[ 'img' ] = $person_img;
+		$has_image = ! empty( $ctc_data[ 'img' ] );
+	}
+	
 	// On sermons, with no media, there's nothing to do
-	if( $cpt == 'ctc_sermon' && count( $pos_media ) == 0 )
+	if( 'ctc_sermon' == $cpt && count( $pos_media ) == 0 )
 		return;
+	
 	if( is_tax( 'ctc_sermon_series' ) ){
 		$has_video = false;
 		$has_audio = false;
