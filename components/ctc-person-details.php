@@ -12,53 +12,56 @@
 	
 	$position = empty ( $ctc_data[ 'position' ] ) ? '' : $ctc_data[ 'position' ];
 	
-	$phone = empty( $ctc_data[ 'phone' ] ) ? '' : empty( $ctc_data[ 'phone' ] );
+	$phone = empty( $ctc_data[ 'phone' ] ) ? '' : $ctc_data[ 'phone' ];
 	
-	$email = empty( $ctc_data[ 'email' ] ) ? '' : empty( $ctc_data[ 'email' ] );
-	
+	$email = empty( $ctc_data[ 'email' ] ) ? '' : $ctc_data[ 'email' ] ;
+	 
 ?>
 
-	<div class="col-12">
-		<div class="ctc-details">
+	<div class="ctc-details col-12">
 		
 <?php if( $position ) {	?>
 
-			<div class="ctc-position li d-inline-block"><i class="fa fa-user aria-hidden="true"></i><?php echo $position; ?></div>
+			<div class="ctc-position li d-inline-block mr-4"><i class="fa fa-user aria-hidden="true"></i><?php echo $position; ?></div>
 
 <?php } if( $email ) {	?>
 
-			<div class="ctc-email li"><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a></div>
+			<div class="ctc-email li d-inline-block mr-4"><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a></div>
 
 <?php } if( $phone ) {	?>
 
-			<div class="ctc-phone li"><i class="fa fa-phone" aria-hidden="true"></i><a href="mailto<?php echo $phone; ?>"><?php echo $phone; ?></a></div>
+			<div class="ctc-phone li d-inline-block mr-4"><i class="fa fa-phone" aria-hidden="true"></i><a href="mailto<?php echo $phone; ?>"><?php echo $phone; ?></a></div>
 
 <?php } ?>
 
-		</div>
+	</div> <!-- .ctc-details -->
 	
 <?php if( count( $urls ) > 0 ) { ?>	
 
-		<div class="ctc-urls">
-			
-		<?php 
-			foreach( $urls as $url_item ): 
-				$host = strtolower( parse_url( $url_item, PHP_URL_HOST ) );
-				$fas = array( 'facebook', 'twitter', 'instagram' );
-				if( false === stripos( 'facebook.com', $host ) ) array_shift( $fas );
-				if( false === stripos( 'twitter.com', $host ) ) array_shift( $fas );
-				if( false === stripos( 'instagram.com', $host ) ) array_shift( $fas );
-				$fa = '';
-				if( ! empty( $fas ) ) {
-					$fa = '<i class="fa fa-' . $fas[0] .'" aria-hidden="true"></i>';
-				}
-		?>
+	<div class="col-12 ctc-urls">
+	
+<?php 
+	foreach( $urls as $url_item ): 
+		$host = strtolower( parse_url( $url_item, PHP_URL_HOST ) );
+		$fa = '';
+		if( false !== stripos( $host, 'facebook.com' ) )
+			$fa = 'facebook-square';
+		if( false !== stripos( $host, 'twitter.com' ) )
+			$fa = 'twitter-square';
+		if( false !== stripos( $host, 'instagram.com' ) )
+			$fa = 'intagram';
+		if( empty( $fa ) ) {
+			$link = $url_item;
+		} else {
+			$link = '<i class="fa fa-2x fa-' . $fa .'" aria-hidden="true"></i>';
+		}
+?>
 		
-			<div class="ctc-url li"><?php echo $fa; ?><a href="<?php echo esc_url( $url_item ); ?>"><?php echo $url_item; ?></a></div>
+		<div class="ctc-url d-inline-block mr-2"><a href="<?php echo esc_url( $url_item ); ?>"><?php echo $link; ?></a></div>
 		
-		<?php endfor; ?>		
+<?php endforeach; ?>		
 		
-		</div> <!-- .ctc-urls -->
+	</div> <!-- .ctc-urls -->
 		
 <?php } ?> 
 

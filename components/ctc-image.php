@@ -18,8 +18,16 @@
 	 case 'ctc_location':
 		$ctc_data = harvest_tk_get_location_data( get_the_ID() );
 		break;
+	 case 'ctc_person':
+		$ctc_data = harvest_tk_get_person_data( get_the_ID() );
+		break;
 	 default:
-		return; // Skipped for non-CTC posts and CTC person posts
+		if( has_post_thumbnail( get_the_ID() ) ){
+			$ctc_data[ 'img' ] = get_the_post_thumbnail_url( get_the_ID() );
+			$ctc_data[ 'img_id' ] = get_post_thumbnail_id( get_the_ID() );
+		} else {
+			return;
+		}
 	}
 	
 	$has_audio = ! empty( $ctc_data[ 'audio' ] );
@@ -123,11 +131,14 @@
 			// Display the image and if there's audio to play put the player under
 			$id = ! empty( $ctc_data[ 'img_id' ] ) ? $ctc_data[ 'img_id' ] : harvest_tk_get_attachment_id( $ctc_data[ 'img' ] );
 		}	
+		
+		$person_class = 'ctc_person' == $cpt ? 'w-25 rounded-circle' : '';
+		$thumb_size = 'ctc_person' == $cpt ? 'harvest_tk-person' : 'harvest_tk-hero';
 ?>
 
-		<div class="ctc-media">
+		<div class="ctc-media <?php echo $person_class; ?>">
 			
-			<?php echo wp_get_attachment_image( $id, 'harvest_tk-hero', '', ['class'=>'ctc-image'] ); ?>
+			<?php echo wp_get_attachment_image( $id, $thumb_size, '', ['class'=>'ctc-image'] ); ?>
 			
 			<?php if( $do_media == 'audio' ): echo wp_audio_shortcode( array( 'src' => $ctc_data[ 'audio' ] ) ); endif; ?>
 			

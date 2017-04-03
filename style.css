@@ -243,6 +243,7 @@ nav .form-control {
 
 .pre-content{ 
 	position:relative;
+	text-align: center;
 }
 .pre-content-bg{ 
 	position: absolute; 
@@ -260,6 +261,8 @@ nav .form-control {
 	box-shadow: 0 5px 30px rgba(0,0,0,0.4);
 	background: #000;
 	text-align: center;
+	overflow: hidden;
+	display: inline-block;
 }
 
 /* CTC Details */

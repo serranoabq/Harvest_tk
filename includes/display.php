@@ -177,7 +177,7 @@ add_filter( 'wp_title', 'harvest_tk_wp_title', 10, 2 );
 
 // Function to add an image on the header above the content
 function harvest_tk_precontent(){
-	if ( is_singular( array( 'ctc_sermon', 'ctc_event', 'ctc_location', 'ctc_person' ) ) ) {
+	if ( is_singular( array( 'ctc_sermon', 'ctc_event', 'ctc_location', 'ctc_person' ,'page' ) ) ) {
 		get_template_part( 'components/ctc','image' ); 
 	}
 }
