@@ -111,7 +111,7 @@ function harvest_tk_customize_register( $wp_customize ) {
 		harvest_tk_customize_createSetting( $wp_customize, array(
 			'id' 	              => 'harvest_tk_panel_'. $i . '_opacity',
 			'type'              => 'select', 
-			'label'             => esc_html__( 'Featured Image Opacity', 'harvest_tk' ),
+			'label'             => esc_ html__( 'Featured Image Opacity', 'harvest_tk' ),
 			'default'           => 'default',
 			'section'           => "harvest_tk_panel_$i",
 			'sanitize_callback' => 'sanitize_hex_color',
