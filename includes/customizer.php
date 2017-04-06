@@ -294,7 +294,7 @@ function harvest_tk_sanitize_opacity( $input ) {
 }
 
 // Ouptut Customizer css
-function harvest_tk_customizer_css{
+function harvest_tk_customizer_css(){
 	if( get_theme_mod( 'harvest_tk_header_bgcolor') ): ?>
 		.pre-content-bg, .site-header {
 			background-color: <?php echo esc_attr( get_theme_mod( 'harvest_tk_header_bgcolor' ) ); ?>
