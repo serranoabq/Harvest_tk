@@ -23,7 +23,7 @@ jQuery( document ).ready( function( $ ) {
 		value.bind( function( to ) {
 			if ( to ) {
 				$( '.pre-content-bg, .site-header' ).css( {
-					'background-color': to;
+					'background-color': to
 				} );
 			}
 		} );

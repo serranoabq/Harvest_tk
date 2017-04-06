@@ -19,7 +19,7 @@ function harvest_tk_customize_register( $wp_customize ) {
 		'id' 	              => 'harvest_tk_header_bgcolor',
 		'type'              => 'color', 
 		'label'             => __( 'Header Background Color', 'harvest_tk' ),
-		'default'           => 'default',
+		'default'           => '#467290',
 		'section'           => 'colors',
 		'sanitize_callback' => 'sanitize_hex_color',
 		'transport'         => 'postMessage',
@@ -294,8 +294,11 @@ function harvest_tk_sanitize_opacity( $input ) {
 }
 
 // Ouptut Customizer css
-function harvest_tk_customizer_css(){
-	if( get_theme_mod( 'harvest_tk_header_bgcolor') ): ?>
+function harvest_tk_customizer_css(){ ?>
+
+	<style type="text/css">
+	
+	<?php if( get_theme_mod( 'harvest_tk_header_bgcolor') ): ?>
 		.pre-content-bg, .site-header {
 			background-color: <?php echo esc_attr( get_theme_mod( 'harvest_tk_header_bgcolor' ) ); ?>
 		}
@@ -307,6 +310,9 @@ function harvest_tk_customizer_css(){
 		if ( $bgcolor || $bgopacity ): 
 			// CSS for setting bg color and panel bg opacity once I have that defined
 		endif;
-	}
+	} ?>
+	</style>
+
+<?php	
 }
 add_action( 'wp_head', 'harvest_tk_customizer_css' );
