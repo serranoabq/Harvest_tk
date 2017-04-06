@@ -18,7 +18,7 @@ function harvest_tk_customize_register( $wp_customize ) {
 	harvest_tk_customize_createSetting( $wp_customize, array(
 		'id' 	              => 'harvest_tk_header_bgcolor',
 		'type'              => 'color', 
-		'label'             => esc_html__( 'Header Background Color', 'harvest_tk' ),
+		'label'             => __( 'Header Background Color', 'harvest_tk' ),
 		'default'           => 'default',
 		'section'           => 'colors',
 		'sanitize_callback' => 'sanitize_hex_color',
@@ -90,7 +90,7 @@ function harvest_tk_customize_register( $wp_customize ) {
 	for($i = 1; $i <= $panels; $i++ ){
 		harvest_tk_customize_createSection( $wp_customize, array(
 			'id' 	            => "harvest_tk_panel_$i",
-			'title'           => esc_html__( 'Panel', 'harvest_tk' ) . ' ' . $i, 
+			'title'           => __( 'Panel', 'harvest_tk' ) . ' ' . $i, 
 			'description'     => __( 'Add a background image to your panel by setting a featured image in the page editor. If you don&rsquo;t select a page, this panel will not be displayed.', 'harvest_tk' ),
 			'active_callback' => 'is_front_page', 
 			'panel'           => 'harvest_tk_options_panel', 
@@ -99,7 +99,7 @@ function harvest_tk_customize_register( $wp_customize ) {
 		harvest_tk_customize_createSetting( $wp_customize, array(
 			'id' 	              => 'harvest_tk_panel_'. $i . '_page',
 			'type'              => 'dropdown-pages', 
-			'label'             => esc_html__( 'Panel Content', 'harvest_tk' ),
+			'label'             => __( 'Panel Content', 'harvest_tk' ),
 			'default'           => false,
 			'section'           => "harvest_tk_panel_$i",
 			'sanitize_callback' => 'harvest_tk_sanitize_numeric_value',
@@ -108,7 +108,7 @@ function harvest_tk_customize_register( $wp_customize ) {
 		harvest_tk_customize_createSetting( $wp_customize, array(
 			'id' 	              => 'harvest_tk_panel_'. $i . '_bgcolor',
 			'type'              => 'color', 
-			'label'             => esc_html__( 'Panel Background Color', 'harvest_tk' ),
+			'label'             => __( 'Panel Background Color', 'harvest_tk' ),
 			'default'           => '',
 			'section'           => "harvest_tk_panel_$i",
 			'sanitize_callback' => 'sanitize_hex_color',
@@ -118,27 +118,27 @@ function harvest_tk_customize_register( $wp_customize ) {
 		harvest_tk_customize_createSetting( $wp_customize, array(
 			'id' 	              => 'harvest_tk_panel_'. $i . '_opacity',
 			'type'              => 'select', 
-			'label'             => esc_ html__( 'Featured Image Opacity', 'harvest_tk' ),
+			'label'             => __( 'Featured Image Opacity', 'harvest_tk' ),
 			'default'           => 'default',
 			'section'           => "harvest_tk_panel_$i",
 			'sanitize_callback' => 'sanitize_hex_color',
-			'description'       => esc_html__( 'Set the opacity of the featured image over the panel background.', 'harvest_tk' ),
+			'description'       => __( 'Set the opacity of the featured image over the panel background.', 'harvest_tk' ),
 			'choices'           => array(
-				'0.25'            => esc_html__( '25%', 'harvest_tk' ),
-				'0.5'             => esc_html__( '50%', 'harvest_tk' ),
-				'0.75'            => esc_html__( '75%', 'harvest_tk' ),
-				'1'               => esc_html__( '100%', 'harvest_tk' ),
+				'0.25'            => __( '25%', 'harvest_tk' ),
+				'0.5'             => __( '50%', 'harvest_tk' ),
+				'0.75'            => __( '75%', 'harvest_tk' ),
+				'1'               => __( '100%', 'harvest_tk' ),
 			),
 		) );
 		
 		harvest_tk_customize_createSetting( $wp_customize, array(
 			'id'                => 'harvest_tk_panel_'. $i . '_showtitle',
-			'label'             => esc_html_x( 'Show Title', 'Customizer setting', 'harvest_tk' ),
+			'label'             => __( 'Show Title', 'harvest_tk' ),
 			'type'              => 'checkbox',
 			'default'           => false,
 			'section'           => "harvest_tk_panel_$i",
 			'transport'         => 'postMessage',
-			'description'       => esc_html__( 'Check to display the page title in the section.', 'harvest_tk' ),
+			'description'       => __( 'Check to display the page title in the section.', 'harvest_tk' ),
 		) );
 	
 	}
