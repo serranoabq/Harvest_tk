@@ -10,7 +10,7 @@
 			$ctc_data = harvest_tk_get_event_data( get_the_ID() );
 			$date_str = sprintf( '%s%s',  date_i18n( 'F j, Y', strtotime( $ctc_data[ 'start' ] ) ), $ctc_data[ 'start' ] != $ctc_data[ 'end' ] ? ' - '. date_i18n( 'F j, Y', strtotime( $ctc_data[ 'end' ] ) ) : '' );
 			$time_str = sprintf( '%s%s',  $ctc_data[ 'time' ], $ctc_data[ 'endtime' ] ? ' - '. $ctc_data[ 'endtime' ] : '' );
-			$id = $ctc_data[ 'img_id' ] ? $ctc_data[ 'img_id' ] :harvest_tk_get_attachment_id( $ctc_data[ 'img' ] );
+			$id = empty( $ctc_data[ 'img_id' ] ) ? harvest_tk_get_attachment_id( $ctc_data[ 'img' ] ) : $ctc_data[ 'img_id' ];
 		?>
 	
 	<div class="d-flex col-sm-6 col-md-4">

@@ -23,6 +23,7 @@
 		break;
 	 default:
 		if( has_post_thumbnail( get_the_ID() ) ){
+			// For other post and pages, we'll use the featured image
 			$ctc_data[ 'img' ] = get_the_post_thumbnail_url( get_the_ID() );
 			$ctc_data[ 'img_id' ] = get_post_thumbnail_id( get_the_ID() );
 		} else {
@@ -135,7 +136,6 @@
 		if( is_tax( 'ctc_sermon_series' ) ){
 			$id = harvest_tk_get_attachment_id( $term_img );
 		} else {
-			// Display the image and if there's audio to play put the player under
 			$id = ! empty( $ctc_data[ 'img_id' ] ) ? $ctc_data[ 'img_id' ] : harvest_tk_get_attachment_id( $ctc_data[ 'img' ] );
 		}	
 		

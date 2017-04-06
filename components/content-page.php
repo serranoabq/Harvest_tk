@@ -6,17 +6,22 @@
  */
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header>
-		<h1 class="page-title"><?php the_title(); ?></h1>
+<article id="post-<?php the_ID(); ?>" <?php post_class( 'row' ); ?>>
+	
+	<header class="col-12">
+		<?php the_title( '<h1 class="page-title">', '</h1>' ); ?>
 	</header><!-- .entry-header -->
 
-	<div class="entry-content">
-		<div class="entry-content-thumbnail">
-			<?php the_post_thumbnail(); ?>
-		</div>
+	<div class="entry-content col-12">
+		
 		<?php the_content(); ?>
-		<?php harvest_tk_link_pages(); ?>
+		
 	</div><!-- .entry-content -->
-	<?php edit_post_link( __( 'Edit', 'harvest_tk' ), '<footer class="entry-meta"><span class="edit-link">', '</span></footer>' ); ?>
+	
+	<footer class="entry-footer">
+
+		<?php edit_post_link( esc_html__( 'Edit this event', 'harvest_tk' ), '<span class="edit-link">', '</span>' ); ?>
+	
+	</footer><!-- .entry-footer -->
+	
 </article><!-- #post-## -->

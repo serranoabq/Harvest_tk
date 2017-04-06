@@ -9,7 +9,7 @@
 		<?php
 			$ctc_data = harvest_tk_get_person_data( get_the_ID() );
 			$position = $ctc_data[ 'position' ];
-			$id = $ctc_data[ 'img_id' ] ? $ctc_data[ 'img_id' ] :harvest_tk_get_attachment_id( $ctc_data[ 'img' ] );
+			$id = empty( $ctc_data[ 'img_id' ] ) ? harvest_tk_get_attachment_id( $ctc_data[ 'img' ] ) : $ctc_data[ 'img_id' ];
 		?>
 	
 	<div class="d-flex col-sm-6 col-md-4">

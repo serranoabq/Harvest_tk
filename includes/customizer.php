@@ -29,45 +29,45 @@ function harvest_tk_customize_register( $wp_customize ) {
 	// Podcasting options
 	harvest_tk_customize_createSection( $wp_customize, array(
 		'id' => 'podcast',
-		'title' => _x( 'Podcasting', 'Customizer section title', 'harvest_tk' ),
-		'description' => _x( 'Settings for audio podcast', 'Customizer section description', 'harvest_tk' ),
+		'title' => __( 'Podcasting', 'harvest_tk' ),
+		'description' => __( 'Settings for audio podcast', 'harvest_tk' ),
 	) );
 	harvest_tk_customize_createSetting( $wp_customize, array(
 		'id' => 'harvest_tk_podcast_desc',
-		'label' => _x( 'Podcast Description', 'Customizer setting', 'cutiv8' ),
+		'label' => __( 'Podcast Description', 'harvest_tk' ),
 		'type' => 'textarea',
 		'default' => get_bloginfo( 'description' ),
 		'section' => 'podcast',
 	) );
 	harvest_tk_customize_createSetting( $wp_customize, array(
 		'id' => 'harvest_tk_podcast_author',
-		'label' => _x( 'Podcast Author', 'Customizer setting', 'harvest_tk' ),
+		'label' => __( 'Podcast Author', 'harvest_tk' ),
 		'type' => 'text',
 		'default' => get_bloginfo( 'name' ),
 		'section' => 'podcast',
 	) );
 	harvest_tk_customize_createSetting( $wp_customize, array(
-		'id' => 'harvest_tk_podcast_logo',
-		'label' => _x( 'Podcast Logo', 'Customizer setting', 'harvest_tk' ),
-		'type' => 'image',
-		'default' => '',
-		'section' => 'podcast',
-		'description' => _x( 'Logo used in podcast feed. Must be 1400 x 1400 jpg or png.', 'Podcast logo option description', 'harvest_tk' ),
+		'id'           => 'harvest_tk_podcast_logo',
+		'label'        => __( 'Podcast Logo', 'harvest_tk' ),
+		'type'         => 'image',
+		'default'      => '',
+		'section'      => 'podcast',
+		'description'  => __( 'Logo used in podcast feed. Must be 1400 x 1400 jpg or png.', 'harvest_tk' ),
 	) );
 	
 	// RSS
 	harvest_tk_customize_createSection( $wp_customize, array(
 		'id' => 'rss',
-		'title' => _x( 'RSS Options', 'Customizer section title', 'harvest_tk' ),
-		'description' => _x( 'Settings for RSS feed', 'Customizer section description', 'harvest_tk' ),
+		'title' => __( 'RSS Options', 'harvest_tk' ),
+		'description' => __( 'Settings for RSS feed', 'harvest_tk' ),
 	) );
 	harvest_tk_customize_createSetting( $wp_customize, array(
 		'id' => 'harvest_tk_feed_logo',
-		'label' => _x( 'RSS Feed Logo', 'Customizer setting', 'harvest_tk' ),
+		'label' => __( 'RSS Feed Logo', 'harvest_tk' ),
 		'type' => 'image',
 		'default' => '',
 		'section' => 'rss',
-		'description' => _x( 'Logo used in RSS feed. Sometimes a white + transparent logo does not show well in RSS readers. Use this to display a different logo than your site logo.', 'RSS feed logo option description', 'harvest_tk' ),
+		'description' => __( 'Logo used in RSS feed', 'harvest_tk' ),
 	) );
 	
 	
@@ -77,14 +77,21 @@ function harvest_tk_customize_register( $wp_customize ) {
 		'description'     => __( 'Configure your theme settings', 'harvest_tk' )
 	) );
 		
+	harvest_tk_customize_createSection( $wp_customize, array(
+		'id' => 'theme-options',
+		'title' => __( 'Theme Options', 'harvest_tk' ),
+		'description' => __( 'Other theme settings', 'harvest_tk' ),
+		'active_callback' => 'is_front_page', 
+	) );
+	
 	// Front-page panels
-	$panels = 5;
+	$panels = 12;
 	// New panels
 	for($i = 1; $i <= $panels; $i++ ){
 		harvest_tk_customize_createSection( $wp_customize, array(
 			'id' 	            => "harvest_tk_panel_$i",
 			'title'           => esc_html__( 'Panel', 'harvest_tk' ) . ' ' . $i, 
-			'description'     => __( 'Add a background image to your panel by setting a featured image in the page editor. If you don&rsquo;t select a page, this panel will not be displayed.', 'pique' ),
+			'description'     => __( 'Add a background image to your panel by setting a featured image in the page editor. If you don&rsquo;t select a page, this panel will not be displayed.', 'harvest_tk' ),
 			'active_callback' => 'is_front_page', 
 			'panel'           => 'harvest_tk_options_panel', 
 		) );
@@ -102,7 +109,7 @@ function harvest_tk_customize_register( $wp_customize ) {
 			'id' 	              => 'harvest_tk_panel_'. $i . '_bgcolor',
 			'type'              => 'color', 
 			'label'             => esc_html__( 'Panel Background Color', 'harvest_tk' ),
-			'default'           => 'default',
+			'default'           => '',
 			'section'           => "harvest_tk_panel_$i",
 			'sanitize_callback' => 'sanitize_hex_color',
 			'transport'         => 'postMessage',
@@ -285,3 +292,21 @@ function harvest_tk_sanitize_opacity( $input ) {
 	}
 	return $input;
 }
+
+// Ouptut Customizer css
+function harvest_tk_customizer_css{
+	if( get_theme_mod( 'harvest_tk_header_bgcolor') ): ?>
+		.pre-content-bg, .site-header {
+			background-color: <?php echo esc_attr( get_theme_mod( 'harvest_tk_header_bgcolor' ) ); ?>
+		}
+	<?php endif; 
+	
+	for( $i = 1; $i < 12; $i++ ){
+		$bgcolor = get_theme_mod( 'harvest_tk_panel_' + $i + '_bgcolor' );
+		$bgopacity = get_theme_mod( 'harvest_tk_panel_' + $i + '_opacity' );
+		if ( $bgcolor || $bgopacity ): 
+			// CSS for setting bg color and panel bg opacity once I have that defined
+		endif;
+	}
+}
+add_action( 'wp_head', 'harvest_tk_customizer_css' );

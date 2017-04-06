@@ -18,6 +18,17 @@ jQuery( document ).ready( function( $ ) {
 		} );
 	} );
 	
+	// Header background color.
+	wp.customize( 'harvest_tk_header_bgcolor', function( value ) {
+		value.bind( function( to ) {
+			if ( to ) {
+				$( '.pre-content-bg, .site-header' ).css( {
+					'background-color': to;
+				} );
+			}
+		} );
+	} );
+	
 	// Header text color.
 	wp.customize( 'header_textcolor', function( value ) {
 		value.bind( function( to ) {
