@@ -47,6 +47,18 @@ jQuery( document ).ready( function( $ ) {
 		} );
 	} );
 	
+	wp.customize( 'harvest_tk_panel_count', function( value ){
+		value.bind( function( to ){
+			for( var i = 1; i < 12; i++ ){
+				if( i <= to ) {
+					// toggle panel on;
+				} else {
+					// toggle panel off;
+				}
+			}
+		} );
+	} );
+	
 	//
 	for( var i = 1; i < 12; i++ ){
 		wp.customize( 'harvest_tk_panel_' + i + '_opacity', function( value ) {

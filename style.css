@@ -263,6 +263,32 @@ nav .form-control {
 	text-align: center;
 	overflow: hidden;
 	display: inline-block;
+	width: 100%;
+}
+.video-overlay .play-button {
+	position: absolute;
+	z-index: 1;
+	background: red;
+	width: 90px;
+	height: 60px;
+	box-shadow: 0 0 30px rgba(0,0,0,0.6);
+	border-radius: 6px;
+	top: 50%;
+	left: 50%;
+	transform: translate3d(-50%, -50%, 0);
+	font-family: fontawesome;
+	color: white;
+	line-height: 60px;
+	font-size: 40px;
+	cursor: pointer;
+}
+.video-overlay .play-button:before {
+	content: '\f04b';
+}
+
+.video-overlay .ctc-image {
+	opacity: 0.5;
+	cursor: pointer;
 }
 
 /* CTC Details */

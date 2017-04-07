@@ -28,23 +28,23 @@ function harvest_tk_customize_register( $wp_customize ) {
 	
 	// Podcasting options
 	harvest_tk_customize_createSection( $wp_customize, array(
-		'id' => 'podcast',
-		'title' => __( 'Podcasting', 'harvest_tk' ),
-		'description' => __( 'Settings for audio podcast', 'harvest_tk' ),
+		'id'                => 'podcast',
+		'title'             => __( 'Podcasting', 'harvest_tk' ),
+		'description'       => __( 'Settings for audio podcast', 'harvest_tk' ),
 	) );
 	harvest_tk_customize_createSetting( $wp_customize, array(
-		'id' => 'harvest_tk_podcast_desc',
-		'label' => __( 'Podcast Description', 'harvest_tk' ),
-		'type' => 'textarea',
-		'default' => get_bloginfo( 'description' ),
-		'section' => 'podcast',
+		'id'           => 'harvest_tk_podcast_desc',
+		'label'        => __( 'Podcast Description', 'harvest_tk' ),
+		'type'         => 'textarea',
+		'default'      => get_bloginfo( 'description' ),
+		'section'      => 'podcast',
 	) );
 	harvest_tk_customize_createSetting( $wp_customize, array(
-		'id' => 'harvest_tk_podcast_author',
-		'label' => __( 'Podcast Author', 'harvest_tk' ),
-		'type' => 'text',
-		'default' => get_bloginfo( 'name' ),
-		'section' => 'podcast',
+		'id'           => 'harvest_tk_podcast_author',
+		'label'        => __( 'Podcast Author', 'harvest_tk' ),
+		'type'         => 'text',
+		'default'      => get_bloginfo( 'name' ),
+		'section'      => 'podcast',
 	) );
 	harvest_tk_customize_createSetting( $wp_customize, array(
 		'id'           => 'harvest_tk_podcast_logo',
@@ -57,17 +57,17 @@ function harvest_tk_customize_register( $wp_customize ) {
 	
 	// RSS
 	harvest_tk_customize_createSection( $wp_customize, array(
-		'id' => 'rss',
-		'title' => __( 'RSS Options', 'harvest_tk' ),
-		'description' => __( 'Settings for RSS feed', 'harvest_tk' ),
+		'id'           => 'rss',
+		'title'        => __( 'RSS Options', 'harvest_tk' ),
+		'description'  => __( 'Settings for RSS feed', 'harvest_tk' ),
 	) );
 	harvest_tk_customize_createSetting( $wp_customize, array(
-		'id' => 'harvest_tk_feed_logo',
-		'label' => __( 'RSS Feed Logo', 'harvest_tk' ),
-		'type' => 'image',
-		'default' => '',
-		'section' => 'rss',
-		'description' => __( 'Logo used in RSS feed', 'harvest_tk' ),
+		'id'           => 'harvest_tk_feed_logo',
+		'label'        => __( 'RSS Feed Logo', 'harvest_tk' ),
+		'type'         => 'image',
+		'default'      => '',
+		'section'      => 'rss',
+		'description'  => __( 'Logo used in RSS feed', 'harvest_tk' ),
 	) );
 	
 	
@@ -76,12 +76,40 @@ function harvest_tk_customize_register( $wp_customize ) {
 		'title'           => 'Theme Options',
 		'description'     => __( 'Configure your theme settings', 'harvest_tk' )
 	) );
-		
+	
+	// Front-page hero 
 	harvest_tk_customize_createSection( $wp_customize, array(
-		'id' => 'theme-options',
-		'title' => __( 'Theme Options', 'harvest_tk' ),
-		'description' => __( 'Other theme settings', 'harvest_tk' ),
+		'id'              => 'harvest_tk_hero_section',
+		'title'           => __( 'Front Page Hero', 'harvest_tk' ),
+		'description'     => __( 'Enter the code or shortcode for the hero image at the top of the homepage', 'harvest_tk' ),
+		'panel'           => 'harvest_tk_options_panel', 
 		'active_callback' => 'is_front_page', 
+	) );
+	harvest_tk_customize_createSetting( $wp_customize, array(
+		'id' 	              => 'harvest_tk_hero',
+		'type'              => 'textarea', 
+		'label'             => __( 'Hero code', 'harvest_tk' ),
+		'default'           => '',
+		'section'           => "harvest_tk_hero_section",
+		'sanitize_callback' => 'do_shortcode',
+	) );
+	
+	// Panels 
+	harvest_tk_customize_createSection( $wp_customize, array(
+		'id'              => 'harvest_tk_panels',
+		'title'           => __( 'Front Page Panels', 'harvest_tk' ),
+		'panel'           => 'harvest_tk_options_panel', 
+		'active_callback' => 'is_front_page', 
+	) );
+	harvest_tk_customize_createSetting( $wp_customize, array(
+		'id' 	              => 'harvest_tk_panel_count',
+		'type'              => 'select', 
+		'label'             => __( 'Front page panel count', 'harvest_tk' ),
+		'default'           => 12,
+		'section'           => "harvest_tk_panels",
+		'sanitize_callback' => 'harvest_tk_sanitize_numeric_value',
+		'transport'         => 'postMessage',
+		'choices'           => range( 0, 12, 1),
 	) );
 	
 	// Front-page panels
@@ -92,7 +120,7 @@ function harvest_tk_customize_register( $wp_customize ) {
 			'id' 	            => "harvest_tk_panel_$i",
 			'title'           => __( 'Panel', 'harvest_tk' ) . ' ' . $i, 
 			'description'     => __( 'Add a background image to your panel by setting a featured image in the page editor. If you don&rsquo;t select a page, this panel will not be displayed.', 'harvest_tk' ),
-			'active_callback' => 'is_front_page', 
+			'active_callback' => 'harvest_tk_panel_check', 
 			'panel'           => 'harvest_tk_options_panel', 
 		) );
 		
@@ -154,6 +182,28 @@ function harvest_tk_customize_preview_js() {
 }
 add_action( 'customize_preview_init', 'harvest_tk_customize_preview_js' );
 
+
+function harvest_tk_customizer_script(){
+?>
+	<script>
+		jQuery( document ).ready( function($){
+			panel_count = 12;
+			$( '#customize-control-harvest_tk_panel_count select' ).change( function() {
+				panel_count =  $(this).val();
+				for( var i = 1; i < 12; i++ ){
+					if( i <= panel_count ) {
+						$( '#accordion-section-harvest_tk_panel_' + i ).css( { 'display' : '' } );
+					} else {
+						$( '#accordion-section-harvest_tk_panel_' + i ).css( { 'display' : 'none' } );
+					}
+				}
+			});
+			
+		});
+	</script>
+<?php	
+}
+add_action( 'customize_controls_print_footer_scripts', 'harvest_tk_customizer_script' );
 
 // Shortcut for creating a Customizer Setting
 function harvest_tk_customize_createSetting( $wp_customize, $args ) {
@@ -316,3 +366,9 @@ function harvest_tk_customizer_css(){ ?>
 <?php	
 }
 add_action( 'wp_head', 'harvest_tk_customizer_css' );
+
+function harvest_tk_panel_check( $control ){
+	$count = get_theme_mod( 'harvest_tk_panel_count', 12 );
+	$current_section = str_ireplace( 'harvest_tk_panel_' , '', $control->id );
+	return is_front_page() && (int)$current_section <= (int)$count;
+}

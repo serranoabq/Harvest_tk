@@ -100,16 +100,41 @@
 			// No iframe so assume a video URL
 			$video = esc_url( $ctc_data[ 'video' ] );
 			$video_args = array(
-				'src'    => $video,
-				'height' => 540,
-				'width'  => 960, 
-				'poster' => $ctc_data[ 'img' ]
+				'src'      => $video,
+				'height'   => 540,
+				'width'    => 960, 
+				// 'poster'   => $ctc_data[ 'img' ],
+				'autoplay' => true,
 			);
-
+			$img_src = '';
+			$video_src = str_replace( "'video'", '"video"', wp_video_shortcode( $video_args ) ); 
+			$video_src = preg_replace( '~\R~u', '', $video_src ); 
+			
+			if( $has_image ){
+				$id = ! empty( $ctc_data[ 'img_id' ] ) ? $ctc_data[ 'img_id' ] : harvest_tk_get_attachment_id( $ctc_data[ 'img' ] );
+				$img_src = wp_get_attachment_image( $id, 'harvest_tk-hero', '', ['class'=>'ctc-image'] );
+				$img_src .= '<div class="play-button"></div>';
+			}
 ?>		
 
-		<div class="ctc-media">
-			<?php echo wp_video_shortcode( $video_args ); ?>
+		<div class="ctc-media <?php echo $has_image ? 'video-overlay' : '' ; ?>">
+			<?php echo $has_image ? $img_src : $video_src; ?>
+			<?php if( $has_image ): ?>
+			<script>
+
+				jQuery(document).ready( function($){
+					var vid_src = '<?php echo $video_src; ?>';
+					$( '.video-overlay .play-button' ).click( function () {
+						$( '.video-overlay .ctc-image' ).trigger( 'click' );
+					} );
+					$( '.video-overlay .ctc-image' ).click( function(){
+						$( this ).replaceWith( vid_src );
+						$( '.video-overlay .play-button' ).hide();
+						$( window.wp.mediaelement.initialize );
+					} );
+				});
+			</script>
+			<?php endif; ?>
 		</div>
 		
 <?php
