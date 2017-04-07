@@ -8,6 +8,7 @@
 
 	$cpt = get_post_type();
 	
+	$has_hero = false;
 	switch ( $cpt ){
 	 case 'ctc_event':
 		$ctc_data = harvest_tk_get_event_data( get_the_ID() );
@@ -23,10 +24,9 @@
 		break;
 	 default:
 		if( has_post_thumbnail( get_the_ID() ) ) {
-			// Without the hero slider, use featured image
+			// Use featured image if available
 			$ctc_data[ 'img' ] = get_the_post_thumbnail_url( get_the_ID() );
 			$ctc_data[ 'img_id' ] = get_post_thumbnail_id( get_the_ID() );
-			$has_hero = false;
 		} 
 		if( is_front_page() && !empty( get_theme_mod( 'harvest_tk_hero' ) ) ) {
 			// Front page hero slider

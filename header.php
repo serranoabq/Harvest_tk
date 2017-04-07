@@ -37,7 +37,7 @@
 			
 		</div> <!-- .pre-content -->
 		
-		<div class="container">
+		<div class="container<?php echo is_front_page() ? '-fluid' : '' ; ?>">
 		
 			<div class="row justify-content-center">
 			
