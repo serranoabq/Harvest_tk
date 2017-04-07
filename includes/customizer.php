@@ -80,18 +80,17 @@ function harvest_tk_customize_register( $wp_customize ) {
 	// Front-page hero 
 	harvest_tk_customize_createSection( $wp_customize, array(
 		'id'              => 'harvest_tk_hero_section',
-		'title'           => __( 'Front Page Hero', 'harvest_tk' ),
-		'description'     => __( 'Enter the code or shortcode for the hero image at the top of the homepage', 'harvest_tk' ),
+		'title'           => __( 'Front Page Hero Slider', 'harvest_tk' ),
+		'description'     => __( 'Enter the shortcode for the hero slider at the top of the  homepage', 'harvest_tk' ),
 		'panel'           => 'harvest_tk_options_panel', 
 		'active_callback' => 'is_front_page', 
 	) );
 	harvest_tk_customize_createSetting( $wp_customize, array(
 		'id' 	              => 'harvest_tk_hero',
 		'type'              => 'textarea', 
-		'label'             => __( 'Hero code', 'harvest_tk' ),
+		'label'             => __( 'Hero Slider Shortcode', 'harvest_tk' ),
 		'default'           => '',
 		'section'           => "harvest_tk_hero_section",
-		'sanitize_callback' => 'do_shortcode',
 	) );
 	
 	// Panels 
@@ -190,11 +189,13 @@ function harvest_tk_customizer_script(){
 			panel_count = 12;
 			$( '#customize-control-harvest_tk_panel_count select' ).change( function() {
 				panel_count =  $(this).val();
-				for( var i = 1; i < 12; i++ ){
+				for( var i = 1; i <= 12; i++ ){
 					if( i <= panel_count ) {
 						$( '#accordion-section-harvest_tk_panel_' + i ).css( { 'display' : '' } );
+						wp.customize.section('harvest_tk_panel_' + i ).activate();
 					} else {
 						$( '#accordion-section-harvest_tk_panel_' + i ).css( { 'display' : 'none' } );
+						wp.customize.section('harvest_tk_panel_' + i ).deactivate();
 					}
 				}
 			});

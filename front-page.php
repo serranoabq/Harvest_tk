@@ -27,7 +27,7 @@ get_header(); ?>
 	// Get each of our panels and show the post data
 	$panels = range( 1, 12, 1 );
 	foreach ( $panels as $panel ) :
-		if ( get_theme_mod( 'harvest_tk_panel' . $panel ) ) :
+		if ( get_theme_mod( 'harvest_tk_panel_' . $panel ) ) :
 			$post = get_post( get_theme_mod( 'harvest_tk_panel' . $panel ) );
 			setup_postdata( $post );
 			set_query_var( 'harvest_tk_panel', $panel );

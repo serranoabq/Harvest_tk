@@ -238,7 +238,7 @@ nav .form-control {
 
 /* These are custom styles for  CTC-specific stuff */
 .main-content{
-	/*overflow: hidden;*/
+	overflow: hidden;
 }
 
 .pre-content{ 

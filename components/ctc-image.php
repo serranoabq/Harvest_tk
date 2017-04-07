@@ -22,15 +22,21 @@
 		$ctc_data = harvest_tk_get_person_data( get_the_ID() );
 		break;
 	 default:
-		if( has_post_thumbnail( get_the_ID() ) ){
-			// For other post and pages, we'll use the featured image
+		if( has_post_thumbnail( get_the_ID() ) ) {
+			// Without the hero slider, use featured image
 			$ctc_data[ 'img' ] = get_the_post_thumbnail_url( get_the_ID() );
 			$ctc_data[ 'img_id' ] = get_post_thumbnail_id( get_the_ID() );
-		} else {
-			return;
+			$has_hero = false;
+		} 
+		if( is_front_page() && !empty( get_theme_mod( 'harvest_tk_hero' ) ) ) {
+			// Front page hero slider
+			$ctc_data[ 'img' ] = do_shortcode( get_theme_mod( 'harvest_tk_hero' ) );				
+			$ctc_data[ 'img_id' ] = '';
+			$has_hero = true;
 		}
 	}
 	
+	// Check capabilities
 	$has_audio = ! empty( $ctc_data[ 'audio' ] );
 	$has_video = ! empty( $ctc_data[ 'video' ] );
 	$has_image = ! empty( $ctc_data[ 'img' ] );
@@ -43,6 +49,7 @@
 	if( $has_video )
 		$pos_media[] = 'video';
 	
+	// A CTC person could use a default gender image
 	if( 'ctc_person' == $cpt && ! $has_image ){
 		$person_img = harvest_tk_person_image( '', $ctc_data[ 'gender' ] );
 		$ctc_data[ 'img' ] = $person_img;
@@ -53,6 +60,7 @@
 	if( 'ctc_sermon' == $cpt && count( $pos_media ) == 0 )
 		return;
 	
+	// On series, try to use the series image
 	if( is_tax( 'ctc_sermon_series' ) ){
 		$has_video = false;
 		$has_audio = false;
@@ -78,13 +86,16 @@
 	if( ! $has_video && ! $has_image && ! $has_map && ! $has_audio )
 		return;
 	
-	if ( $do_media == 'video' ): 
-		// Let's do video!
+	
+	/** Let's put out the information based on request and capabilities **/ 
+	
+	if ( $do_media == 'video' ): 		// Let's do video!
 		$video = $ctc_data[ 'video' ];
 		$has_iframe = ( false !== strripos( $video, '<iframe') );
-		if( $has_iframe ){ 
-			// It's a full embed code 
+		
+		if( $has_iframe ){ // It's a full embed code 
 			// It's up to the user to style the embed code appropriately
+			// Warning this could break things!
 			
 ?>		
 
@@ -96,20 +107,22 @@
 		
 <?php
 			
-		} else {
-			// No iframe so assume a video URL
+		} else { // No iframe so assume a video URL
 			$video = esc_url( $ctc_data[ 'video' ] );
 			$video_args = array(
 				'src'      => $video,
 				'height'   => 540,
 				'width'    => 960, 
-				// 'poster'   => $ctc_data[ 'img' ],
+				'poster'   => $ctc_data[ 'img' ],
 				'autoplay' => true,
 			);
 			$img_src = '';
+			
+			// Get video markup
 			$video_src = str_replace( "'video'", '"video"', wp_video_shortcode( $video_args ) ); 
 			$video_src = preg_replace( '~\R~u', '', $video_src ); 
 			
+			// If an image is available, lazy load the video
 			if( $has_image ){
 				$id = ! empty( $ctc_data[ 'img_id' ] ) ? $ctc_data[ 'img_id' ] : harvest_tk_get_attachment_id( $ctc_data[ 'img' ] );
 				$img_src = wp_get_attachment_image( $id, 'harvest_tk-hero', '', ['class'=>'ctc-image'] );
@@ -119,7 +132,7 @@
 
 		<div class="ctc-media <?php echo $has_image ? 'video-overlay' : '' ; ?>">
 			<?php echo $has_image ? $img_src : $video_src; ?>
-			<?php if( $has_image ): ?>
+			<?php if( $has_image ): // Lazy load JS code ?>
 			<script>
 
 				jQuery(document).ready( function($){
@@ -141,8 +154,7 @@
 			
 		} // has_iframe		
   
-	elseif ( $has_map ):
-		// The image is a map (a feature of CTC Extender) based on event address
+	elseif ( $has_map ): 	// The image is a map (a feature of CTC Extender) based on event address
 		$map_url = esc_url( $ctc_data[ 'map_url' ] );
 		$api_key = 'AIzaSyBpzPm7J6-tkqom76246jehm8dRj2pu1Ds'; // Mine
 		$map_img_url = add_query_arg( [ 'key' => $api_key ], $ctc_data[ 'img' ] );
@@ -157,20 +169,25 @@
 
 <?php
 
-	elseif ( $has_image ):
+	elseif ( $has_image ):  // It has an image; if there's audio it spits it out under the image
+	
+		// Sermon series archives can use the taxonomy image
 		if( is_tax( 'ctc_sermon_series' ) ){
 			$id = harvest_tk_get_attachment_id( $term_img );
 		} else {
 			$id = ! empty( $ctc_data[ 'img_id' ] ) ? $ctc_data[ 'img_id' ] : harvest_tk_get_attachment_id( $ctc_data[ 'img' ] );
 		}	
 		
+		// Slight change in style for people
 		$person_class = 'ctc_person' == $cpt ? 'w-25 rounded-circle' : '';
 		$thumb_size = 'ctc_person' == $cpt ? 'harvest_tk-person' : 'harvest_tk-hero';
+		
+		$img_src = $has_hero ? $ctc_data[ 'img' ] : wp_get_attachment_image( $id, $thumb_size, '', ['class'=>'ctc-image'] );
 ?>
 
 		<div class="ctc-media <?php echo $person_class; ?>">
 			
-			<?php echo wp_get_attachment_image( $id, $thumb_size, '', ['class'=>'ctc-image'] ); ?>
+			<?php echo $img_src; ?>
 			
 			<?php if( $do_media == 'audio' ): echo wp_audio_shortcode( array( 'src' => $ctc_data[ 'audio' ] ) ); endif; ?>
 			
