@@ -37,9 +37,12 @@
 			
 		</div> <!-- .pre-content -->
 		
-		<div class="container<?php echo is_front_page() ? '-fluid' : '' ; ?>">
+		<div class="container<?php echo is_front_page() ? '-fluid p-0' : '' ; ?>">
+
+<?php if( ! is_front_page() ): ?>
 		
 			<div class="row justify-content-center">
 			
 				<div id="content" class="main-content-inner col-lg-10">
 
+<?php endif; ?>

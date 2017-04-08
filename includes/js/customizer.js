@@ -60,24 +60,27 @@ jQuery( document ).ready( function( $ ) {
 	} );
 	
 	//
-	for( var i = 1; i < 12; i++ ){
-		wp.customize( 'harvest_tk_panel_' + i + '_opacity', function( value ) {
+	for( var i = 1; i <= 12; i++ ){
+		var dpanel = 'harvest_tk_panel_' + i;
+		wp.customize( dpanel + '_opacity', function( value ) {
+			var mpanel = '.' + dpanel;
 			value.bind( function( opacity ) {
-				$( '.harvest_tk-panel' + i + ' .harvest_tk-panel-background' ).css( {
-					'opacity': opacity,
+				$( mpanel + ' .harvest_tk_panel-background' ).css( {
+					'opacity': opacity
 				} );
 			} );
 		} );
 
-		wp.customize( 'harvest_tk_panel_' + i + '_bgcolor', function( value ) {
+		wp.customize( dpanel + '_bgcolor', function( value ) {
+			var mpanel = '.' + dpanel;
 			value.bind( function( color ) {
 				if ( false === color ) {
-					$( '.harvest_tk-panel' + i ).css( {
-						'background-color': '',
+					$( mpanel ).css( {
+						'background-color': ''
 					} );
 				} else {
-					$( '.harvest_tk-panel' + i ).css( {
-						'background-color': color,
+					$( mpanel ).css( {
+						'background-color': color
 					} );
 				}
 			} );

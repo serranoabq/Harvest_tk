@@ -234,7 +234,7 @@ nav .input-group-btn,
 nav .form-control {
     display: inline;
 }
-
+/**************************************************/
 
 /* These are custom styles for  CTC-specific stuff */
 .main-content{
@@ -321,6 +321,8 @@ h1.page-title {
 .entry-footer{
 	margin-top: 25%;
 }
+
+/* Header */
 #site-header-container{
 	padding-bottom: 0;
 }
@@ -333,11 +335,11 @@ h1.page-title {
 	color: rgba(0,0,0,0.5);
 }
 
+/* Nav Bar */ 
 .navbar-white .navbar-toggler, 
 .navbar-white .navbar-nav .nav-link {
 	color: rgba( 255,255,255, 0.95 ) !important;
 }
-
 
 .navbar-white .navbar-toggler {
 	border-color: rgba(255, 255, 255, 0.1);
@@ -353,6 +355,20 @@ h1.page-title {
 	margin-right: auto;
 }
 
+.harvest_tk_panel-background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-size: cover;
+	z-index: 0;
+	right: 0;
+	bottom: 0;
+	background-position: center;
+}
+
+.harvest_tk_panel-content{
+	position: relative;
+}
 @media (max-width: 768px){
 	.card-columns{
 		column-count: 2;

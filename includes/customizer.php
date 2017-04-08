@@ -148,13 +148,14 @@ function harvest_tk_customize_register( $wp_customize ) {
 			'label'             => __( 'Featured Image Opacity', 'harvest_tk' ),
 			'default'           => 'default',
 			'section'           => "harvest_tk_panel_$i",
-			'sanitize_callback' => 'sanitize_hex_color',
+			'sanitize_callback' => 'harvest_tk_sanitize_opacity',
 			'description'       => __( 'Set the opacity of the featured image over the panel background.', 'harvest_tk' ),
+			'transport'         => 'postMessage',
 			'choices'           => array(
-				'0.25'            => __( '25%', 'harvest_tk' ),
-				'0.5'             => __( '50%', 'harvest_tk' ),
-				'0.75'            => __( '75%', 'harvest_tk' ),
-				'1'               => __( '100%', 'harvest_tk' ),
+				'0.25'            => '25%',
+				'0.5'             => '50%',
+				'0.75'            => '75%',
+				'1'               => '100%',
 			),
 		) );
 		
@@ -355,12 +356,20 @@ function harvest_tk_customizer_css(){ ?>
 		}
 	<?php endif; 
 	
-	for( $i = 1; $i < 12; $i++ ){
-		$bgcolor = get_theme_mod( 'harvest_tk_panel_' + $i + '_bgcolor' );
-		$bgopacity = get_theme_mod( 'harvest_tk_panel_' + $i + '_opacity' );
-		if ( $bgcolor || $bgopacity ): 
-			// CSS for setting bg color and panel bg opacity once I have that defined
-		endif;
+	for( $i = 1; $i <= 12; $i++ ){
+		$bgcolor = get_theme_mod( 'harvest_tk_panel_' . $i . '_bgcolor' );
+		$bgopacity = get_theme_mod( 'harvest_tk_panel_' . $i . '_opacity' );
+		
+		if ( $bgcolor ): ?>
+			.harvest_tk_panel_<?php echo $i; ?>{
+				background-color: <?php echo esc_attr( $bgcolor ); ?> !important;
+			}
+		<?php endif; 
+		if ( $bgopacity ): ?>
+			.harvest_tk_panel_<?php echo $i; ?> .harvest_tk_panel-background{
+				opacity: <?php echo esc_attr( $bgopacity ); ?> !important;
+			}
+		<?php endif;
 	} ?>
 	</style>
 

@@ -28,7 +28,9 @@
 			$ctc_data[ 'img' ] = get_the_post_thumbnail_url( get_the_ID() );
 			$ctc_data[ 'img_id' ] = get_post_thumbnail_id( get_the_ID() );
 		} 
-		if( is_front_page() && !empty( get_theme_mod( 'harvest_tk_hero' ) ) ) {
+		$hero = get_theme_mod( 'harvest_tk_hero' );
+		
+		if( is_front_page() && ! empty( $hero ) ) {
 			// Front page hero slider
 			$ctc_data[ 'img' ] = do_shortcode( get_theme_mod( 'harvest_tk_hero' ) );				
 			$ctc_data[ 'img_id' ] = '';

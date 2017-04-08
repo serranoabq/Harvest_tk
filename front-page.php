@@ -22,13 +22,10 @@ get_header(); ?>
 			// Special pages could be created with special templates 
 			// (e.g. for recent sermon or upcoming events)
 			// 
-			// get_template_part( 'components/content', 'page' );
+			get_template_part( 'components/content', 'front' );
 			wp_reset_postdata();
 		endif;
 	endforeach;
 	?>
-
-	</main><!-- #main -->
-</div><!-- #primary -->
 
 <?php get_footer(); ?>
