@@ -162,21 +162,6 @@ display: block;
  * For example with some margin, like the line below ;) Delete, modify, change classes in HTML if you desire another style */
  .comment .children { margin-left: 1.5em; }
 
-/**
-* Some WP Theme Repository requirements
-*/
-
-.sticky {
-}
-
-.gallery-caption {
-
-}
-
-.bypostauthor {
-
-}
-
 .entry-meta {
 	clear: both;
 }
@@ -234,13 +219,26 @@ nav .input-group-btn,
 nav .form-control {
     display: inline;
 }
+
 /**************************************************/
 
-/* These are custom styles for  CTC-specific stuff */
 .main-content{
 	overflow: hidden;
 }
+h1.page-title {
+	margin-top: 20px
+}
+.entry-footer{
+	margin-top: 25%;
+}
 
+/* Header */
+#site-header-container{
+	padding-bottom: 0;
+}
+.pre-content-bg, .site-header{
+	background: #467290; /* Customizable */
+}
 .pre-content{ 
 	position:relative;
 	text-align: center;
@@ -252,8 +250,10 @@ nav .form-control {
 	bottom: 33%;
 	width: 100%;
 	z-index: -1;
-	background: red; /* customize */
+	background: red; /* Customizable */
 }
+
+/* Header Media */
 .ctc-media{
 	margin: 0 auto;
 	max-width: 960px;
@@ -285,10 +285,18 @@ nav .form-control {
 .video-overlay .play-button:before {
 	content: '\f04b';
 }
-
 .video-overlay .ctc-image {
 	opacity: 0.5;
 	cursor: pointer;
+}
+
+/* CTC Media chooser */
+.ctc-sermon-chooser{
+	text-align: center;
+	margin-top: 20px;
+}
+.ctc_capability {
+	color: rgba(0,0,0,0.5);
 }
 
 /* CTC Details */
@@ -308,31 +316,12 @@ nav .form-control {
 	color: #fff; 
 }
 
-/* CTC Media chooser */
-.ctc-sermon-chooser{
-	text-align: center;
-	margin-top: 20px;
-}
-
-h1.page-title {
-	margin-top: 20px
-}
-
-.entry-footer{
-	margin-top: 25%;
-}
-
-/* Header */
-#site-header-container{
-	padding-bottom: 0;
-}
-.pre-content-bg, .site-header{
-	background: #467290;
-}
-
-
-.ctc_capability {
-	color: rgba(0,0,0,0.5);
+/* CTC card */
+.ctc-card {
+	margin-top: 15px;
+	min-width: 200px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 /* Nav Bar */ 
@@ -348,13 +337,10 @@ h1.page-title {
 	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.95)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
 
-.ctc-card {
-	margin-top: 15px;
-	min-width: 200px;
-	margin-left: auto;
-	margin-right: auto;
+/* Front page panels */
+.harvest_tk_panel {
+	position: relative;
 }
-
 .harvest_tk_panel-background {
 	position: absolute;
 	top: 0;
@@ -365,10 +351,21 @@ h1.page-title {
 	bottom: 0;
 	background-position: center;
 }
-
 .harvest_tk_panel-content{
 	position: relative;
 }
+.harvest_tk_panel-preview_frame{
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	right: 10px;
+	bottom: 10px;
+	border: 3px dashed red;
+	z-index: 2;
+}
+
+
+
 @media (max-width: 768px){
 	.card-columns{
 		column-count: 2;
