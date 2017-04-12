@@ -242,6 +242,10 @@ h1.page-title {
 .pre-content{ 
 	position:relative;
 	text-align: center;
+	line-height: 0;
+}
+.home .pre-content{
+	line-height: 0;
 }
 .pre-content-bg{ 
 	position: absolute; 
@@ -252,6 +256,7 @@ h1.page-title {
 	z-index: -1;
 	background: red; /* Customizable */
 }
+
 
 /* Header Media */
 .ctc-media{
@@ -264,6 +269,9 @@ h1.page-title {
 	overflow: hidden;
 	display: inline-block;
 	width: 100%;
+}
+.home .ctc-media{
+	max-width: 100%;
 }
 .video-overlay .play-button {
 	position: absolute;
@@ -363,7 +371,17 @@ h1.page-title {
 	border: 3px dashed red;
 	z-index: 2;
 }
-
+.harvest_tk_panel-preview_frame span{
+	position: absolute;
+	bottom: 0px;
+	right: 0;
+	font-size: .8em;
+	font-weight: bold;
+	color: #fff;
+	background: rgba(255,255,255,0.5);
+	padding: 5px;
+	display: block;;
+}
 
 
 @media (max-width: 768px){
