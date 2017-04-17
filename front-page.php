@@ -13,18 +13,27 @@ get_header(); ?>
 	<?php
 	// Get each of our panels and show the post data
 	$panels = range( 1, get_theme_mod( 'harvest_tk_panel_count' ), 1 );
-	foreach ( $panels as $panel ) :
-		if ( get_theme_mod( 'harvest_tk_panel_' . $panel . '_page') ) :
-			$post = get_post( get_theme_mod( 'harvest_tk_panel_' . $panel . '_page') );
-			setup_postdata( $post );
-			set_query_var( 'harvest_tk_panel', $panel );
-			// Each panel can be a page's content, but displayed differently
-			// Special pages could be created with special templates 
-			// (e.g. for recent sermon or upcoming events)
-			// 
-			get_template_part( 'components/content', 'front' );
-			wp_reset_postdata();
-		endif;
+	foreach ( $panels as $panel ) :	
+		set_query_var( 'harvest_tk_panel', $panel );
+		
+		switch( get_theme_mod( 'harvest_tk_panel_' . $panel . '_type' )):
+			case 'sermon':
+				get_template_part( 'components/front', 'sermon' );
+				break;
+			case 'event':
+				get_template_part( 'components/front', 'events' );
+				break;
+			case 'page':
+				if( get_theme_mod( 'harvest_tk_panel_' . $panel . '_page' ) ) :
+					$post = get_post( get_theme_mod( 'harvest_tk_panel_' . $panel . '_page') );
+					setup_postdata( $post );
+					get_template_part( 'components/front', 'panel' );
+					wp_reset_postdata();
+				endif;
+				break;
+				
+		endswitch;
+		
 	endforeach;
 	?>
 

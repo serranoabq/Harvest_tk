@@ -124,6 +124,21 @@ function harvest_tk_customize_register( $wp_customize ) {
 		) );
 		
 		harvest_tk_customize_createSetting( $wp_customize, array(
+			'id' 	              => 'harvest_tk_panel_'. $i . '_type',
+			'type'              => 'radio', 
+			'label'             => __( 'Panel Content Type', 'harvest_tk' ),
+			'default'           => 'sermon',
+			'section'           => "harvest_tk_panel_$i",
+			'sanitize_callback' => 'harvest_tk_sanitize_type',
+			// 'transport'         => 'postMessage',
+			'choices'           => array(
+				'sermon'          => __( 'Recent Sermon', 'harvest_tk' ),
+				'event'           => __( 'Upcoming Events', 'harvest_tk' ),
+				'page'            => __( 'Static Page', 'harvest_tk' ),
+			),
+		) );
+		
+		harvest_tk_customize_createSetting( $wp_customize, array(
 			'id' 	              => 'harvest_tk_panel_'. $i . '_page',
 			'type'              => 'dropdown-pages', 
 			'label'             => __( 'Panel Content', 'harvest_tk' ),
@@ -187,20 +202,39 @@ function harvest_tk_customizer_script(){
 ?>
 	<script>
 		jQuery( document ).ready( function($){
+			var api = wp.customize;
 			panel_count = 12;
 			$( '#customize-control-harvest_tk_panel_count select' ).change( function() {
 				panel_count =  $(this).val();
 				for( var i = 1; i <= 12; i++ ){
 					if( i <= panel_count ) {
 						$( '#accordion-section-harvest_tk_panel_' + i ).css( { 'display' : '' } );
-						wp.customize.section('harvest_tk_panel_' + i ).activate();
+						api.section('harvest_tk_panel_' + i ).activate();
 					} else {
 						$( '#accordion-section-harvest_tk_panel_' + i ).css( { 'display' : 'none' } );
-						wp.customize.section('harvest_tk_panel_' + i ).deactivate();
+						api.section('harvest_tk_panel_' + i ).deactivate();
 					}
 				}
 			});
 			
+			for( var i = 1; i <= 12; i++ ){
+				var panel_type = api.control( 'harvest_tk_panel_' + i + '_type' ).setting();
+				var type_control = 'input[name=_customize-radio-harvest_tk_panel_' + i + '_type]';
+				
+				// Hide the page chooser
+				$( '#customize-control-harvest_tk_panel_' + i + '_page' ).css( {'display': 'page' == panel_type ? 'list-item': 'none' } );
+				
+				$( type_control ).change( function() {
+					var panel = $(this).attr('name').replace('_customize-radio-harvest_tk_panel_','').replace('_type','');
+					var panel_type = $( this ).val();
+					if( 'page' == panel_type ) {
+						api.control( 'harvest_tk_panel_' + panel + '_page' ).activate();
+					} else {
+						api.control( 'harvest_tk_panel_' + panel + '_page' ).deactivate();
+					}
+					$( '#customize-control-harvest_tk_panel_' + panel + '_page' ).css( {'display': 'page' == panel_type ? 'list-item': 'none' } );
+				});
+			}
 		});
 	</script>
 <?php	
@@ -341,6 +375,15 @@ function harvest_tk_sanitize_opacity( $input ) {
 	$choices = array( 'default', 0.25, 0.5, 0.75, 1 );
 	if ( ! in_array( $input, $choices ) ) {
 		$input = 'default';
+	}
+	return $input;
+}
+
+// Sanitize panel type control
+function harvest_tk_sanitize_type( $input ) {
+	$choices = array( 'sermon', 'event', 'page' );
+	if ( ! in_array( $input, $choices ) ) {
+		$input = 'page';
 	}
 	return $input;
 }
