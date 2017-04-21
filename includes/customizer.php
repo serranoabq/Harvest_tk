@@ -127,7 +127,7 @@ function harvest_tk_customize_register( $wp_customize ) {
 			'id' 	              => 'harvest_tk_panel_'. $i . '_type',
 			'type'              => 'radio', 
 			'label'             => __( 'Panel Content Type', 'harvest_tk' ),
-			'default'           => 'sermon',
+			'default'           => 'page',
 			'section'           => "harvest_tk_panel_$i",
 			'sanitize_callback' => 'harvest_tk_sanitize_type',
 			// 'transport'         => 'postMessage',
@@ -145,6 +145,7 @@ function harvest_tk_customize_register( $wp_customize ) {
 			'default'           => false,
 			'section'           => "harvest_tk_panel_$i",
 			'sanitize_callback' => 'harvest_tk_sanitize_numeric_value',
+			'active_callback'   => 'harvest_tk_panel_page_check',
 		) );
 		
 		harvest_tk_customize_createSetting( $wp_customize, array(
@@ -218,11 +219,7 @@ function harvest_tk_customizer_script(){
 			});
 			
 			for( var i = 1; i <= 12; i++ ){
-				var panel_type = api.control( 'harvest_tk_panel_' + i + '_type' ).setting();
 				var type_control = 'input[name=_customize-radio-harvest_tk_panel_' + i + '_type]';
-				
-				// Hide the page chooser
-				$( '#customize-control-harvest_tk_panel_' + i + '_page' ).css( {'display': 'page' == panel_type ? 'list-item': 'none' } );
 				
 				$( type_control ).change( function() {
 					var panel = $(this).attr('name').replace('_customize-radio-harvest_tk_panel_','').replace('_type','');
@@ -254,6 +251,7 @@ function harvest_tk_customize_createSetting( $wp_customize, $args ) {
 		'default'           => '', // required
 		'section'           => '', // required
 		'sanitize_callback' => '', // optional
+		'active_callback'   => '', // optional
 		'transport'         => '', // optional
 		'description'       => '', // optional
 		'priority'          => null, // optional
@@ -266,7 +264,7 @@ function harvest_tk_customize_createSetting( $wp_customize, $args ) {
 	// Available types and arguments
 	$available_types = array( 'text', 'number', 'checkbox', 'textarea', 'radio', 'select', 'dropdown-pages', 'email', 'url', 'date', 'hidden', 'image', 'color' );
 	$setting_def_args = array( 'default'=> '', 'sanitize_callback'=>'', 'transport'=>'' );
-	$control_def_args = array( 'type'=>'', 'label'=>'', 'description'=>'', 'priority'=>'', 'choices'=>'', 'section'=>'' );
+	$control_def_args = array( 'type'=>'', 'label'=>'', 'description'=>'', 'priority'=>'', 'choices'=>'', 'section'=>'', 'active_callback'=>'' );
 	
 	// Check for non-empty inputs, too
 	if( empty( $args[ 'id' ] ) ||  
@@ -424,4 +422,11 @@ function harvest_tk_panel_check( $control ){
 	$count = get_theme_mod( 'harvest_tk_panel_count', 12 );
 	$current_section = str_ireplace( 'harvest_tk_panel_' , '', $control->id );
 	return is_front_page() && (int)$current_section <= (int)$count;
+}
+
+function harvest_tk_panel_page_check( $control ){
+	$panel = str_ireplace( 'harvest_tk_panel_' , '', $control->id );
+	$panel = str_ireplace( '_page', '' , $panel );
+	$type = get_theme_mod( "harvest_tk_panel_$panel" . '_type' );
+	return 'page' == $type;
 }

@@ -22,7 +22,7 @@ jQuery( document ).ready( function( $ ) {
 	wp.customize( 'harvest_tk_header_bgcolor', function( value ) {
 		value.bind( function( to ) {
 			if ( to ) {
-				$( '.pre-content-bg, .site-header' ).css( {
+				$( '.pre-content-bg, .site-header, .panel-header' ).css( {
 					'background-color': to
 				} );
 			}
