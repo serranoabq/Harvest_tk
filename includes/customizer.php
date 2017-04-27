@@ -165,6 +165,7 @@ function harvest_tk_customize_register( $wp_customize ) {
 			'default'           => 'default',
 			'section'           => "harvest_tk_panel_$i",
 			'sanitize_callback' => 'harvest_tk_sanitize_opacity',
+			'active_callback'   => 'harvest_tk_panel_page_check',
 			'description'       => __( 'Set the opacity of the featured image over the panel background.', 'harvest_tk' ),
 			'transport'         => 'postMessage',
 			'choices'           => array(
@@ -224,12 +225,8 @@ function harvest_tk_customizer_script(){
 				$( type_control ).change( function() {
 					var panel = $(this).attr('name').replace('_customize-radio-harvest_tk_panel_','').replace('_type','');
 					var panel_type = $( this ).val();
-					if( 'page' == panel_type ) {
-						api.control( 'harvest_tk_panel_' + panel + '_page' ).activate();
-					} else {
-						api.control( 'harvest_tk_panel_' + panel + '_page' ).deactivate();
-					}
 					$( '#customize-control-harvest_tk_panel_' + panel + '_page' ).css( {'display': 'page' == panel_type ? 'list-item': 'none' } );
+					$( '#customize-control-harvest_tk_panel_' + panel + '_opacity' ).css( {'display': 'page' == panel_type ? 'list-item': 'none' } );
 				});
 			}
 		});

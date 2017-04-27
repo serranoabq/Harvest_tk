@@ -21,7 +21,7 @@
 <body <?php body_class(); ?>>
 	<?php do_action( 'before' ); ?>
 		
-	<header id="masthead" class="site-header" role="banner">
+	<header id="masthead" class="site-header" role="banner" style="background-color:<?php echo get_theme_mod('harvest_tk_header_bgcolor'); ?>">
 	
 		<?php get_template_part( 'components/site', 'header' ); ?>
 	
@@ -31,7 +31,7 @@
 	
 		<div class="pre-content">
 		
-			<div class="pre-content-bg"></div>
+			<div class="pre-content-bg" style="background-color:<?php echo get_theme_mod('harvest_tk_header_bgcolor'); ?>"></div>
 			
 			<?php harvest_tk_precontent(); ?>
 			

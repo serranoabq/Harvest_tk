@@ -14,6 +14,7 @@
 		<div class="harvest_tk_panel-background " style="background-image:url(<?php echo esc_url( $image[0] ); ?>)"></div>
 		
 	<?php endif; ?>
+	
 	<div class="container">
 		<div class="harvest_tk_panel-content">
 		
@@ -21,10 +22,12 @@
 		
 		</div>
 		
-		<?php if( is_customize_preview() ): ?>
-		
-			<div class="harvest_tk_panel-preview_frame"><span><?php echo __('Panel', 'harvest_tk' ) . ' ' . $harvest_tk_panel; ?></span></div>
-		
-		<?php endif; ?>
 	</div>
+	
+	<?php if( is_customize_preview() ): ?>
+	
+		<div class="harvest_tk_panel-preview_frame"><span><?php echo __('Panel', 'harvest_tk' ) . ' ' . $harvest_tk_panel; ?></span></div>
+	
+	<?php endif; ?>
+	
 </article><!-- #post-## -->

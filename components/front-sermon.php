@@ -23,79 +23,26 @@
 .panel-header {
 	padding: 15px 0;
 }
-.panel-header h3 {
-    
-}
-#latest-sermon *{
+#latest-sermon .container{
+	text-align: center;
 	transition: all 0.5s ease;
 }
-#latest-sermon .container{
-	// margin: 0;
-	// padding: 0;
-	// width: 100%;
-}
-.ctc-media-content{
-	// line-height: 0;
-}
-#latest-sermon .ctc-media{
-	box-shadow: none;
-}
 
-#latest-sermon .ctc-details{
-	position: relative;
-	bottom: 0;
-	background-color: none;
-	padding: 15px 30px;
-	width: 100%;
-}
-
-@media (max-width: 992px){
-	#latest-sermon{
-		padding: 0 !important;
-	}
+@media (max-width: 576px){
 	#latest-sermon .container{
-		margin: 0;
-		width: 100%;
+		width: calc(100% + 10vw);
 		padding: 0;
+		margin: 0 -5vw;
 	}
-	#latest-sermon .ctc-details{
-		position: absolute !important;
-		bottom: <?php echo ( $has_audio && !$has_video ) ? '30px' : '0'; ?>;
-		background-color: rgba(0,0,0,0.5);
-		padding-left: 30px;
-	}
-	.panel-header{
-		position: absolute;
-		width: 100%;
-		z-index: 10;
-		text-align: center;
-		top:10px;
-	}
-}
-@media (min-width: 576px){
-	.ctc-details{
-		
-	}
-	#latest-sermon .container{
-		
-	}
-	#latest-sermon .ctc-details{
-		// position: absolute !important;
-	}
-}
-@media (min-width: 768px){
-	#latest-sermon .container{
-		margin: 0 auto;
-	}
-	
 }
 </style>
 <article id="latest-sermon" <?php post_class( "harvest_tk_panel m-0 p-5 harvest_tk_panel_$harvest_tk_panel" ); ?> style="background-color:<?php echo get_theme_mod( "harvest_tk_panel_$harvest_tk_panel" . '_bgcolor' ); ?>">
+	
 	<div class="container">
 		<div class="panel-header"><h3><?php _e( 'Latest Message', 'harvest_tk' ); ?></h3></div>
 		
 		<div class="row">
-			<div class="col-lg-9 ctc-media-content">
+			<div class="col-md-8 col-lg-9 ctc-media-content">
 	<?php 
 					if( $has_video ): // 
 					
@@ -170,20 +117,21 @@
 			</div> <!-- .ctc-media-content -->
 			
 			
-			<div class="col-lg-3 ctc-details">
+			<div class="col-md-4 col-lg-3 ctc-details">
 				<h4 class="sermon-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
 				<div class="text-muted ctc_speaker"><?php echo $ctc_data[ 'speakers' ]; ?></div>
 				<div class="text-muted ctc_date"><?php the_date(); ?></div>
 			</div>
 		</div> <!-- .ctc-details -->
 		
-		
-		<?php if( is_customize_preview() ): ?>
-		
-			<div class="harvest_tk_panel-preview_frame"><span><?php echo __('Panel', 'harvest_tk' ) . ' ' . $harvest_tk_panel; ?></span></div>
-		
-		<?php endif; ?>
 	</div>
+	
+	<?php if( is_customize_preview() ): ?>
+		
+		<div class="harvest_tk_panel-preview_frame"><span><?php echo __('Panel', 'harvest_tk' ) . ' ' . $harvest_tk_panel; ?></span></div>
+	
+	<?php endif; ?>
+	
 </article><!-- #post-## -->
 
 <?php 
