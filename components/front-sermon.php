@@ -1,5 +1,6 @@
 <?php
 /**
+ * Front page - Sermon panel 
  * @package harvest_tk
  */
 	$query = array(
@@ -19,26 +20,10 @@
 		
 		
 ?>
-<style>
-.panel-header {
-	padding: 15px 0;
-}
-#latest-sermon .container{
-	text-align: center;
-	transition: all 0.5s ease;
-}
 
-@media (max-width: 576px){
-	#latest-sermon .container{
-		width: calc(100% + 10vw);
-		padding: 0;
-		margin: 0 -5vw;
-	}
-}
-</style>
 <article id="latest-sermon" <?php post_class( "harvest_tk_panel m-0 p-5 harvest_tk_panel_$harvest_tk_panel" ); ?> style="background-color:<?php echo get_theme_mod( "harvest_tk_panel_$harvest_tk_panel" . '_bgcolor' ); ?>">
 	
-	<div class="container">
+	<div class="container p-0">
 		<div class="panel-header"><h3><?php _e( 'Latest Message', 'harvest_tk' ); ?></h3></div>
 		
 		<div class="row">

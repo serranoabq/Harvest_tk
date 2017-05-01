@@ -1,5 +1,6 @@
 <?php
 /**
+ * Front page - Page panel 
  * @package harvest_tk
  */
 
@@ -15,7 +16,7 @@
 		
 	<?php endif; ?>
 	
-	<div class="container">
+	<div class="container p-0">
 		<div class="harvest_tk_panel-content">
 		
 			<?php the_content(); ?>

@@ -1,5 +1,5 @@
 /*
-Theme Name: Harvest_tk
+Theme Name: Harvest_tk 
 Description: Harvest theme based on _tk
 Version: 0.1.0
 License: GNU General Public License v3.0 /
@@ -13,7 +13,13 @@ Tags: gray, light, two-columns, right-sidebar, responsive-layout, custom-backgro
 /* This is a small security for too long strings titles */
 body {
 	word-wrap: break-word;
+	font-family: Nunito, Helvetica, Arial, sans-serif;
 }
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: Roboto, sans-serif;
+}
+
 
 /* Alignment */
 .alignleft {
@@ -133,15 +139,50 @@ object {
 }
 
 /* Navigation */
-
-.dropdown-submenu{position:relative;}
-.dropdown-submenu>.dropdown-menu{top:0;left:100%;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;}
-.dropdown-submenu:active>.dropdown-menu, .dropdown-submenu:hover>.dropdown-menu {
-display: block;
+.dropdown-menu{
+	top: 70px;
+	right: 0;
+	left: initial;
+	background-color: #467290;
+	border: none;
+	border-radius: 0;
 }
-.dropdown-submenu>a:after{display:block;content:" ";float:right;width:0;height:0;border-color:transparent;border-style:solid;border-width:5px 0 5px 5px;border-left-color:#cccccc;margin-top:5px;margin-right:-10px;}
-.dropdown-submenu:active>a:after{border-left-color:#ffffff;}
-.dropdown-submenu.pull-left{float:none;}.dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;}
+.dropdown-submenu{
+	position:relative;
+}
+.dropdown-submenu > .dropdown-menu{
+	top:0;
+	left:100%;
+}
+.dropdown-submenu:active > .dropdown-menu, .dropdown-submenu:hover > .dropdown-menu {
+	display: block;
+}
+.dropdown-submenu > a:after{ 
+	display:block;
+	content:" ";
+	float:right;
+	width:0;
+	height:0;
+	border-color:transparent;
+	border-style:solid;
+	border-width:5px 0 5px 5px;
+	border-left-color:#cccccc;
+	margin-top:5px;
+	margin-right:-10px;
+}
+.dropdown-submenu:active > a:after{
+	border-left-color:#ffffff;
+}
+.dropdown-submenu.pull-left{
+	float:none;
+}
+.dropdown-submenu.pull-left > .dropdown-menu{
+	left:-100%;
+	margin-left:10px;
+	-webkit-border-radius:6px 0 6px 6px;
+	-moz-border-radius:6px 0 6px 6px;
+	border-radius:6px 0 6px 6px;
+}
 
 
 /* Here some needed widget styles
@@ -358,6 +399,7 @@ h1.page-title {
 	right: 0;
 	bottom: 0;
 	background-position: center;
+	background-attachment: fixed;
 }
 .harvest_tk_panel-content{
 	position: relative;
@@ -382,7 +424,13 @@ h1.page-title {
 	padding: 5px;
 	display: block;;
 }
-
+.harvest_tk_panel .panel-header {
+	padding: 15px 0;
+}
+#latest-sermon .container{
+	text-align: center;
+	transition: all 0.5s ease;
+}
 
 @media (max-width: 768px){
 	.card-columns{
@@ -392,5 +440,10 @@ h1.page-title {
 @media (max-width: 567px){
 	.card-columns{
 		column-count: 1;
+	}
+	#latest-sermon .container{
+		width: calc(100% + 10vw);
+		padding: 0;
+		margin: 0 -5vw;
 	}
 }
