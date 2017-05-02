@@ -1,7 +1,7 @@
 /*
 Theme Name: Harvest_tk 
 Description: Harvest theme based on _tk
-Version: 0.1.0
+Version: 0.1.1
 License: GNU General Public License v3.0 /
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Tags: gray, light, two-columns, right-sidebar, responsive-layout, custom-background, custom-colors, custom-header, custom-menu, featured-images, flexible-header, sticky-post,  theme-options, threaded-comments, translation-ready
@@ -412,6 +412,7 @@ h1.page-title {
 	bottom: 10px;
 	border: 3px dashed red;
 	z-index: 2;
+	pointer-events: none;
 }
 .harvest_tk_panel-preview_frame span{
 	position: absolute;
@@ -431,6 +432,44 @@ h1.page-title {
 	text-align: center;
 	transition: all 0.5s ease;
 }
+
+.harvest_tk_panel .card { 
+	overflow: hidden;
+}
+.harvest_tk_panel	.card-img-overlay {
+		background-color:rgba(0,0,0,0.3);
+	}
+.harvest_tk_panel	.ctc_cal {
+	overflow: hidden;
+	width: 60px;
+	height: 60px;
+	background-color: gray;
+	font-size: 1em;
+	color: #fff;
+	text-align: center;
+	margin-right: 10px;
+	float: left;
+}
+.harvest_tk_panel	.ctc_cal > .month {
+	height: 20px;
+	line-height: 20px;
+	font-weight: bold;
+	font-size: 14px;
+	filter: hue-rotate(180deg)  saturate(200%);
+}
+.harvest_tk_panel	.ctc_cal > .day {
+	height: 25px;
+	line-height: 25px;
+	font-weight: bold;
+	font-size: 24px;
+}
+.harvest_tk_panel	.ctc_cal > .time {
+	height: 15px;
+	line-height: 15px;
+	font-size: 12px;
+	filter: hue-rotate(180deg) saturate(200%);
+}
+
 
 @media (max-width: 768px){
 	.card-columns{

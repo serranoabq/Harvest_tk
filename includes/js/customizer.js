@@ -75,11 +75,11 @@ jQuery( document ).ready( function( $ ) {
 			var mpanel = '.' + dpanel;
 			value.bind( function( color ) {
 				if ( false === color ) {
-					$( mpanel ).css( {
+					$( mpanel + ', ' + mpanel + ' .ctc_cal > .month, ' + mpanel + ' .time' ).css( {
 						'background-color': ''
 					} );
 				} else {
-					$( mpanel ).css( {
+					$( mpanel + ', ' + mpanel + ' .ctc_cal >  .month, ' + mpanel + ' .time' ).css( {
 						'background-color': color
 					} );
 				}

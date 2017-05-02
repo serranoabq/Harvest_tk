@@ -400,12 +400,16 @@ function harvest_tk_customizer_css(){ ?>
 		
 		if ( $bgcolor ): ?>
 			.harvest_tk_panel_<?php echo $i; ?>{
-				background-color: <?php echo esc_attr( $bgcolor ); ?> !important;
+				background-color: <?php echo esc_attr( $bgcolor ); ?>;
+			}
+			.harvest_tk_panel_<?php echo $i; ?> .month,
+			.harvest_tk_panel_<?php echo $i; ?> .time {
+				background-color: <?php echo esc_attr( $bgcolor ); ?>;
 			}
 		<?php endif; 
 		if ( $bgopacity ): ?>
 			.harvest_tk_panel_<?php echo $i; ?> .harvest_tk_panel-background{
-				opacity: <?php echo esc_attr( $bgopacity ); ?> !important;
+				opacity: <?php echo esc_attr( $bgopacity ); ?>;
 			}
 		<?php endif;
 	} ?>
