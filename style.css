@@ -140,13 +140,19 @@ object {
 
 /* Navigation */
 .dropdown-menu{
-	top: 70px;
-	right: 0;
-	left: initial;
-	background-color: #467290;
+	left:initial;
+	filter: saturate(75%);
 	border: none;
 	border-radius: 0;
+	box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
 }
+.dropdown:last-child  .dropdown-menu {
+	right: 0;
+}
+.dropdown-menu li {
+	padding-left: 10px;
+}
+
 .dropdown-submenu{
 	position:relative;
 }
@@ -425,11 +431,8 @@ h1.page-title {
 	padding: 5px;
 	display: block;;
 }
-.harvest_tk_panel .panel-header {
-	padding: 15px 0;
-}
-#latest-sermon .container{
-	text-align: center;
+
+.harvest_tk_panel .container{
 	transition: all 0.5s ease;
 }
 
@@ -449,6 +452,10 @@ h1.page-title {
 	text-align: center;
 	margin-right: 10px;
 	float: left;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
 }
 .harvest_tk_panel	.ctc_cal > .month {
 	height: 20px;

@@ -4,7 +4,11 @@
  * @package harvest_tk
  */
 
-	$bgcolor = get_theme_mod( "harvest_tk_panel_$harvest_tk_panel" . '_bgcolor' );
+	$bgcolor = get_theme_mod( "harvest_tk_panel_$harvest_tk_panel" . '_bgcolor', '' );
+	$wht = get_theme_mod( "harvest_tk_panel_$harvest_tk_panel" . '_whitetext', false );
+	$showtitle = get_theme_mod( "harvest_tk_panel_$harvest_tk_panel" . '_showtitle', false );
+	$preview_title_class = !$showtitle && is_customize_preview() ? 'hidden-xs-up' : '';
+	$white_text_class = $wht ? 'text-white' : '';
 	
 	function harvest_tk_event_card( $post_id ){
 		$ctc_data = harvest_tk_get_event_data( $post_id );
@@ -26,8 +30,8 @@
 		<div class="card card-inverse">
 			<a href="<?php echo $permalink;?>">
 				<?php echo $has_image || $has_map ? $img : ''; ?>
-				<div class="card-img-overlay" style="<?php echo $has_image || $has_map ? 'top:auto;' : ''; ?>">
-					<?php echo harvest_tk_event_cal( $ctc_data[ 'start'], $ctc_data[ 'time' ] ); ?>
+				<?php echo harvest_tk_event_cal( $ctc_data[ 'start'], $ctc_data[ 'time' ] ); ?>
+				<div class="card-img-overlay p-2" style="<?php echo $has_image || $has_map ? 'top:auto;' : ''; ?>">
 					<div class="card-title m-0"><?php echo $title;?></div>
 				</div>
 			</a>
@@ -57,50 +61,16 @@
 	if ( $posts -> have_posts() ):
 
 	?>
-<style>
-	.card { 
-		overflow: hidden;
-	}
-	.card-img-overlay {
-		background-color:rgba(0,0,0,0.3);
-	}
-	.ctc_cal {
-		overflow: hidden;
-		width: 60px;
-		height: 60px;
-		background-color: gray;
-		font-size: 1em;
-		color: #fff;
-		text-align: center;
-		margin-right: 10px;
-		float: left;
-	}
-	.ctc_cal > .month {
-		height: 20px;
-		line-height: 20px;
-		font-weight: bold;
-		font-size: 14px;
-		filter: hue-rotate(180deg)  saturate(200%);
-	}
-	.ctc_cal > .day {
-		height: 25px;
-		line-height: 25px;
-		font-weight: bold;
-		font-size: 24px;
-	}
-	.ctc_cal > .time {
-		height: 15px;
-		line-height: 15px;
-		font-size: 12px;
-		filter: hue-rotate(180deg) saturate(200%);
-	}
-</style>
 
 <article id="recent-events" <?php post_class( "harvest_tk_panel m-0 p-5 harvest_tk_panel_$harvest_tk_panel" ); ?> style="background-color:<?php echo $bgcolor; ?>">
 
-	<div class="container p-0">
-	
-		<div class="panel-header"><h3><?php _e( 'Upcoming Events', 'harvest_tk' ); ?></h3></div>
+	<div class="container p-0 <?php echo $white_text_class; ?>">
+		<?php if( $showtitle || is_customize_preview() ): ?>
+		
+		<div class="panel-header pb-4 <?php echo $preview_title_class; ?>"><h3><?php _e( '
+		Upcoming Events', 'harvest_tk' ); ?></h3></div>
+		
+		<?php endif; ?>
 		
 		<div class="row no-gutters">
 		<?php 

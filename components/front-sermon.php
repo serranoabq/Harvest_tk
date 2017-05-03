@@ -3,12 +3,19 @@
  * Front page - Sermon panel 
  * @package harvest_tk
  */
+	$bgcolor = get_theme_mod( "harvest_tk_panel_$harvest_tk_panel" . '_bgcolor', '' );
+	$wht = get_theme_mod( "harvest_tk_panel_$harvest_tk_panel" . '_whitetext', false );
+	$paneltitle = get_theme_mod( "harvest_tk_panel_$harvest_tk_panel" . '_title' );
+	$showtitle = get_theme_mod( "harvest_tk_panel_$harvest_tk_panel" . '_showtitle', false );
+	$preview_title_class = !$showtitle && is_customize_preview() ? 'hidden-xs-up' : '';
+	$white_text_class = $wht ? 'text-white' : '';
+	
 	$query = array(
 		'post_type' 			=> 'ctc_sermon', 
 		'order' 					=> 'DESC',
 		'orderby' 				=> 'date',
 		'posts_per_page'		=> 1,
-	); 
+	); 	
 	$posts = new WP_Query( $query ); 
 
 	if ( $posts -> have_posts() ): $posts -> the_post();
@@ -21,12 +28,17 @@
 		
 ?>
 
-<article id="latest-sermon" <?php post_class( "harvest_tk_panel m-0 p-5 harvest_tk_panel_$harvest_tk_panel" ); ?> style="background-color:<?php echo get_theme_mod( "harvest_tk_panel_$harvest_tk_panel" . '_bgcolor' ); ?>">
+<article id="latest-sermon" <?php post_class( "harvest_tk_panel m-0 p-5 harvest_tk_panel_$harvest_tk_panel" ); ?> style="background-color:<?php echo $bgcolor; ?>">
 	
-	<div class="container p-0">
-		<div class="panel-header"><h3><?php _e( 'Latest Message', 'harvest_tk' ); ?></h3></div>
+	<div class="container p-0 <?php echo $white_text_class; ?>">
+		<?php if( $showtitle || is_customize_preview() ): ?>
+		
+		<div class="panel-header pb-4 <?php echo $preview_title_class; ?>"><h3><?php echo $paneltitle; ?></h3></div>
+		
+		<?php endif; ?>
 		
 		<div class="row">
+		
 			<div class="col-md-8 col-lg-9 ctc-media-content">
 	<?php 
 					if( $has_video ): // 
@@ -101,12 +113,33 @@
 				
 			</div> <!-- .ctc-media-content -->
 			
+			<div class="col-md-4 col-lg-3">
 			
-			<div class="col-md-4 col-lg-3 ctc-details">
-				<h4 class="sermon-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
-				<div class="text-muted ctc_speaker"><?php echo $ctc_data[ 'speakers' ]; ?></div>
-				<div class="text-muted ctc_date"><?php the_date(); ?></div>
+				<div class="row h-100 pt-3 pt-md-0">
+				
+					<div class="col-12 col-sm-6 col-md-12 ctc-details">
+					
+						<h4 class="sermon-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+						
+						<div class="ctc_speaker"><?php echo $ctc_data[ 'speakers' ]; ?></div>
+						
+						<div class="ctc_series"><?php echo sprintf( __( '<b>Series:</b> %s', 'harvest_tk'), $ctc_data[ 'series' ] ); ?></div>
+						
+						<div class="ctc_date"><?php the_date(); ?></div>
+						
+					</div>
+					
+					<div class="col-12 col-sm-6 col-md-12 align-self-end">
+					
+						<div class="text-left pt-4" style="font-family: Roboto, sans-serif;" >
+							<?php echo sprintf( __( 'Catch the rest of this series or any of our previous messages by checking out our <a href="%s" title="Sermon Archive" class="font-weight-bold text-uppercase">archive</a>', 'harvest_tk' ), get_post_type_archive_link( 'ctc-sermon' ) ); ?>
+						</div>					
+					</div>
+				</div>
+				
 			</div>
+			
+			
 		</div> <!-- .ctc-details -->
 		
 	</div>
