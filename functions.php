@@ -117,7 +117,7 @@ function harvest_tk_scripts() {
 	// load harvest_tk styles
 	wp_enqueue_style( 'harvest_tk-style', get_stylesheet_uri() );
 
-	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css?family=Nunito|Roboto|Lora' );
+	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css?family=Nunito:200,400|Roboto:200,400|Lora:200,400' );
 	
 	// load bootstrap js
 	wp_enqueue_script('harvest_tk-bootstrapjs', THEME_DIR_URI . '/includes/resources/bootstrap/js/4.0/bootstrap.min.js', array('jquery') );

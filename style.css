@@ -396,6 +396,12 @@ h1.page-title {
 .harvest_tk_panel {
 	position: relative;
 }
+.harvest_tk_panel h1,
+.harvest_tk_panel h2,
+.harvest_tk_panel h3 {
+	font-family: Nunito, sans-serif;
+	font-weight: 200;
+}
 .harvest_tk_panel-background {
 	position: absolute;
 	top: 0;
@@ -435,13 +441,26 @@ h1.page-title {
 .harvest_tk_panel .container{
 	transition: all 0.5s ease;
 }
-
+.harvest_tk_panel .card-title {
+	position: absolute;
+	left: 1rem;
+	right: 1rem;
+	text-align: center;
+	top: 50%;
+	transform: translatey(-50%);
+	font-size: 2.5rem;
+	font-family: Nunito, sans-serif;
+	font-weight: 200;
+	line-height: 2.5rem;
+	z-index: 2;
+}
 .harvest_tk_panel .card { 
 	overflow: hidden;
 }
 .harvest_tk_panel	.card-img-overlay {
-		background-color:rgba(0,0,0,0.3);
-	}
+	background:rgba(0,0,0,0.3);
+	background:linear-gradient( 0, rgba(0,0,0,0.75), transparent);
+}
 .harvest_tk_panel	.ctc_cal {
 	overflow: hidden;
 	width: 60px;
@@ -456,6 +475,7 @@ h1.page-title {
 	top: 10px;
 	left: 10px;
 	box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+	z-index: 5;
 }
 .harvest_tk_panel	.ctc_cal > .month {
 	height: 20px;
@@ -487,9 +507,9 @@ h1.page-title {
 	.card-columns{
 		column-count: 1;
 	}
-	#latest-sermon .container{
+	/* #latest-sermon .container{
 		width: calc(100% + 10vw);
 		padding: 0;
 		margin: 0 -5vw;
-	}
+	} */
 }

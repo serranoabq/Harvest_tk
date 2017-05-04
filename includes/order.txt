@@ -1,0 +1,9 @@
+Front Page Order
+[slider]
+[welcome]
+[locations]
+[recent sermon]
+[give]
+[upcoming events]
+[subscribe]
+[]

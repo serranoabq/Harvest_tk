@@ -23,6 +23,9 @@ get_header(); ?>
 			case 'event':
 				get_template_part( 'components/front', 'events' );
 				break;
+			case 'location':
+				get_template_part( 'components/front', 'location' );
+				break;
 			case 'page':
 				if( get_theme_mod( 'harvest_tk_panel_' . $panel . '_page' ) ) :
 					$post = get_post( get_theme_mod( 'harvest_tk_panel_' . $panel . '_page') );

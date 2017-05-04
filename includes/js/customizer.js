@@ -5,8 +5,9 @@
  */
 
 jQuery( document ).ready( function( $ ) {
+	var api = wp.customize;
 	
-	wp.customize.preview.bind( 'section-scroll', function( data ){
+	api.preview.bind( 'section-scroll', function( data ){
 		if ( 'undefined' == typeof( $( '.' + data.section ).offset() ) ) {
 			return;
 		}
@@ -23,20 +24,20 @@ jQuery( document ).ready( function( $ ) {
 	
 	
 	// Site title and description.
-	wp.customize( 'blogname', function( value ) {
+	api( 'blogname', function( value ) {
 		value.bind( function( to ) {
 			$( '.site-title a' ).text( to );
 		} );
 	} );
 	
-	wp.customize( 'blogdescription', function( value ) {
+	api( 'blogdescription', function( value ) {
 		value.bind( function( to ) {
 			$( '.lead' ).text( to );
 		} );
 	} );
 	
 	// Header background color.
-	wp.customize( 'harvest_tk_header_bgcolor', function( value ) {
+	api( 'harvest_tk_header_bgcolor', function( value ) {
 		value.bind( function( to ) {
 			if ( to ) {
 				$( '.pre-content-bg, .site-header, .panel-header, .dropdown-menu' ).css( {
@@ -47,7 +48,7 @@ jQuery( document ).ready( function( $ ) {
 	} );
 	
 	// Header text color.
-	wp.customize( 'header_textcolor', function( value ) {
+	api( 'header_textcolor', function( value ) {
 		value.bind( function( to ) {
 			if ( 'blank' === to ) {
 				$( '.site-title, .lead' ).css( {
@@ -64,7 +65,7 @@ jQuery( document ).ready( function( $ ) {
 		} );
 	} );
 	
-	wp.customize( 'harvest_tk_panel_count', function( value ){
+	api( 'harvest_tk_panel_count', function( value ){
 		value.bind( function( to ){
 			for( var i = 1; i < 12; i++ ){
 				if( i <= to ) {
@@ -80,7 +81,7 @@ jQuery( document ).ready( function( $ ) {
 	for( var i = 1; i <= 12; i++ ){
 		var dpanel = 'harvest_tk_panel_' + i;
 		
-		wp.customize( dpanel + '_opacity', function( value ) {
+		api( dpanel + '_opacity', function( value ) {
 			var mpanel = '.' + dpanel;
 			value.bind( function( opacity ) {
 				$( mpanel + ' .harvest_tk_panel-background' ).css( {
@@ -89,7 +90,7 @@ jQuery( document ).ready( function( $ ) {
 			} );
 		} );
 
-		wp.customize( dpanel + '_bgcolor', function( value ) {
+		api( dpanel + '_bgcolor', function( value ) {
 			var mpanel = '.' + dpanel;
 			value.bind( function( color ) {
 				if ( false === color ) {
@@ -104,24 +105,36 @@ jQuery( document ).ready( function( $ ) {
 			} );
 		} );
 		
-		wp.customize( dpanel + '_title', function( value ) {
+		api( dpanel + '_title', function( value ) {
 			var mpanel = '.' + dpanel;
 			value.bind( function( value ) {
 				$( mpanel + ' .panel-header h3' ).html( value );
 			} );
 		} );
 		
-		wp.customize( dpanel + '_showtitle', function( value ) {
+		api( dpanel + '_showtitle', function( value ) {
 			var mpanel = '.' + dpanel;
 			value.bind( function( value ) {
 				$( mpanel + ' .panel-header' ).toggleClass( 'hidden-xs-up' );
 			} );
 		} );
 		
-		wp.customize( dpanel + '_whitetext', function( value ) {
+		api( dpanel + '_whitetext', function( value ) {
 			var mpanel = '.' + dpanel;
 			value.bind( function( value ) {
 				$( mpanel + ' .container' ).toggleClass( 'text-white' );
+			} );
+		} );
+		
+		api( dpanel + '_bgimage', function( value ) {
+			var mpanel = '.' + dpanel;
+			value.bind( function( image_url ) {
+				console.log ($( mpanel ).hasClass( 'front-panel' ) );
+				if( $( mpanel ).hasClass( 'front-panel' ) ) 
+					return;
+				$( mpanel + ' .harvest_tk_panel-background' ).css( {
+					'background-image': 'url(' + image_url + ')'
+				} );
 			} );
 		} );
 		
