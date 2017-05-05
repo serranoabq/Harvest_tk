@@ -13,24 +13,26 @@
 	$bgimage = get_theme_mod( "harvest_tk_panel_$harvest_tk_panel" . '_bgimage' );
 	
 	// Generate location card
-	function harvest_tk_location_card( $post_id ){
-		
-		$ctc_data = harvest_tk_get_location_data( $post_id );
-		$times = $ctc_data[ 'times' ]; 
-		$address = nl2br( $ctc_data[ 'address' ] );
-		$title = $ctc_data[ 'name' ];
-		?>
-		
-		<h3><?php echo $title;?></h3>
-		<div class="ctc-times"><?php echo $times;?></div>
-		<div class="mt-4">
-			<a href="<?php echo $ctc_data[ 'map_url' ]; ?>" target="_blank" alt="<?php _e( 'Map and Directions', 'harvest_tk' ); ?>" class="btn btn-secondary font-weight-bold text-uppercase">
-				<?php _e( 'Directions', 'harvest_tk' ); ?>
-			</a>
-		</div>
-		
-		<?php
-	}
+	if ( ! function_exists( 'harvest_tk_location_card' ) ) :
+		function harvest_tk_location_card( $post_id ){
+			
+			$ctc_data = harvest_tk_get_location_data( $post_id );
+			$times = $ctc_data[ 'times' ]; 
+			$address = nl2br( $ctc_data[ 'address' ] );
+			$title = $ctc_data[ 'name' ];
+			?>
+			
+			<h3><?php echo $title;?></h3>
+			<div class="ctc-times"><?php echo $times;?></div>
+			<div class="mt-4">
+				<a href="<?php echo $ctc_data[ 'map_url' ]; ?>" target="_blank" alt="<?php _e( 'Map and Directions', 'harvest_tk' ); ?>" class="btn btn-secondary font-weight-bold text-uppercase">
+					<?php _e( 'Directions', 'harvest_tk' ); ?>
+				</a>
+			</div>
+			
+			<?php
+		}
+	endif;
 	
   $query = array(
 		'post_type' 			=> 'ctc_location', 
