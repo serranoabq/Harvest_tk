@@ -108,7 +108,7 @@ jQuery( document ).ready( function( $ ) {
 		api( dpanel + '_title', function( value ) {
 			var mpanel = '.' + dpanel;
 			value.bind( function( value ) {
-				$( mpanel + ' .panel-header h3' ).html( value );
+				$( mpanel + ' .panel-header h1' ).html( value );
 			} );
 		} );
 		
@@ -129,7 +129,6 @@ jQuery( document ).ready( function( $ ) {
 		api( dpanel + '_bgimage', function( value ) {
 			var mpanel = '.' + dpanel;
 			value.bind( function( image_url ) {
-				console.log ($( mpanel ).hasClass( 'front-panel' ) );
 				if( $( mpanel ).hasClass( 'front-panel' ) ) 
 					return;
 				$( mpanel + ' .harvest_tk_panel-background' ).css( {

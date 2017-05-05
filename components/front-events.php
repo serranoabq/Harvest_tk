@@ -13,58 +13,62 @@
 	$bgimage = get_theme_mod( "harvest_tk_panel_$harvest_tk_panel" . '_bgimage' );
 	
 	// Generate event card display
-	function harvest_tk_event_card( $post_id ){
-		
-		$ctc_data = harvest_tk_get_event_data( $post_id );
-		$title = $ctc_data[ 'name' ];
-		$permalink = $ctc_data[ 'permalink' ];
-		$has_image = ! empty( $ctc_data[ 'img' ] );
-		$has_map = ! empty( $ctc_data[ 'map_used' ] ) && $ctc_data[ 'map_used' ];
-		
-		if ( $has_map ) {
+	if ( ! function_exists( 'harvest_tk_event_card' ) ) :
+		function harvest_tk_event_card( $post_id ){
 			
-			$map_url = esc_url( $ctc_data[ 'map_url' ] );
-			$api_key = 'AIzaSyBpzPm7J6-tkqom76246jehm8dRj2pu1Ds'; // Mine
-			$map_img_url = add_query_arg( [ 'key' => $api_key ], $ctc_data[ 'img' ] );
-			$img = "<img src='$map_img_url' />";
+			$ctc_data = harvest_tk_get_event_data( $post_id );
+			$title = $ctc_data[ 'name' ];
+			$permalink = $ctc_data[ 'permalink' ];
+			$has_image = ! empty( $ctc_data[ 'img' ] );
+			$has_map = ! empty( $ctc_data[ 'map_used' ] ) && $ctc_data[ 'map_used' ];
 			
-		} elseif( $has_image ){
+			if ( $has_map ) {
+				
+				$map_url = esc_url( $ctc_data[ 'map_url' ] );
+				$api_key = 'AIzaSyBpzPm7J6-tkqom76246jehm8dRj2pu1Ds'; // Mine
+				$map_img_url = add_query_arg( [ 'key' => $api_key ], $ctc_data[ 'img' ] );
+				$img = "<img src='$map_img_url' />";
+				
+			} elseif( $has_image ){
+				
+				$id = empty( $ctc_data[ 'img_id' ] ) ? harvest_tk_get_attachment_id( $ctc_data[ 'img' ] ) : $ctc_data[ 'img_id' ];
+				$img = wp_get_attachment_image( $id, 'harvest_tk-hero', '', ['class'=>'ctc-image img-responsive'] );
+				
+			}
+			?>
 			
-			$id = empty( $ctc_data[ 'img_id' ] ) ? harvest_tk_get_attachment_id( $ctc_data[ 'img' ] ) : $ctc_data[ 'img_id' ];
-			$img = wp_get_attachment_image( $id, 'harvest_tk-hero', '', ['class'=>'ctc-image img-responsive'] );
+			<div class="card card-inverse rounded-0 border-0">
+				<a href="<?php echo $permalink;?>">
+					<?php echo $has_image || $has_map ? $img : ''; ?>
+					<?php echo harvest_tk_event_cal( $ctc_data[ 'start'], $ctc_data[ 'time' ] ); ?>
+					<div class="card-img-overlay p-2">
+						<div class="card-title m-0"><?php echo $title;?></div>
+					</div>
+				</a>
+			</div>
 			
+			<?php
 		}
-		?>
-		
-		<div class="card card-inverse rounded-0 border-0">
-			<a href="<?php echo $permalink;?>">
-				<?php echo $has_image || $has_map ? $img : ''; ?>
-				<?php echo harvest_tk_event_cal( $ctc_data[ 'start'], $ctc_data[ 'time' ] ); ?>
-				<div class="card-img-overlay p-2">
-					<div class="card-title m-0"><?php echo $title;?></div>
-				</div>
-			</a>
-		</div>
-		
-		<?php
-	}
+	endif;
 	
 	// Generate calendar icon
-	function harvest_tk_event_cal( $ctc_date, $ctc_time ){
-		
-		$day_str = date_i18n( 'j', strtotime( $ctc_date ) );
-		$mon_str = date_i18n( 'M', strtotime( $ctc_date ) );
-		$time_str = $ctc_time;
-		?>
-		
-		<div class="ctc_cal rounded">
-			<div class="month" style="background-color: <?php echo $bgcolor ;?>"><?php echo $mon_str; ?></div>
-			<div class="day"><?php echo $day_str; ?></div>
-			<div class="time" style="background-color: <?php echo $bgcolor ;?>"><?php echo $time_str; ?></div>
-		</div>
-		
-		<?php
-	}
+	if ( ! function_exists( 'harvest_tk_event_cal' ) ) :
+		function harvest_tk_event_cal( $ctc_date, $ctc_time ){
+			
+			$day_str = date_i18n( 'j', strtotime( $ctc_date ) );
+			$mon_str = date_i18n( 'M', strtotime( $ctc_date ) );
+			$time_str = $ctc_time;
+			?>
+			
+			<div class="ctc_cal rounded">
+				<div class="month" style="background-color: <?php echo $bgcolor ;?>"><?php echo $mon_str; ?></div>
+				<div class="day"><?php echo $day_str; ?></div>
+				<div class="time" style="background-color: <?php echo $bgcolor ;?>"><?php echo $time_str; ?></div>
+			</div>
+			
+			<?php
+		}
+	endif;
 	
   $query = array(
 		'post_type' 			=> 'ctc_event', 
