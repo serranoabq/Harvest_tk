@@ -145,6 +145,7 @@
 					$( '.video-overlay .ctc-image' ).click( function(){
 						$( this ).replaceWith( vid_src );
 						$( '.video-overlay .play-button' ).hide();
+						$( '.video-overlay' ).addClass( 'embed-loaded' );
 						$( window.wp.mediaelement.initialize );
 					} );
 				});
