@@ -562,6 +562,27 @@ function harvest_tk_pre_events( $query ){
 	
 }
 
+add_action( 'pre_get_posts', 'harvest_tk_pre_locations' );
+function harvest_tk_pre_locations( $query ){
+	global $wp_query;
+
+	if( ! array_key_exists( 'post_type', $query->query_vars ) )
+		return;
+	
+	if( 'ctc_location' != $query->query_vars[ 'post_type' ] )
+		return;
+		
+	$args = array(
+		'order' => 'ASC',
+		'orderby' => 'order',
+		'posts_per_page' => -1,
+	);
+
+	$query_terms = array_merge( $args, $query->query_vars ); 
+	$query->query_vars = $query_terms;
+	
+}
+
 // Get the name from CTC extender
 function harvest_tk_get_ctc_name( $ctc_type, $is_singular = false ) {
 	

@@ -19,11 +19,15 @@
 		
 	</div><!-- close .main-content -->
 
-	<footer id="colophon" class="site-footer" role="contentinfo">
+	<footer id="colophon" class="site-footer pt-5" role="contentinfo">
 		
 		<div class="container">
 		
-		<div class="row">
+			<div class="row">
+				<?php dynamic_sidebar( 'footer' ); ?>
+			</div>
+			
+			<div class="row">
 
 				<div class="site-footer-inner col-sm-12">
 

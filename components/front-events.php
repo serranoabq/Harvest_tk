@@ -54,7 +54,7 @@
 	// Generate calendar icon
 	if ( ! function_exists( 'harvest_tk_event_cal' ) ) :
 		function harvest_tk_event_cal( $ctc_date, $ctc_time ){
-			
+			global $bgcolor;
 			$day_str = date_i18n( 'j', strtotime( $ctc_date ) );
 			$mon_str = date_i18n( 'M', strtotime( $ctc_date ) );
 			$time_str = $ctc_time;
