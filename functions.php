@@ -91,6 +91,7 @@ add_action( 'after_setup_theme', 'harvest_tk_setup' );
 
 // Register widgetized area and update sidebar with default widgets
 function harvest_tk_widgets_init() {
+	
 	register_sidebar( array(
 		'name'          => __( 'Sidebar', 'harvest_tk' ),
 		'id'            => 'sidebar-1',
@@ -98,7 +99,18 @@ function harvest_tk_widgets_init() {
 		'after_widget'  => '</aside>',
 		'before_title'  => '<h3 class="widget-title">',
 		'after_title'   => '</h3>',
-		) );
+	) );
+	
+	register_sidebar( array( 
+		'name'          => __( 'Footer', 'harvest_tk' ), 
+		'id'            => 'footer',
+		'description'   => '', 
+		'before_widget' => '<div id="%1$s" class="widget col %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h3 class="widget-title">',
+		'after_title'   => '</h3>',
+	));
+	
 }
 add_action( 'widgets_init', 'harvest_tk_widgets_init' );
 

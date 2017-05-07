@@ -562,16 +562,16 @@ function harvest_tk_pre_events( $query ){
 	
 }
 
-add_action( 'pre_get_posts', 'harvest_tk_pre_locations' );
-function harvest_tk_pre_locations( $query ){
+add_action( 'pre_get_posts', 'harvest_tk_pre_locations_and_people' );
+function harvest_tk_pre_locations_and_people( $query ){
 	global $wp_query;
 
 	if( ! array_key_exists( 'post_type', $query->query_vars ) )
 		return;
 	
-	if( 'ctc_location' != $query->query_vars[ 'post_type' ] )
+	if( ! in_array( $query->query_vars[ 'post_type' ], array( 'ctc_location', 'ctc_person' ) ) )
 		return;
-		
+ 		
 	$args = array(
 		'order' => 'ASC',
 		'orderby' => 'order',
@@ -582,6 +582,7 @@ function harvest_tk_pre_locations( $query ){
 	$query->query_vars = $query_terms;
 	
 }
+
 
 // Get the name from CTC extender
 function harvest_tk_get_ctc_name( $ctc_type, $is_singular = false ) {

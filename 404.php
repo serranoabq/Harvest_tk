@@ -7,18 +7,18 @@
 
 get_header(); ?>
 
-	<section class="content-padder error-404 not-found">
+	<article class="row content-padder error-404 not-found">
 
-		<header>
-			<h2 class="page-title"><?php _e( 'Oops! Something went wrong here.', 'harvest_tk' ); ?></h2>
-		</header><!-- .page-header -->
+		<header class="col-12">
+			<h1 class="page-title"><?php _e( 'Oops! Something went wrong here.', 'harvest_tk' ); ?></h1>
+		</header><!-- .entry-header -->
 
-		<div class="page-content">
+		<div class="entry-content col-12">
 
 			<p><?php _e( 'We\'re sorry, but the page you requested could not be found.', 'harvest_tk' ); ?></p>
 
-		</div><!-- .page-content -->
+		</div><!-- .entry-content -->
 
-	</section><!-- .content-padder -->
+	</article><!-- .error-404 -->
 
 <?php get_footer(); ?>
