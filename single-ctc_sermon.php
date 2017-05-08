@@ -21,4 +21,6 @@ get_header();
 
 	<?php endwhile; // End of the loop. ?>
 
+	<?php get_template_part( 'components/content', 'related-sermons' ); ?>
+		
 <?php get_footer(); ?>

@@ -530,6 +530,24 @@ function harvest_tk_the_location_details( $post_id, $glyph = 'fa' ){
 	echo $item_output;
 }
 
+// Adjust the sermon series query
+add_action( 'pre_get_posts', 'harvest_tk_pre_sermon_series' );
+function harvest_tk_pre_sermon_series( $query ){
+	global $wp_query;
+
+	if( ! array_key_exists( 'ctc_sermon_series', $query->query_vars ) )
+		return;
+		
+	$args = array(
+		'order' => 'ASC',
+		'orderby' => 'date',
+		);
+
+	$query_terms = array_merge( $args, $query->query_vars ); 
+	$query->query_vars = $query_terms;
+
+}
+
 // Adjust the event query
 add_action( 'pre_get_posts', 'harvest_tk_pre_events' );
 function harvest_tk_pre_events( $query ){
@@ -562,6 +580,7 @@ function harvest_tk_pre_events( $query ){
 	
 }
 
+// Adjust the location and people query
 add_action( 'pre_get_posts', 'harvest_tk_pre_locations_and_people' );
 function harvest_tk_pre_locations_and_people( $query ){
 	global $wp_query;
