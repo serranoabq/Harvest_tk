@@ -77,6 +77,35 @@ function harvest_tk_customize_register( $wp_customize ) {
 		'description'     => __( 'Configure your theme settings', 'harvest_tk' )
 	) );
 	
+	// CTC default images 
+	harvest_tk_customize_createSection( $wp_customize, array(
+		'id'              => 'harvest_tk_ctc_defaults_section',
+		'title'           => __( 'Default Images', 'harvest_tk' ),
+		'description'     => __( 'Choose default images for use with sermons, events, and locations, ', 'harvest_tk' ),
+		'panel'           => 'harvest_tk_options_panel', 
+	) );
+	harvest_tk_customize_createSetting( $wp_customize, array(
+		'id' 	              => 'harvest_tk_sermon_dafault_image',
+		'type'              => 'image', 
+		'label'             => __( 'Default Sermon Image', 'harvest_tk' ),
+		'default'           => '',
+		'section'           => "harvest_tk_ctc_defaults_section",
+	) );
+	harvest_tk_customize_createSetting( $wp_customize, array(
+		'id' 	              => 'harvest_tk_event_dafault_image',
+		'type'              => 'image', 
+		'label'             => __( 'Default Event Image', 'harvest_tk' ),
+		'default'           => '',
+		'section'           => "harvest_tk_ctc_defaults_section",
+	) );
+	harvest_tk_customize_createSetting( $wp_customize, array(
+		'id' 	              => 'harvest_tk_location_dafault_image',
+		'type'              => 'image', 
+		'label'             => __( 'Default Location Image', 'harvest_tk' ),
+		'default'           => '',
+		'section'           => "harvest_tk_ctc_defaults_section",
+	) );
+	
 	// Front-page hero 
 	harvest_tk_customize_createSection( $wp_customize, array(
 		'id'              => 'harvest_tk_hero_section',

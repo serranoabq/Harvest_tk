@@ -152,6 +152,11 @@ object {
 }
 .dropdown-menu li {
 	padding-left: 10px;
+	padding-bottom: 5px;
+}
+.dropdown-menu li a:before {
+	content: "\00bb ";
+	margin-right: 5px;
 }
 
 .dropdown-submenu{
@@ -316,13 +321,14 @@ h1.page-title {
 	text-align: center;
 	overflow: hidden;
 	display: inline-block;
-	/* width: 100%; */
 }
 .embed-loaded{
 	width: 100%;
 }
 .home .ctc-media{
 	max-width: 100%;
+	box-shadow: none;
+	width: 100%;
 }
 .video-overlay .play-button {
 	position: absolute;
@@ -510,9 +516,4 @@ h1.page-title {
 	.card-columns{
 		column-count: 1;
 	}
-	/* #latest-sermon .container{
-		width: calc(100% + 10vw);
-		padding: 0;
-		margin: 0 -5vw;
-	} */
 }
