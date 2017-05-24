@@ -47,7 +47,7 @@
 							<?php _e( 'Directions', 'harvest_tk' ); ?>
 						</a>
 					</div>
-					<?php endinf; ?>
+					<?php endif; ?>
 
 				</div>
 
