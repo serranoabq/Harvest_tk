@@ -142,14 +142,6 @@ function harvest_tk_get_recurrence_note( $post_obj ) {
 		return '';
 }
 
-// This helper is used to get an expression for recurrence
-function harvest_tk_get_recurrence_note( $post_obj ) {
-	if( class_exists( 'CTC_Extender' ) )
-		return ctcex_get_recurrence_note ( $post_obj );
-	else
-		return '';
-}
-
 // Helper is used to get options
 function harvest_tk_get_option( $option, $default = '' ){
 	if( class_exists( 'CTC_Extender' ) )
