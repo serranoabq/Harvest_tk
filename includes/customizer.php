@@ -14,18 +14,18 @@ function harvest_tk_customize_register( $wp_customize ) {
 	$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
-	
+
 	harvest_tk_customize_createSetting( $wp_customize, array(
 		'id' 	              => 'harvest_tk_header_bgcolor',
-		'type'              => 'color', 
+		'type'              => 'color',
 		'label'             => __( 'Header Background Color', 'harvest_tk' ),
 		'default'           => '#467290',
 		'section'           => 'colors',
 		'sanitize_callback' => 'sanitize_hex_color',
 		'transport'         => 'postMessage',
 	) );
-	
-	
+
+
 	// Podcasting options
 	harvest_tk_customize_createSection( $wp_customize, array(
 		'id'                => 'podcast',
@@ -54,7 +54,7 @@ function harvest_tk_customize_register( $wp_customize ) {
 		'section'      => 'podcast',
 		'description'  => __( 'Logo used in podcast feed. Must be 1400 x 1400 jpg or png.', 'harvest_tk' ),
 	) );
-	
+
 	// RSS
 	harvest_tk_customize_createSection( $wp_customize, array(
 		'id'           => 'rss',
@@ -69,69 +69,76 @@ function harvest_tk_customize_register( $wp_customize ) {
 		'section'      => 'rss',
 		'description'  => __( 'Logo used in RSS feed', 'harvest_tk' ),
 	) );
-	
-	
+
+
 	harvest_tk_customize_createPanel( $wp_customize, array(
-		'id'              => 'harvest_tk_options_panel', 
+		'id'              => 'harvest_tk_options_panel',
 		'title'           => 'Theme Options',
 		'description'     => __( 'Configure your theme settings', 'harvest_tk' )
 	) );
-	
-	// CTC default images 
+
+	// CTC default images
 	harvest_tk_customize_createSection( $wp_customize, array(
 		'id'              => 'harvest_tk_ctc_defaults_section',
 		'title'           => __( 'Default Images', 'harvest_tk' ),
 		'description'     => __( 'Choose default images for use with sermons, events, and locations, ', 'harvest_tk' ),
-		'panel'           => 'harvest_tk_options_panel', 
+		'panel'           => 'harvest_tk_options_panel',
 	) );
 	harvest_tk_customize_createSetting( $wp_customize, array(
 		'id' 	              => 'harvest_tk_sermon_dafault_image',
-		'type'              => 'image', 
+		'type'              => 'image',
 		'label'             => __( 'Default Sermon Image', 'harvest_tk' ),
 		'default'           => '',
 		'section'           => "harvest_tk_ctc_defaults_section",
 	) );
 	harvest_tk_customize_createSetting( $wp_customize, array(
 		'id' 	              => 'harvest_tk_event_dafault_image',
-		'type'              => 'image', 
+		'type'              => 'image',
 		'label'             => __( 'Default Event Image', 'harvest_tk' ),
 		'default'           => '',
 		'section'           => "harvest_tk_ctc_defaults_section",
 	) );
 	harvest_tk_customize_createSetting( $wp_customize, array(
 		'id' 	              => 'harvest_tk_location_dafault_image',
-		'type'              => 'image', 
+		'type'              => 'image',
 		'label'             => __( 'Default Location Image', 'harvest_tk' ),
 		'default'           => '',
 		'section'           => "harvest_tk_ctc_defaults_section",
 	) );
-	
-	// Front-page hero 
+	harvest_tk_customize_createSetting( $wp_customize, array(
+		'id' 	              => 'harvest_tk_person_dafault_image',
+		'type'              => 'image',
+		'label'             => __( 'Default Person Image', 'harvest_tk' ),
+		'default'           => '',
+		'section'           => "harvest_tk_ctc_defaults_section",
+	) );
+
+	// Front-page hero
 	harvest_tk_customize_createSection( $wp_customize, array(
 		'id'              => 'harvest_tk_hero_section',
 		'title'           => __( 'Front Page Hero Slider', 'harvest_tk' ),
 		'description'     => __( 'Enter the shortcode for the hero slider at the top of the  homepage', 'harvest_tk' ),
-		'panel'           => 'harvest_tk_options_panel', 
-		'active_callback' => 'is_front_page', 
+		'panel'           => 'harvest_tk_options_panel',
+		'active_callback' => 'is_front_page',
 	) );
 	harvest_tk_customize_createSetting( $wp_customize, array(
 		'id' 	              => 'harvest_tk_hero',
-		'type'              => 'textarea', 
+		'type'              => 'textarea',
 		'label'             => __( 'Hero Slider Shortcode', 'harvest_tk' ),
 		'default'           => '',
 		'section'           => "harvest_tk_hero_section",
 	) );
-	
-	// Panels 
+
+	// Panels
 	harvest_tk_customize_createSection( $wp_customize, array(
 		'id'              => 'harvest_tk_panels',
 		'title'           => __( 'Front Page Panels', 'harvest_tk' ),
-		'panel'           => 'harvest_tk_options_panel', 
-		'active_callback' => 'is_front_page', 
+		'panel'           => 'harvest_tk_options_panel',
+		'active_callback' => 'is_front_page',
 	) );
 	harvest_tk_customize_createSetting( $wp_customize, array(
 		'id' 	              => 'harvest_tk_panel_count',
-		'type'              => 'select', 
+		'type'              => 'select',
 		'label'             => __( 'Front page panel count', 'harvest_tk' ),
 		'description'       => __( 'Select how many panels to show on the front page', 'harvest_tk' ),
 		'default'           => 12,
@@ -140,7 +147,7 @@ function harvest_tk_customize_register( $wp_customize ) {
 		'transport'         => 'postMessage',
 		'choices'           => range( 0, 12, 1),
 	) );
-	
+
 	// Front-page panels
 	$panels = 12;
 	// New panels
@@ -148,23 +155,23 @@ function harvest_tk_customize_register( $wp_customize ) {
 		// Create section
 		harvest_tk_customize_createSection( $wp_customize, array(
 			'id' 	            => "harvest_tk_panel_$i",
-			'title'           => __( 'Panel', 'harvest_tk' ) . ' ' . $i, 
+			'title'           => __( 'Panel', 'harvest_tk' ) . ' ' . $i,
 			'description'     => __( 'Edit the settings for each panel, including the panel title, panel type, background image and background color. Panels that use a Static Page type, use the page\'s Featured Image as the background.', 'harvest_tk' ),
-			'active_callback' => 'harvest_tk_panel_check', 
-			'panel'           => 'harvest_tk_options_panel', 
+			'active_callback' => 'harvest_tk_panel_check',
+			'panel'           => 'harvest_tk_options_panel',
 		) );
-		
+
 		// Panel Title
 		harvest_tk_customize_createSetting( $wp_customize, array(
 			'id' 	              => 'harvest_tk_panel_'. $i . '_title',
-			'type'              => 'text', 
+			'type'              => 'text',
 			'label'             => __( 'Title', 'harvest_tk' ),
 			'default'           => harvest_tk_panel_default_title( $i ),
 			'section'           => "harvest_tk_panel_$i",
 			'transport'         => 'postMessage',
 			'active_callback'   => 'harvest_tk_panel_notpage_check',
 		) );
-	
+
 		// Show Panel title or not
 		harvest_tk_customize_createSetting( $wp_customize, array(
 			'id'                => 'harvest_tk_panel_'. $i . '_showtitle',
@@ -174,12 +181,12 @@ function harvest_tk_customize_register( $wp_customize ) {
 			'section'           => "harvest_tk_panel_$i",
 			'transport'         => 'postMessage',
 		) );
-	
-		
+
+
 		// Panel Type
 		harvest_tk_customize_createSetting( $wp_customize, array(
 			'id' 	              => 'harvest_tk_panel_'. $i . '_type',
-			'type'              => 'select', 
+			'type'              => 'select',
 			'label'             => __( 'Content Type', 'harvest_tk' ),
 			'default'           => '',
 			'section'           => "harvest_tk_panel_$i",
@@ -191,33 +198,33 @@ function harvest_tk_customize_register( $wp_customize ) {
 				'page'            => __( 'Static Page', 'harvest_tk' ),
 			),
 		) );
-		
+
 		// Panel Page if Type is 'page'
 		harvest_tk_customize_createSetting( $wp_customize, array(
 			'id' 	              => 'harvest_tk_panel_'. $i . '_page',
-			'type'              => 'dropdown-pages', 
+			'type'              => 'dropdown-pages',
 			'label'             => __( 'Page Content', 'harvest_tk' ),
 			'default'           => false,
 			'section'           => "harvest_tk_panel_$i",
 			'sanitize_callback' => 'harvest_tk_sanitize_numeric_value',
 			'active_callback'   => 'harvest_tk_panel_page_check',
 		) );
-		
+
 		// Panel background image
 		harvest_tk_customize_createSetting( $wp_customize, array(
 			'id' 	              => 'harvest_tk_panel_'. $i . '_bgimage',
-			'type'              => 'image', 
+			'type'              => 'image',
 			'label'             => __( 'Background Image', 'harvest_tk' ),
 			'default'           => '',
 			'section'           => "harvest_tk_panel_$i",
 			'active_callback'   => 'harvest_tk_panel_notpage_check',
 			'transport'         => 'postMessage',
 		) );
-		
+
 		// Panel background opacity
 		harvest_tk_customize_createSetting( $wp_customize, array(
 			'id' 	              => 'harvest_tk_panel_'. $i . '_opacity',
-			'type'              => 'select', 
+			'type'              => 'select',
 			'label'             => __( 'Background Image Opacity', 'harvest_tk' ),
 			'default'           => 'default',
 			'section'           => "harvest_tk_panel_$i",
@@ -231,19 +238,19 @@ function harvest_tk_customize_register( $wp_customize ) {
 				'1'               => '100%',
 			),
 		) );
-		
+
 		// Panel background color
 		harvest_tk_customize_createSetting( $wp_customize, array(
 			'id' 	              => 'harvest_tk_panel_'. $i . '_bgcolor',
-			'type'              => 'color', 
+			'type'              => 'color',
 			'label'             => __( 'Background Color', 'harvest_tk' ),
 			'default'           => '',
 			'section'           => "harvest_tk_panel_$i",
 			'sanitize_callback' => 'sanitize_hex_color',
 			'transport'         => 'postMessage',
 		) );
-		
-		// Use (inverted) white text 
+
+		// Use (inverted) white text
 		harvest_tk_customize_createSetting( $wp_customize, array(
 			'id'                => 'harvest_tk_panel_'. $i . '_whitetext',
 			'label'             => __( 'Use white text', 'harvest_tk' ),
@@ -252,9 +259,9 @@ function harvest_tk_customize_register( $wp_customize ) {
 			'section'           => "harvest_tk_panel_$i",
 			'transport'         => 'postMessage',
 		) );
-		
+
 	}
-	
+
 }
 add_action( 'customize_register', 'harvest_tk_customize_register' );
 
@@ -271,9 +278,9 @@ function harvest_tk_customizer_script(){
 ?>
 	<script>
 		jQuery( document ).ready( function($){
-			
+
 			var api = wp.customize;
-			
+
 			panel_count = 12;
 			$( '#customize-control-harvest_tk_panel_count select' ).change( function() {
 				panel_count =  $(this).val();
@@ -287,10 +294,10 @@ function harvest_tk_customizer_script(){
 					}
 				}
 			});
-			
+
 			for( var i = 1; i <= 12; i++ ){
 				var type_control = '#customize-control-harvest_tk_panel_' + i + '_type select';
-				
+
 				$( type_control ).change( function() {
 					var panel = $( this ).attr('data-customize-setting-link').replace( 'harvest_tk_panel_' ,'').replace( '_type', '');
 					var panel_type = $( this ).val();
@@ -298,11 +305,11 @@ function harvest_tk_customizer_script(){
 					$( '#customize-control-harvest_tk_panel_' + panel + '_title' ).css( {'display': 'page' != panel_type ? 'list-item': 'none' } );
 					$( '#customize-control-harvest_tk_panel_' + panel + '_bgimage' ).css( {'display': 'page' != panel_type ? 'list-item': 'none' } );
 				});
-				
+
 				checkExpanded( i );
-			
+
 			}
-			
+
 			function checkExpanded( panel ){
 				var parent = 'harvest_tk_panel_' + panel;
 				api.section( parent ).expanded.bind( function( expanding ) {
@@ -310,10 +317,10 @@ function harvest_tk_customizer_script(){
 					api.previewer.send( 'section-scroll', data );
 				});
 			}
-			
+
 		});
 	</script>
-<?php	
+<?php
 }
 add_action( 'customize_controls_print_footer_scripts', 'harvest_tk_customizer_script' );
 
@@ -321,8 +328,8 @@ add_action( 'customize_controls_print_footer_scripts', 'harvest_tk_customizer_sc
 function harvest_tk_customize_createSetting( $wp_customize, $args ) {
 	$default_args = array(
 		'id' 	              => '', // required
-		'type'              => '', // required. This refers to the control type. 
-		                           // All settings are theme_mod and accessible via get_theme_mod.  
+		'type'              => '', // required. This refers to the control type.
+		                           // All settings are theme_mod and accessible via get_theme_mod.
 															 // Other types include: 'number', 'checkbox', 'textarea', 'radio',
 															 // 'select', 'dropdown-pages', 'email', 'url', 'date', 'hidden',
 															 // 'image', 'color'
@@ -337,32 +344,32 @@ function harvest_tk_customize_createSetting( $wp_customize, $args ) {
 		'choices'           => '', // optional
 		'panel'             => '', // optional
 	);
-	
+
 	$args = wp_parse_args( $args, $default_args );
-	
+
 	// Available types and arguments
 	$available_types = array( 'text', 'number', 'checkbox', 'textarea', 'radio', 'select', 'dropdown-pages', 'email', 'url', 'date', 'hidden', 'image', 'color' );
 	$setting_def_args = array( 'default'=> '', 'sanitize_callback'=>'', 'transport'=>'' );
 	$control_def_args = array( 'type'=>'', 'label'=>'', 'description'=>'', 'priority'=>'', 'choices'=>'', 'section'=>'', 'active_callback'=>'' );
-	
+
 	// Check for non-empty inputs, too
-	if( empty( $args[ 'id' ] ) ||  
-			empty( $args[ 'section' ] ) ||  
+	if( empty( $args[ 'id' ] ) ||
+			empty( $args[ 'section' ] ) ||
 			empty( $args[ 'type' ] ) )
 		return;
-		
+
 	// Check for a right type
 	if( ! in_array( $args[ 'type' ], $available_types ) ) $args[ 'type' ] = 'text';
-	
+
 	$id = $args[ 'id' ];
 	unset( $args[ 'id' ] );
-	
+
 	// Split setting arguments and control arguments
 	$setting_args = array_intersect_key( $args, $setting_def_args );
 	$control_args = array_intersect_key( $args, $control_def_args );
-	
+
 	$wp_customize->add_setting( $id, $setting_args );
-	
+
 	if( 'image' == $args[ 'type' ] ) {
 		$wp_customize->add_control( new WP_Customize_Image_Control(
 			$wp_customize,
@@ -400,12 +407,12 @@ function harvest_tk_customize_createSection( $wp_customize, $args ) {
 		'active_callback' => '', // optional
 		'panel'           => '', // optional
 	);
-	
+
 	$args = wp_parse_args( $args, $default_args );
-	
+
 	// Check for required inputs
 	if( empty( $args[ 'id' ] ) ||  empty( $args[ 'title' ] ) ) return;
-	
+
 	$id = $args[ 'id' ];
 	unset( $args[ 'id' ] );
 	$wp_customize->add_section( $id, $args );
@@ -420,11 +427,11 @@ function harvest_tk_customize_createPanel( $wp_customize, $args ) {
 		'description'     => '', // optional
 		'active_callback' => '', // optional
 	);
-	
+
 	$args = wp_parse_args( $args, $default_args );
-	
+
 	if( empty ( $args[ 'id' ] ) ||  empty( $args[ 'title' ] ) ) return;
-	
+
 	$id = $args[ 'id' ];
 	unset( $args[ 'id' ] );
 	$wp_customize->add_panel( $id, $args );
@@ -469,19 +476,19 @@ function harvest_tk_sanitize_type( $input ) {
 function harvest_tk_customizer_css(){ ?>
 
 	<style type="text/css">
-	
+
 	<?php if( get_theme_mod( 'harvest_tk_header_bgcolor') ): ?>
 		.pre-content-bg, .site-header, .dropdown-menu {
 			background-color: <?php echo esc_attr( get_theme_mod( 'harvest_tk_header_bgcolor' ) ); ?>
 		}
-	<?php endif; 
-	
+	<?php endif;
+
 	for( $i = 1; $i <= 12; $i++ ){
 		$bgcolor = get_theme_mod( 'harvest_tk_panel_' . $i . '_bgcolor' );
 		$bgopacity = get_theme_mod( 'harvest_tk_panel_' . $i . '_opacity' );
-		
-		if ( $bgcolor ): 
-	?>	
+
+		if ( $bgcolor ):
+	?>
 			.harvest_tk_panel_<?php echo $i; ?>{
 				background-color: <?php echo esc_attr( $bgcolor ); ?>;
 			}
@@ -489,22 +496,22 @@ function harvest_tk_customizer_css(){ ?>
 			.harvest_tk_panel_<?php echo $i; ?> .time {
 				background-color: <?php echo esc_attr( $bgcolor ); ?>;
 			}
-		
-	<?php 
-		endif; 
-		
-		if ( in_array( $bgopacity, array( 0, 0.25, 0.5, 0.75, 1 ) ) ): 
+
+	<?php
+		endif;
+
+		if ( in_array( $bgopacity, array( 0, 0.25, 0.5, 0.75, 1 ) ) ):
 	?>
 			.harvest_tk_panel_<?php echo $i; ?> .harvest_tk_panel-background{
 				opacity: <?php echo esc_attr( $bgopacity ); ?>;
 			}
-			
-	<?php 
+
+	<?php
 		endif;
 	} ?>
 	</style>
 
-<?php	
+<?php
 }
 add_action( 'wp_head', 'harvest_tk_customizer_css' );
 
@@ -522,7 +529,7 @@ function harvest_tk_panel_default_title( $panel ){
 			return __( 'Locations', 'harvest_tk' );
 			break;
 		/* case 'person':
-			return __( 'People', 'harvest_tk' ); 
+			return __( 'People', 'harvest_tk' );
 			break; */
 		default:
 			return '';
@@ -537,7 +544,7 @@ function harvest_tk_panel_check( $control ){
 	return is_front_page() && (int)$current_section <= (int)$count;
 }
 
-// Active callback: Returns TRUE if the panel type is 'page' 
+// Active callback: Returns TRUE if the panel type is 'page'
 function harvest_tk_panel_page_check( $control ){
 	$panel = str_ireplace( 'harvest_tk_panel_' , '', $control->id );
 	$panel = str_ireplace( '_page', '' , $panel );
@@ -553,4 +560,3 @@ function harvest_tk_panel_notpage_check( $control ){
 	$type = get_theme_mod( "harvest_tk_panel_$panel" . '_type' );
 	return 'page' != $type;
 }
-

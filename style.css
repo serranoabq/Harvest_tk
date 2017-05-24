@@ -1,5 +1,5 @@
 /*
-Theme Name: Harvest_tk 
+Theme Name: Harvest_tk
 Description: Harvest theme based on _tk
 Version: 0.1.1
 License: GNU General Public License v3.0 /
@@ -169,7 +169,7 @@ object {
 .dropdown-submenu:active > .dropdown-menu, .dropdown-submenu:hover > .dropdown-menu {
 	display: block;
 }
-.dropdown-submenu > a:after{ 
+.dropdown-submenu > a:after{
 	display:block;
 	content:" ";
 	float:right;
@@ -292,7 +292,7 @@ h1.page-title {
 .pre-content-bg, .site-header{
 	background: #467290; /* Customizable */
 }
-.pre-content{ 
+.pre-content{
 	position:relative;
 	text-align: center;
 	line-height: 0;
@@ -300,8 +300,8 @@ h1.page-title {
 .home .pre-content{
 	line-height: 0;
 }
-.pre-content-bg{ 
-	position: absolute; 
+.pre-content-bg{
+	position: absolute;
 	left: 0;
 	top: -2px;
 	bottom: 33%;
@@ -321,6 +321,9 @@ h1.page-title {
 	text-align: center;
 	overflow: hidden;
 	display: inline-block;
+}
+.single-ctc_person .ctc-media{
+	min-width: 200px;
 }
 .embed-loaded{
 	width: 100%;
@@ -378,7 +381,7 @@ h1.page-title {
 	width: 25px;
 }
 .ctc-details .btn .fa {
-	color: #fff; 
+	color: #fff;
 }
 
 /* CTC card */
@@ -389,8 +392,8 @@ h1.page-title {
 	margin-right: auto;
 }
 
-/* Nav Bar */ 
-.navbar-white .navbar-toggler, 
+/* Nav Bar */
+.navbar-white .navbar-toggler,
 .navbar-white .navbar-nav .nav-link {
 	color: rgba( 255,255,255, 0.95 ) !important;
 }
@@ -464,7 +467,7 @@ h1.page-title {
 	line-height: 2.5rem;
 	z-index: 2;
 }
-.harvest_tk_panel .card { 
+.harvest_tk_panel .card {
 	overflow: hidden;
 }
 .harvest_tk_panel	.card-img-overlay {
