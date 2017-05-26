@@ -8,7 +8,7 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'row' ); ?>>
 
-	<header class="col-12">
+	<header class="col-12 p-3">
 		<?php the_title( '<h1 class="page-title">', '</h1>' ); ?>
 	</header>
 	

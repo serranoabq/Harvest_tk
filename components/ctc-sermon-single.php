@@ -10,7 +10,7 @@
 
 	<?php get_template_part( 'components/ctc-sermon', 'chooser' ); ?>
 	
-	<header class="col-12">
+	<header class="col-12 p-3">
 
 		<?php the_title( '<h1 class="page-title">', '</h1>' ); ?>
 		<span class="ctc-sermon-date"><?php echo the_date(); ?></span>
