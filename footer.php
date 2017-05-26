@@ -34,13 +34,16 @@
 				<div class="site-footer-inner col-sm-6 align-baseline">
 
 					<div class="site-info">
+					
 						<?php do_action( 'harvest_tk_credits' ); ?>
+						
 						<?php echo sprintf( __( '&copy; Copyright %d %s', 'harvest' ), date('Y'), get_bloginfo( 'name' ) ); ?>
+						
 					</div><!-- close .site-info -->
 
 				</div>
 
-				<div class="site-footer-social col-sm-6 text-right">
+				<div class="site-footer-social col-sm-6 text-center text-sm-right">
 				
 					<?php 
 					

@@ -136,9 +136,17 @@
 					
 						<h2 class="sermon-title"><?php the_title(); ?></h2>
 						
-						<div class="ctc_speaker"><?php echo $ctc_data[ 'speakers' ]; ?></div>
+						<?php if( ! empty( $ctc_data[ 'speakers' ] ) ): ?>
 						
-						<div class="ctc_series"><?php echo sprintf( __( '<b>Series:</b> %s', 'harvest_tk'), $ctc_data[ 'series' ] ); ?></div>
+							<div class="ctc_speaker"><?php echo $ctc_data[ 'speakers' ]; ?></div>
+						
+						<?php endif; ?>
+						
+						<?php if( ! empty( $ctc_data[ 'series' ] ) ): ?>
+						
+							<div class="ctc_series"><?php echo sprintf( __( '<b>Series:</b> %s', 'harvest_tk'), $ctc_data[ 'series' ] ); ?></div>
+						
+						<?php endif; ?>
 						
 						<div class="ctc_date"><?php the_date(); ?></div>
 						

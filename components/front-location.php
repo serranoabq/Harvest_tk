@@ -23,14 +23,18 @@
 			?>
 			
 			<h3><?php echo $title;?></h3>
+			
 			<div class="ctc-times"><?php echo $times;?></div>
+			
+			<?php if( ! empty( $ctc_data[ 'map_url' ] ) ) : ?>
+			
 			<div class="mt-4">
 				<a href="<?php echo $ctc_data[ 'map_url' ]; ?>" target="_blank" alt="<?php _e( 'Map and Directions', 'harvest_tk' ); ?>" class="btn btn-secondary font-weight-bold text-uppercase">
 					<?php _e( 'Directions', 'harvest_tk' ); ?>
 				</a>
 			</div>
 			
-			<?php
+			<?php endif;
 		}
 	endif;
 	
