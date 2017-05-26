@@ -1,9 +1,43 @@
 Front Page Order
+[menu]
 [slider]
-[welcome]
-[locations]
 [recent sermon]
-[give]
+[locations]
+[love your city]
 [upcoming events]
+[give]
 [subscribe]
-[]
+[footer]
+
+
+[Menu]
+I'm New
+About Us
+> Our Story
+> Locations
+> Our Team
+> Contact Us 
+Media
+Events 
+Give
+Ministries
+> Love your city
+>> New Mexico Prays
+>> Serve505
+>> Foster Family Appreciation
+>> Eggstravaganza
+>> Trunk or Treat
+> Life groups
+> Harvest Youth
+> Harvest Kids
+> Beloved
+
+
+[Footer]
+Footer Menu
+Social Media
+> Facebook
+> Twitter
+> YouTube
+> Instagram
+
