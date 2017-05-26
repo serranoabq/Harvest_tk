@@ -26,11 +26,18 @@ function harvest_tk_customize_register( $wp_customize ) {
 	) );
 
 
+	//** Options Panel **//
+	harvest_tk_customize_createPanel( $wp_customize, array(
+		'id'           => 'harvest_tk_options_panel',
+		'title'        => 'Theme Options',
+	) );
+
 	// Podcasting options
 	harvest_tk_customize_createSection( $wp_customize, array(
-		'id'                => 'podcast',
-		'title'             => __( 'Podcasting', 'harvest_tk' ),
-		'description'       => __( 'Settings for audio podcast', 'harvest_tk' ),
+		'id'           => 'podcast',
+		'title'        => __( 'Podcasting', 'harvest_tk' ),
+		'description'  => __( 'Settings for audio podcast', 'harvest_tk' ),
+		'panel'        => 'harvest_tk_options_panel',
 	) );
 	harvest_tk_customize_createSetting( $wp_customize, array(
 		'id'           => 'harvest_tk_podcast_desc',
@@ -60,6 +67,7 @@ function harvest_tk_customize_register( $wp_customize ) {
 		'id'           => 'rss',
 		'title'        => __( 'RSS Options', 'harvest_tk' ),
 		'description'  => __( 'Settings for RSS feed', 'harvest_tk' ),
+		'panel'        => 'harvest_tk_options_panel',
 	) );
 	harvest_tk_customize_createSetting( $wp_customize, array(
 		'id'           => 'harvest_tk_feed_logo',
@@ -70,16 +78,59 @@ function harvest_tk_customize_register( $wp_customize ) {
 		'description'  => __( 'Logo used in RSS feed', 'harvest_tk' ),
 	) );
 
-
-	harvest_tk_customize_createPanel( $wp_customize, array(
-		'id'              => 'harvest_tk_options_panel',
-		'title'           => 'Theme Options',
-		'description'     => __( 'Configure your theme settings', 'harvest_tk' )
+	// Social accounts
+	harvest_tk_customize_createSection( $wp_customize, array(
+		'id'           => 'social',
+		'title'        => __( 'Social Media', 'harvest_tk' ),
+		'description'  => __( 'Add your social media accounts', 'harvest_tk' ),
+		'panel'        => 'harvest_tk_options_panel',
 	) );
-
+	harvest_tk_customize_createSetting( $wp_customize, array(
+		'id' 	         => 'harvest_tk_facebook',
+		'type'         => 'text',
+		'label'        => 'Facebook',
+		'default'      => '',
+		'section'      => 'social',
+	) );
+	harvest_tk_customize_createSetting( $wp_customize, array(
+		'id' 	         => 'harvest_tk_twitter',
+		'type'         => 'text',
+		'label'        => 'Twitter',
+		'default'      => '',
+		'section'      => 'social'
+	) );
+	harvest_tk_customize_createSetting( $wp_customize, array(
+		'id' 	         => 'harvest_tk_instagram',
+		'type'         => 'text',
+		'label'        => 'Instagram',
+		'default'      => '',
+		'section'      => 'social'
+	) );
+	harvest_tk_customize_createSetting( $wp_customize, array(
+		'id' 	         => 'harvest_tk_google',
+		'type'         => 'text',
+		'label'        => 'Google+',
+		'default'      => '',
+		'section'      => 'social'
+	) );
+	harvest_tk_customize_createSetting( $wp_customize, array(
+		'id' 	         => 'harvest_tk_youtube',
+		'type'         => 'text',
+		'label'        => 'YouTube',
+		'default'      => '',
+		'section'      => 'social'
+	) );
+	harvest_tk_customize_createSetting( $wp_customize, array(
+		'id' 	         => 'harvest_tk_vimeo',
+		'type'         => 'text',
+		'label'        => 'Vimeo',
+		'default'      => '',
+		'section'      => 'social'
+	) );
+	
 	// CTC default images
 	harvest_tk_customize_createSection( $wp_customize, array(
-		'id'              => 'harvest_tk_ctc_defaults_section',
+		'id'              => 'ctc_defaults',
 		'title'           => __( 'Default Images', 'harvest_tk' ),
 		'description'     => __( 'Choose default images for use with sermons, events, and locations, ', 'harvest_tk' ),
 		'panel'           => 'harvest_tk_options_panel',
@@ -89,33 +140,33 @@ function harvest_tk_customize_register( $wp_customize ) {
 		'type'              => 'image',
 		'label'             => __( 'Default Sermon Image', 'harvest_tk' ),
 		'default'           => '',
-		'section'           => "harvest_tk_ctc_defaults_section",
+		'section'           => 'ctc_defaults',
 	) );
 	harvest_tk_customize_createSetting( $wp_customize, array(
 		'id' 	              => 'harvest_tk_event_dafault_image',
 		'type'              => 'image',
 		'label'             => __( 'Default Event Image', 'harvest_tk' ),
 		'default'           => '',
-		'section'           => "harvest_tk_ctc_defaults_section",
+		'section'           => 'ctc_defaults',
 	) );
 	harvest_tk_customize_createSetting( $wp_customize, array(
 		'id' 	              => 'harvest_tk_location_dafault_image',
 		'type'              => 'image',
 		'label'             => __( 'Default Location Image', 'harvest_tk' ),
 		'default'           => '',
-		'section'           => "harvest_tk_ctc_defaults_section",
+		'section'           => 'ctc_defaults',
 	) );
 	harvest_tk_customize_createSetting( $wp_customize, array(
 		'id' 	              => 'harvest_tk_person_dafault_image',
 		'type'              => 'image',
 		'label'             => __( 'Default Person Image', 'harvest_tk' ),
 		'default'           => '',
-		'section'           => "harvest_tk_ctc_defaults_section",
+		'section'           => 'ctc_defaults',
 	) );
 
 	// Front-page hero
 	harvest_tk_customize_createSection( $wp_customize, array(
-		'id'              => 'harvest_tk_hero_section',
+		'id'              => 'hero',
 		'title'           => __( 'Front Page Hero Slider', 'harvest_tk' ),
 		'description'     => __( 'Enter the shortcode for the hero slider at the top of the  homepage', 'harvest_tk' ),
 		'panel'           => 'harvest_tk_options_panel',
@@ -126,12 +177,12 @@ function harvest_tk_customize_register( $wp_customize ) {
 		'type'              => 'textarea',
 		'label'             => __( 'Hero Slider Shortcode', 'harvest_tk' ),
 		'default'           => '',
-		'section'           => "harvest_tk_hero_section",
+		'section'           => 'hero',
 	) );
 
 	// Panels
 	harvest_tk_customize_createSection( $wp_customize, array(
-		'id'              => 'harvest_tk_panels',
+		'id'              => 'panels',
 		'title'           => __( 'Front Page Panels', 'harvest_tk' ),
 		'panel'           => 'harvest_tk_options_panel',
 		'active_callback' => 'is_front_page',
@@ -142,7 +193,7 @@ function harvest_tk_customize_register( $wp_customize ) {
 		'label'             => __( 'Front page panel count', 'harvest_tk' ),
 		'description'       => __( 'Select how many panels to show on the front page', 'harvest_tk' ),
 		'default'           => 12,
-		'section'           => "harvest_tk_panels",
+		'section'           => 'panels',
 		'sanitize_callback' => 'harvest_tk_sanitize_numeric_value',
 		'transport'         => 'postMessage',
 		'choices'           => range( 0, 12, 1),

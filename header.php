@@ -13,6 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<meta name="theme-color" content="<?php echo get_theme_mod('harvest_tk_header_bgcolor'); ?>" />
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 
 	<?php wp_head(); ?>
@@ -21,7 +22,7 @@
 <body <?php body_class(); ?>>
 	<?php do_action( 'before' ); ?>
 		
-	<header id="masthead" class="site-header" role="banner" style="background-color:<?php echo get_theme_mod('harvest_tk_header_bgcolor'); ?>">
+	<header id="masthead" class="site-header" role="banner" style="background-color: <?php echo get_theme_mod('harvest_tk_header_bgcolor'); ?>">
 	
 		<?php get_template_part( 'components/site', 'header' ); ?>
 	

@@ -24,12 +24,14 @@
 		<div class="container">
 		
 			<div class="row">
+			
 				<?php dynamic_sidebar( 'footer' ); ?>
+			
 			</div>
 			
 			<div class="row">
 
-				<div class="site-footer-inner col-sm-12">
+				<div class="site-footer-inner col-sm-6 align-baseline">
 
 					<div class="site-info">
 						<?php do_action( 'harvest_tk_credits' ); ?>
@@ -38,6 +40,27 @@
 
 				</div>
 
+				<div class="site-footer-social col-sm-6 text-right">
+				
+					<?php 
+					
+						$fb = get_theme_mod('harvest_tk_facebook');
+						$tw = get_theme_mod('harvest_tk_twitter');
+						$ig = get_theme_mod('harvest_tk_instagram');
+						$gp = get_theme_mod('harvest_tk_google');
+						$yt = get_theme_mod('harvest_tk_youtube');
+						$vm = get_theme_mod('harvest_tk_vimeo');
+					
+						if( $fb ) echo '<a href="'. $fb .'" target="_blank"><i class="fa fa-facebook-square fa-2x mr-2 text-muted"></i></a>';
+						if( $tw ) echo '<a href="'. $tw .'" target="_blank"><i class="fa fa-twitter-square fa-2x mr-2 text-muted"></i></a>';
+						if( $ig ) echo '<a href="'. $ig .'" target="_blank"><i class="fa fa-instagram fa-2x mr-2 text-muted"></i></a>';
+						if( $gp ) echo '<a href="'. $gp .'" target="_blank"><i class="fa fa-google-plus-square fa-2x mr-2 text-muted"></i></a>';
+						if( $yt ) echo '<a href="'. $yt .'" target="_blank"><i class="fa fa-youtube-square fa-2x mr-2 text-muted"></i></a>';
+						if( $vm ) echo '<a href="'. $vm .'" target="_blank"><i class="fa fa-vimeo-square fa-2x text-muted"></i></a>';
+						
+					?>
+				</div>
+				
 			</div>
 			
 		</div><!-- close .container -->
