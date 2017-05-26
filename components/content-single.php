@@ -4,24 +4,27 @@
  */
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header>
-		<h1 class="page-title"><?php the_title(); ?></h1>
+<article id="post-<?php the_ID(); ?>" <?php post_class( 'row' ); ?>>
 
-		<div class="entry-meta">
-			<?php harvest_tk_posted_on(); ?>
-		</div><!-- .entry-meta -->
+	<header class="col-12 p-3">
+		<?php the_title( '<h1 class="page-title">', '</h1>' ); ?>
+		<span class="text-muted"><?php echo the_date(); ?></span>
+
 	</header><!-- .entry-header -->
 
-	<div class="entry-content">
-		<div class="entry-content-thumbnail">
-			<?php the_post_thumbnail(); ?>
-		</div>
+	<div class="entry-meta">
+		<?php harvest_tk_posted_on(); ?>
+	</div><!-- .entry-meta -->
+	
+	<div class="entry-content col-12">
+		
 		<?php the_content(); ?>
+		
 		<?php harvest_tk_link_pages(); ?>
+		
 	</div><!-- .entry-content -->
 
-	<footer class="entry-meta">
+	<footer class="entry-footer">
 		<?php
 			/* translators: used between list items, there is a space after the comma */
 			$category_list = get_the_category_list( __( ', ', 'harvest_tk' ) );
@@ -56,6 +59,8 @@
 			);
 		?>
 
-		<?php edit_post_link( __( 'Edit', 'harvest_tk' ), '<span class="edit-link">', '</span>' ); ?>
-	</footer><!-- .entry-meta -->
+		<?php edit_post_link( __( 'Edit this post', 'harvest_tk' ), '<span class="edit-link">', '</span>' ); ?>
+		
+	</footer><!-- .entry-footer -->
+	
 </article><!-- #post-## -->
