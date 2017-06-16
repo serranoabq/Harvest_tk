@@ -216,13 +216,12 @@ function harvest_tk_pre_sermon_series( $query ){
 // Adjust the event query
 add_action( 'pre_get_posts', 'harvest_tk_pre_events' );
 function harvest_tk_pre_events( $query ){
-	global $wp_query;
-
-	if( ! array_key_exists( 'post_type', $query->query_vars ) )
-		return;
-
-	if( 'ctc_event' != $query->query_vars[ 'post_type' ] )
-		return;
+	if( is_admin() ) return; // don't filter the back end
+	
+	$query_term = $query->query_vars;
+	$ct1 = array_key_exists( 'ctc_event_category', $query_term ) && ! empty( $query_term['ctc_event_category'] );
+	$ct3 = array_key_exists( 'post_type', $query_term )  && 'ctc_event' == $query_term['post_type'];
+	if( ! ( $ct1 || $ct3 ) ) return;
 
 	$args = array(
 		'order' => 'ASC',
@@ -248,8 +247,8 @@ function harvest_tk_pre_events( $query ){
 // Adjust the location and people query
 add_action( 'pre_get_posts', 'harvest_tk_pre_locations_and_people' );
 function harvest_tk_pre_locations_and_people( $query ){
-	global $wp_query;
-
+	if( is_admin() ) return; // don't filter the back end
+	
 	if( ! array_key_exists( 'post_type', $query->query_vars ) )
 		return;
 

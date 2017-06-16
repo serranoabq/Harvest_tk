@@ -43,7 +43,8 @@ function harvest_tk_setup() {
 	
 	// Register navigation menus
 	register_nav_menus( array(
-		'primary'  => __( 'Header bottom menu', 'harvest_tk' ),
+		'primary'      => __( 'Header menu', 'harvest_tk' ),
+		'footer-menu'  => __( 'Footer menu', 'harvest_tk' ),
 		) );
 
 	// Use HTML5 for search, comments, gallery and captions

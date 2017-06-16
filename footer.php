@@ -29,6 +29,18 @@
 			
 			</div>
 			
+			<div class="row footer-menu">
+			
+				<?php wp_nav_menu( array (
+					'theme_location'  => 'footer-menu',					
+					'container'       => 'div',					
+					'container_class' => 'col-12',
+					'menu_class'      => 'nav justify-content-end',
+					
+				) ); ?>
+			
+			</div>
+			
 			<div class="row">
 
 				<div class="site-footer-inner col-sm-6 align-baseline">

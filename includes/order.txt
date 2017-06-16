@@ -3,7 +3,7 @@ Front Page Order
 [slider]
 [recent sermon]
 [locations]
-[love your city]
+[theme verse]
 [upcoming events]
 [give]
 [subscribe]
@@ -11,15 +11,15 @@ Front Page Order
 
 
 [Menu]
-I'm New
+I'm New *
 About Us
-> Our Story
-> Locations
-> Our Team
-> Contact Us 
-Media
-Events 
-Give
+> Our Story *
+> Locations *
+> Our Team *
+> Contact Us *
+Media *
+Events *
+Give (needs work)
 Ministries
 > Love your city
 >> New Mexico Prays
@@ -27,17 +27,17 @@ Ministries
 >> Foster Family Appreciation
 >> Eggstravaganza
 >> Trunk or Treat
-> Life groups
-> Harvest Youth
-> Harvest Kids
-> Beloved
+> Life groups *
+> Harvest Youth *
+> Harvest Kids *
+> Beloved *
 
 
 [Footer]
-Footer Menu
+Footer Menu *
 Social Media
-> Facebook
-> Twitter
-> YouTube
-> Instagram
+> Facebook *
+> Twitter *
+> YouTube *
+> Instagram *
 
