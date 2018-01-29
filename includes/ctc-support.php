@@ -82,6 +82,8 @@ function harvest_tk_add_ctc(){
 			'field_overrides' => array()
 	) );
 
+	// Groups
+	add_theme_support( 'ctcex_groups' );
 }
 
 // Add default image into the sermon

@@ -17,9 +17,9 @@
 		'orderby' 				=> 'date',
 		'posts_per_page'		=> 1,
 	); 	
-	$posts = new WP_Query( $query ); 
+	$m_posts = new WP_Query( $query ); 
 
-	if ( $posts -> have_posts() ): $posts -> the_post();
+	if ( $m_posts -> have_posts() ): $m_posts -> the_post();
 	
 		$ctc_data = harvest_tk_get_sermon_data( get_the_ID() );
 		$has_image = ! empty( $ctc_data[ 'img' ] );

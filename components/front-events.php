@@ -74,9 +74,9 @@
 		'post_type' 			=> 'ctc_event', 
 		'posts_per_page'		=> 3,
 	); 
-	$posts = new WP_Query( $query ); 
+	$m_posts = new WP_Query( $query ); 
 
-	if ( $posts -> have_posts() ):
+	if ( $m_posts -> have_posts() ):
 
 	?>
 
@@ -98,7 +98,7 @@
 		
 		<div class="harvest_tk_panel-content row no-gutters">
 		
-		<?php $i = 1; while ( $posts -> have_posts() ): $posts -> the_post(); ?>
+		<?php $i = 1; while ( $m_posts -> have_posts() ): $m_posts -> the_post(); ?>
 		
 			<?php if (1 == $i): ?>
 			
@@ -120,7 +120,7 @@
 							
 						</div> <!-- .col (inner) -->
 						
-				<?php if( $i == $posts->post_count ): ?>
+				<?php if( $i == $m_posts->post_count ): ?>
 				
 					</div> <!-- .row (inner) -->
 					

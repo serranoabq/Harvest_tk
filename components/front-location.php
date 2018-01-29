@@ -44,9 +44,9 @@
 		'order'           => 'ASC',
 		'posts_per_page'  => -1,
 	); 
-	$posts = new WP_Query( $query ); 
+	$m_posts = new WP_Query( $query ); 
 
-	if ( $posts -> have_posts() ):
+	if ( $m_posts -> have_posts() ):
 
 	?>
 
@@ -68,7 +68,7 @@
 		
 		<div class="harvest_tk_panel-content row text-center">
 		
-		<?php while ( $posts -> have_posts() ): $posts -> the_post(); ?>
+		<?php while ( $m_posts -> have_posts() ): $m_posts -> the_post(); ?>
 		
 			<div class="col-sm-4 py-3">
 			
