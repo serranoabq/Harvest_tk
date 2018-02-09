@@ -12,7 +12,7 @@ Front Page Order
 
 [Menu]
 I'm New *
-About Us
+About Us * 
 > Our Story *
 > Locations *
 > Our Team *

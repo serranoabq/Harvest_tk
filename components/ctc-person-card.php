@@ -1,16 +1,19 @@
 <?php
 /**
- * Template part for displaying sermons in card format
+ * Template part for displaying people in card format
  *
  * @package harvest_tk
  */
 	if( ! get_the_ID() ) return; // Bail if not in the Loop
 ?>
 		<?php
-			$ctc_data = harvest_tk_get_sermon_data( get_the_ID() );
-			$has_audio = ! empty( $ctc_data[ 'audio' ] );
-			$has_video = ! empty( $ctc_data[ 'video' ] );
+			$ctc_data = harvest_tk_get_person_data( get_the_ID() );
 			$id = empty( $ctc_data[ 'img_id' ] ) ? harvest_tk_get_attachment_id( $ctc_data[ 'img' ] ) : $ctc_data[ 'img_id' ];
+			$position = empty ( $ctc_data[ 'position' ] ) ? '' : $ctc_data[ 'position' ];
+			$email = empty( $ctc_data[ 'email' ] ) ? '' : 'mailto:' . $ctc_data[ 'email' ];
+			$ctc_data[ 'url' ] .=  "\r\n" . $email;
+			$urls = explode( "\r\n", $ctc_data[ 'url' ] );
+			
 		?>
 
 	<div class="d-flex col-sm-6 col-md-4">
@@ -26,11 +29,31 @@
 
 					<div class="ctc_capability">
 
-						<div class="card-subtitle text-muted ctc_speaker"><?php echo $ctc_data[ 'speakers' ]; ?></div>
-						<div class="card-subtitle text-muted ctc_date"><?php the_date(); ?></div>
+						<?php if( $position ): ?><div class="card-subtitle text-muted ctc_position"><?php echo $position; ?></div><?php endif; ?>
+						
+						<div class="card-subtitle">
+						
+							<?php 
+								foreach( $urls as $url_item ): 
+									$host = strtolower( parse_url( $url_item, PHP_URL_HOST ) );
+									$fa = ''; $link = '';
+									if( false !== stripos( $host, 'facebook.com' ) )
+										$fa = 'facebook-square';
+									if( false !== stripos( $host, 'twitter.com' ) )
+										$fa = 'twitter-square';
+									if( false !== stripos( $host, 'instagram.com' ) )
+										$fa = 'instagram';
+									if( false !== stripos( $url_item, 'mailto:' ) )
+										$fa = 'envelope';
+									if( ! empty( $fa ) ) 
+										$link = '<i class="fa fa-' . $fa .'" aria-hidden="true"></i>';
+							?>
+									
+							<div class="ctc-url d-inline-block mr-2"><a href="<?php echo esc_url( $url_item ); ?>" class="text-muted"><?php echo $link; ?></a></div>
+									
+							<?php endforeach; ?>	
 
-						<?php if ( $has_audio ): ?><i class="fa fa-volume-up" title="<?php _e('Audio Available', 'harvest_tk'); ?>"></i><?php endif; ?>
-						<?php if ( $has_video ): ?><i class="fa fa-film" title="<?php _e('Video Available', 'harvest_tk'); ?>"></i><?php endif; ?>
+						</div>
 
 					</div>
 

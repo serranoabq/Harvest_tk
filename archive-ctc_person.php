@@ -1,6 +1,6 @@
 <?php
 /**
- * Archive page for all events
+ * Archive page for all people
  *
  * @package harvest_tk
  */

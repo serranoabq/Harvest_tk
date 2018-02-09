@@ -8,6 +8,7 @@
 $term = get_queried_object();
 get_header(); 
 ?>
+
 	<div class="row">
 
 		<div class="text-center col-12 p-3">
