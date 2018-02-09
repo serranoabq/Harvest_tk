@@ -25,7 +25,7 @@ function harvest_tk_link_pages_by_meta( $args, $meta_args ){
 	$defaults = array(
 		'prev_text'        => '%title',
 		'next_text'        => '%title',
-		'screen_reader_text' => __( 'Post navigation' ),
+		'screen_reader_text' => __( 'Post navigation', 'harvest_tk' ),
 		'echo'             => 1
 	);
 	$r = wp_parse_args( $args, $defaults );

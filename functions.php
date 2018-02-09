@@ -148,7 +148,7 @@ function harvest_tk_scripts() {
 		wp_enqueue_script( 'harvest_tk-keyboard-image-navigation', THEME_DIR_URI . '/includes/js/keyboard-image-navigation.js', array( 'jquery' ), '20120202' );
 	}
 	
-	harvest_tk_deregister_scripts();
+	//harvest_tk_deregister_scripts();
 	
 }
 add_action( 'wp_enqueue_scripts', 'harvest_tk_scripts' );
@@ -157,11 +157,18 @@ add_action( 'wp_enqueue_scripts', 'harvest_tk_scripts' );
 function harvest_tk_deregister_scripts() {
 	global $wp_query, $post;
 	
-	if( ! ( strpos( json_encode( $wp_query ), '[contact-form-7' ) || strpos( json_encode( $post ), '[contact-form-7' ) ) )  {
-			wp_deregister_script( 'contact-form-7' );
-			wp_deregister_style( 'contact-form-7' );
+	// List of offending plugins that encode their scripts in every page not just when they are used
+	/*
+	$bad_plugins = array();
+	$bad_plugins[ 'plugin_slug' ] = 'shortcode_slug'; // replace 'plugin_slug' and 'shortcode_slug' with the appropriate terms 
+	
+	foreach( $bad_plugins as $plugin_slug => $shortcode_slug) {		
+		if( ! ( strpos( json_encode( $wp_query ), "[$shortcode_slug" ) || strpos( json_encode( $post ), "[$shortcode_slug" ) ) )  {	
+			wp_deregister_script( $plugin_slug );
+			wp_deregister_style( $plugin_slug );
+		}
 	}
-
+	*/
 }
 
 // Helper function for theme options

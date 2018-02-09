@@ -49,7 +49,7 @@
 					
 						<?php do_action( 'harvest_tk_credits' ); ?>
 						
-						<?php echo sprintf( __( '&copy; Copyright %d %s', 'harvest' ), date('Y'), get_bloginfo( 'name' ) ); ?>
+						<?php echo sprintf( __( '&copy; Copyright %d %s', 'harvest_tk' ), date('Y'), get_bloginfo( 'name' ) ); ?>
 						
 					</div><!-- close .site-info -->
 

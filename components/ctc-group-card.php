@@ -45,7 +45,7 @@
 
 					<div class="ctc_capability">
 
-						<?php if( $day ): ?><div class="card-subtitle text-muted ctc_date_time"><?php _ex( "{$day}s at {$time}", 'day of the week and time (as in "Sundays at 7:00pm")', 'harvest_tk' ); ?></div><?php endif; ?>
+						<?php if( $day ): ?><div class="card-subtitle text-muted ctc_date_time"><?php _ex( "{$day}s at {$time}", 'day of the week and time (as in "Sundays at 7:00pm"); $day and $time are i18n-ized', 'harvest_tk' ); ?></div><?php endif; ?>
 						
 						<?php if( $leader ): ?><div class="card-subtitle text-muted ctc_leader"><b><?php _e( 'Led by:', 'harvest_tk' ); ?></b> <?php echo $leader; ?></div><?php endif; ?>
 						
