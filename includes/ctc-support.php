@@ -197,6 +197,14 @@ function harvest_tk_get_person_data( $post_id ){
 		return harvest_tk_get_default_data( $post_id );
 }
 
+// Get group data for use in templates
+function harvest_tk_get_group_data( $post_id ){
+	if( class_exists( 'CTC_Extender' ) )
+		return ctcex_get_group_data( $post_id );
+	else
+		return harvest_tk_get_default_data( $post_id );
+}
+
 // Adjust the sermon series query
 add_action( 'pre_get_posts', 'harvest_tk_pre_sermon_series' );
 function harvest_tk_pre_sermon_series( $query ){
