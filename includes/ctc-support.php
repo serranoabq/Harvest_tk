@@ -296,6 +296,10 @@ function harvest_tk_get_ctc_name( $ctc_type, $is_singular = false ) {
 			$names = __( 'Locations/Location', 'harvest_tk' );
 			$option = 'ctc-locations';
 			break;
+		case 'ctcex_group':
+			$names = __( 'Groups/Group', 'harvest_tk' );
+			$option = 'ctcex-groups';
+			break;
 		case 'default':
 			return '';
 	}

@@ -163,7 +163,14 @@ function harvest_tk_customize_register( $wp_customize ) {
 		'default'           => '',
 		'section'           => 'ctc_defaults',
 	) );
-
+	harvest_tk_customize_createSetting( $wp_customize, array(
+		'id' 	              => 'harvest_tk_group_dafault_image',
+		'type'              => 'image',
+		'label'             => __( 'Default Group Image', 'harvest_tk' ),
+		'default'           => '',
+		'section'           => 'ctc_defaults',
+	) );
+	
 	// Front-page hero
 	harvest_tk_customize_createSection( $wp_customize, array(
 		'id'              => 'hero',

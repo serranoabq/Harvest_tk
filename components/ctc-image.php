@@ -22,6 +22,9 @@
 	 case 'ctc_person':
 		$ctc_data = harvest_tk_get_person_data( get_the_ID() );
 		break;
+	 case 'ctcex_group':
+		$ctc_data = harvest_tk_get_group_data( get_the_ID() );
+		break;
 	 default:
 		if( has_post_thumbnail( get_the_ID() ) ) {
 			// Use featured image if available
