@@ -34,7 +34,7 @@
 	
 	<?php if( $bgimage || is_customize_preview() ) : ?>
 		
-		<div class="harvest_tk_panel-background" style="background-image:url(<?php echo esc_url( $bgimage ); ?>)"></div>
+		<div class="harvest_tk_panel-background bg-m-scroll" style="background-image:url(<?php echo esc_url( $bgimage ); ?>)"></div>
 		
 	<?php endif; ?>
 	

@@ -37,7 +37,7 @@
 			}
 			?>
 			
-			<div class="card card-inverse rounded-0 border-0">
+			<div class="card card-inverse rounded-0 border-0 mx-2 mt-2">
 				<a href="<?php echo $permalink;?>">
 					<?php echo $has_image || $has_map ? $img : ''; ?>
 					<?php echo harvest_tk_event_cal( $ctc_data[ 'start'], $ctc_data[ 'time' ] ); ?>
@@ -60,7 +60,7 @@
 			$time_str = $ctc_time;
 			?>
 			
-			<div class="ctc_cal rounded">
+			<div class="ctc_cal">
 				<div class="month" style="background-color: <?php echo $bgcolor ;?>"><?php echo $mon_str; ?></div>
 				<div class="day"><?php echo $day_str; ?></div>
 				<div class="time" style="background-color: <?php echo $bgcolor ;?>"><?php echo $time_str; ?></div>
@@ -84,7 +84,7 @@
 
 	<?php if( $bgimage || is_customize_preview() ) : ?>
 		
-		<div class="harvest_tk_panel-background" style="background-image:url(<?php echo esc_url( $bgimage ); ?>)"></div>
+		<div class="harvest_tk_panel-background bg-m-scroll" style="background-image:url(<?php echo esc_url( $bgimage ); ?>)"></div>
 		
 	<?php endif; ?>
 	

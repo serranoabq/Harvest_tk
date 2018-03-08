@@ -4,6 +4,8 @@
  * @package harvest_tk
  */
 	
+	$preview_panel_class = isset( $empty ) && is_customize_preview() ? 'hidden-xs-up' : '';
+	
 	$panel_title = get_theme_mod( "harvest_tk_panel_$harvest_tk_panel" . '_title' );
 	$show_title = get_theme_mod( "harvest_tk_panel_$harvest_tk_panel" . '_showtitle', false );
 	$preview_title_class = !$show_title && is_customize_preview() ? 'hidden-xs-up' : '';
@@ -14,7 +16,7 @@
 ?>
 
 
-<article id="post-<?php the_ID(); ?>" <?php post_class( "harvest_tk_panel m-0  py-5 px-3 px-md-5 harvest_tk_panel_$harvest_tk_panel front-panel" ); ?> style="background-color:<?php echo $bgcolor; ?>">
+<article id="post-<?php the_ID(); ?>" <?php post_class( "harvest_tk_panel m-0  py-5 px-3 px-md-5 harvest_tk_panel_$harvest_tk_panel front-panel $preview_panel_class" ); ?> style="background-color:<?php echo $bgcolor; ?>">
 	
 	<?php if ( has_post_thumbnail() ) :
 	
@@ -22,7 +24,7 @@
 	
 	?>
 		
-		<div class="harvest_tk_panel-background " style="background-image:url(<?php echo esc_url( $image[0] ); ?>)"></div>
+		<div class="harvest_tk_panel-background bg-m-scroll" style="background-image:url(<?php echo esc_url( $image[0] ); ?>)"></div>
 		
 	<?php endif; ?>
 	

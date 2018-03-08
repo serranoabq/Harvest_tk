@@ -317,7 +317,21 @@ function harvest_tk_customize_register( $wp_customize ) {
 			'section'           => "harvest_tk_panel_$i",
 			'transport'         => 'postMessage',
 		) );
-
+		
+		// Swap with another panel
+		/*
+		harvest_tk_customize_createSetting( $wp_customize, array(
+			'id'                => 'harvest_tk_panel_'. $i . '_swap',
+			'label'             => __( 'Swap with another panel', 'harvest_tk' ),
+			'type'              => 'select',
+			'choices'           => array(
+				"panel_empty"     => ''
+			),
+			'default'           => '',
+			'section'           => "harvest_tk_panel_$i",
+			'transport'         => 'postMessage',
+		) );
+		*/
 	}
 
 }
@@ -339,16 +353,23 @@ function harvest_tk_customizer_script(){
 
 			var api = wp.customize;
 
-			panel_count = 12;
+			var panel_count = wp.customize.value( 'harvest_tk_panel_count' )();
 			$( '#customize-control-harvest_tk_panel_count select' ).change( function() {
 				panel_count =  $(this).val();
 				for( var i = 1; i <= 12; i++ ){
+					
 					if( i <= panel_count ) {
 						$( '#accordion-section-harvest_tk_panel_' + i ).css( { 'display' : '' } );
 						api.section('harvest_tk_panel_' + i ).activate();
+						for( var j = 1; j<= 12; j++ ){
+							$('#_customize-input-harvest_tk_panel_' + j + '_swap option[value=panel_' + i +']').show()
+						}
 					} else {
 						$( '#accordion-section-harvest_tk_panel_' + i ).css( { 'display' : 'none' } );
 						api.section('harvest_tk_panel_' + i ).deactivate();
+						for( var j = 1; j<= 12; j++ ){
+							$('#_customize-input-harvest_tk_panel_' + j + '_swap option[value=panel_' + i +']').hide()
+						}
 					}
 				}
 			});
@@ -365,9 +386,25 @@ function harvest_tk_customizer_script(){
 				});
 
 				checkExpanded( i );
+				
+				//addSwapControls( i );
 
 			}
-
+			
+			function addSwapControls( panel ){
+				var parent = '#_customize-input-harvest_tk_panel_' + panel + '_swap';
+				for( var j = 1; j <= 12; j++ ) {
+					if( panel == j ){ 
+						continue; 
+					}
+					var hidden = j > panel_count ? ' style="display: none;': '';
+					$( parent ).append( 
+						$( '<option value="panel_' + j + '" ' + hidden + '>Panel ' + j + '</option>' )
+					);
+				}
+				
+			}
+			
 			function checkExpanded( panel ){
 				var parent = 'harvest_tk_panel_' + panel;
 				api.section( parent ).expanded.bind( function( expanding ) {
@@ -375,7 +412,7 @@ function harvest_tk_customizer_script(){
 					api.previewer.send( 'section-scroll', data );
 				});
 			}
-
+			
 		});
 	</script>
 <?php
@@ -396,7 +433,7 @@ function harvest_tk_customize_createSetting( $wp_customize, $args ) {
 		'section'           => '', // required
 		'sanitize_callback' => '', // optional
 		'active_callback'   => '', // optional
-		'transport'         => '', // optional
+		'transport'         => 'refresh', // optional
 		'description'       => '', // optional
 		'priority'          => null, // optional
 		'choices'           => '', // optional
@@ -407,7 +444,7 @@ function harvest_tk_customize_createSetting( $wp_customize, $args ) {
 
 	// Available types and arguments
 	$available_types = array( 'text', 'number', 'checkbox', 'textarea', 'radio', 'select', 'dropdown-pages', 'email', 'url', 'date', 'hidden', 'image', 'color' );
-	$setting_def_args = array( 'default'=> '', 'sanitize_callback'=>'', 'transport'=>'' );
+	$setting_def_args = array( 'default'=> '', 'sanitize_callback'=>'', 'transport'=>'refresh' );
 	$control_def_args = array( 'type'=>'', 'label'=>'', 'description'=>'', 'priority'=>'', 'choices'=>'', 'section'=>'', 'active_callback'=>'' );
 
 	// Check for non-empty inputs, too

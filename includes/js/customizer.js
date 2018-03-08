@@ -40,7 +40,7 @@ jQuery( document ).ready( function( $ ) {
 	api( 'harvest_tk_header_bgcolor', function( value ) {
 		value.bind( function( to ) {
 			if ( to ) {
-				$( '.pre-content-bg, .site-header, .panel-header, .dropdown-menu' ).css( {
+				$( '.pre-content-bg, .site-header, .dropdown-menu' ).css( {
 					'background-color': to
 				} );
 			}
@@ -70,8 +70,10 @@ jQuery( document ).ready( function( $ ) {
 			for( var i = 1; i < 12; i++ ){
 				if( i <= to ) {
 					// toggle panel on;
+					$( '.harvest_tk_panel_' + i ).removeClass( 'hidden-xs-up' );
 				} else {
 					// toggle panel off;
+					$( '.harvest_tk_panel_' + i ).addClass( 'hidden-xs-up' );
 				}
 			}
 		} );
@@ -107,21 +109,21 @@ jQuery( document ).ready( function( $ ) {
 		
 		api( dpanel + '_title', function( value ) {
 			var mpanel = '.' + dpanel;
-			value.bind( function( value ) {
-				$( mpanel + ' .panel-header h1' ).html( value );
+			value.bind( function( title ) {
+				$( mpanel + ' .panel-header h1' ).html( title );
 			} );
 		} );
 		
 		api( dpanel + '_showtitle', function( value ) {
 			var mpanel = '.' + dpanel;
-			value.bind( function( value ) {
+			value.bind( function( show_title ) {
 				$( mpanel + ' .panel-header' ).toggleClass( 'hidden-xs-up' );
 			} );
 		} );
 		
 		api( dpanel + '_whitetext', function( value ) {
 			var mpanel = '.' + dpanel;
-			value.bind( function( value ) {
+			value.bind( function( whitetext ) {
 				$( mpanel + ' .container' ).toggleClass( 'text-white' );
 			} );
 		} );
@@ -136,6 +138,41 @@ jQuery( document ).ready( function( $ ) {
 				} );
 			} );
 		} );
+		
+		/*
+		api( dpanel + '_swap', function( value ) {
+			var mpanel = dpanel;
+			value.bind( function( to ) {
+				fromPanel = mpanel.replace( 'harvest_tk_panel_', '' );
+				toPanel = to.replace( 'panel_', '' );
+				swapPanels( fromPanel, toPanel );
+			} );
+		} );
+		*/
+	}
+	
+	function getPanelData( panel ){
+		controls = ['title', 'showtitle', 'type', 'page', 'bgimage', 'opacity', 'bgcolor', 'whitetext'];
+		panelData = new Object();
+		controls.forEach( function( ctl ) {
+			panelData[ctl] = wp.customize.value( 'harvest_tk_panel_' + panel + '_' + ctl )();
+		})
+		return panelData;
+	}
+	
+	function setPanelData( panesl, panelData ){
+		controls = ['title', 'showtitle', 'type', 'page', 'bgimage', 'opacity', 'bgcolor', 'whitetext'];
+		controls.forEach( function( ctl ) {
+			wp.customize.value( 'harvest_tk_panel_' + panel + '_' + ctl )( panelData[ ctl] );		
+		})
+	}
+	
+	function swapPanels( fromPanel, toPanel ){
+		fromPanelData = getPanelData( fromPanel );
+		toPanelData = getPanelData( toPanel );
+		
+		setPanelData( fromPanel, toPanelData );
+		setPanelData( toPanel, fromPanelData );
 		
 	}
 } );
