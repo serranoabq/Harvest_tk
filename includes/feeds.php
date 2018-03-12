@@ -208,3 +208,39 @@ function harvest_tk_sermon_save_audio_enclosure( $post_id, $post ) {
 }
 /* */
 
+function harvest_tk_getImage( $post_id = null ) {
+	if( null == $post_id ){
+		global $post;
+		$post_id = $post -> ID;
+	}
+	
+	$cpt = get_post_type( $post_id );
+	$ctc_data = array();
+	switch ( $cpt ){
+	 case 'ctc_event':
+		$ctc_data = harvest_tk_get_event_data( $post_id );
+		break;
+	 case 'ctc_sermon':
+		$ctc_data = harvest_tk_get_sermon_data( $post_id );
+		break;
+	 case 'ctc_location':
+		$ctc_data = harvest_tk_get_location_data( $post_id );
+		break;
+	 case 'ctc_person':
+		$ctc_data = harvest_tk_get_person_data( $post_id );
+		break;
+	 case 'ctcex_group':
+		$ctc_data = harvest_tk_get_group_data( $post_id );
+		break;
+	 default:
+		if( has_post_thumbnail( $post_id ) ) {
+			// Use featured image if available
+			$ctc_data[ 'img' ] = get_the_post_thumbnail_url( $post_id );
+		} 
+	}
+	if( $ctc_data[ 'img' ] ){
+		return $ctc_data[ 'img' ];
+	} else {
+		return '';
+	}
+}
