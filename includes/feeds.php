@@ -3,11 +3,11 @@
 	
 	// RSS feed enhancements
 
-function cultiv8_podcast_description(){
+function harvest_tk_podcast_description(){
 	global $wp_query;
 	$query = $wp_query->query;
 	$site_desc = bloginfo( 'description' );
-	$pod_desc = get_theme_mod( 'cultiv8_podcast_desc', '' );
+	$pod_desc = get_theme_mod( 'harvest_tk_podcast_desc', '' );
 	$term_desc = '';
 	if( isset( $query[ 'ctc_sermon_topic' ] )){
 		$term = get_term_by( 'slug', $query[ 'ctc_sermon_topic' ], 'ctc_sermon_topic' );
@@ -21,25 +21,25 @@ function cultiv8_podcast_description(){
 }
 	
 // Add namespace
-add_filter( 'rss2_ns', 'cultiv8_itunes_namespace' );
-function cultiv8_itunes_namespace() {
+add_filter( 'rss2_ns', 'harvest_tk_itunes_namespace' );
+function harvest_tk_itunes_namespace() {
 	echo 'xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"';
 }
 
-add_filter('rss2_head', 'cultiv8_itunes_head');
-function cultiv8_itunes_head() {
-		$desc = cultiv8_podcast_description();
-	if( cultiv8_option( 'podcast_author' ) ) {
+add_filter('rss2_head', 'harvest_tk_itunes_head');
+function harvest_tk_itunes_head() {
+		$desc = harvest_tk_podcast_description();
+	if( harvest_tk_option( 'podcast_author' ) ) {
 			echo '
-	<itunes:author>'. cultiv8_option( 'podcast_author' ) . '</itunes:author>';
+	<itunes:author>'. harvest_tk_option( 'podcast_author' ) . '</itunes:author>';
 	}
 	if( $desc ) {
 			echo '
 	<itunes:summary>'. $desc . '</itunes:summary>';
 	}
-	if( cultiv8_option('podcast_image') ) {
+	if( harvest_tk_option('podcast_image') ) {
 			echo '
-	<itunes:image href="'. cultiv8_option('podcast_image' ) . '"/>';
+	<itunes:image href="'. harvest_tk_option('podcast_image' ) . '"/>';
 	}
 }
 
@@ -48,8 +48,8 @@ function cultiv8_itunes_head() {
 / RSS Feeds
 /************************************************************/
 // Change the feed to just the sermons
-add_filter( 'request', 'cultiv8_feed_request' );
-function cultiv8_feed_request( $qv ) {
+add_filter( 'request', 'harvest_tk_feed_request' );
+function harvest_tk_feed_request( $qv ) {
 	if( ! isset( $qv['feed'] ) ) return $qv;
 	
 	if( ! isset($qv[ 'post_type' ] ) )
@@ -71,43 +71,43 @@ function cultiv8_feed_request( $qv ) {
 
 
 // Add an image to go with the item on the feed
-add_filter( 'the_excerpt_rss', 'cultiv8_rss_post_thumbnail' );
-add_filter( 'the_content_feed', 'cultiv8_rss_post_thumbnail' );
-function cultiv8_rss_post_thumbnail( $content ) {
+add_filter( 'the_excerpt_rss', 'harvest_tk_rss_post_thumbnail' );
+add_filter( 'the_content_feed', 'harvest_tk_rss_post_thumbnail' );
+function harvest_tk_rss_post_thumbnail( $content ) {
 	global $post;
-	$content = '<p><img src="' . cultiv8_getImage( $post->ID ) . '"/></p>' . $content;
+	$content = '<p><img src="' . harvest_tk_getImage( $post->ID ) . '"/></p>' . $content;
 	
 	return $content;
 }
 
 // Add logos and icons to feeds
-add_action( 'atom_head', 'cultiv8_atom_feed_add_icon' );
-add_action( 'comments_atom_head', 'cultiv8_atom_feed_add_icon' );
-function cultiv8_atom_feed_add_icon() { 
+add_action( 'atom_head', 'harvest_tk_atom_feed_add_icon' );
+add_action( 'comments_atom_head', 'harvest_tk_atom_feed_add_icon' );
+function harvest_tk_atom_feed_add_icon() { 
 ?>
 	<feed>
 		<icon><?php echo get_site_icon_url(); ?></icon>
-		<logo><?php echo get_theme_mod( 'cultiv8_feed_logo', get_theme_mod( 'cultiv8_site_logo', '' ) ); ?></logo>
+		<logo><?php echo get_theme_mod( 'harvest_tk_feed_logo', get_theme_mod( 'harvest_tk_site_logo', '' ) ); ?></logo>
 	</feed>
 <?php }
 
-add_action( 'rss_head', 'cultiv8_rss_feed_add_icon' );
-add_action( 'rss2_head', 'cultiv8_rss_feed_add_icon' );
-add_action( 'commentsrss2_head', 'cultiv8_rss_feed_add_icon' );
-function cultiv8_rss_feed_add_icon($text) { 
+add_action( 'rss_head', 'harvest_tk_rss_feed_add_icon' );
+add_action( 'rss2_head', 'harvest_tk_rss_feed_add_icon' );
+add_action( 'commentsrss2_head', 'harvest_tk_rss_feed_add_icon' );
+function harvest_tk_rss_feed_add_icon($text) { 
 ?>
 	<image>
-		<url><?php echo get_theme_mod( 'cultiv8_feed_logo', get_theme_mod( 'cultiv8_site_logo', '' ) ); ?></url>
+		<url><?php echo get_theme_mod( 'harvest_tk_feed_logo', get_theme_mod( 'harvest_tk_site_logo', '' ) ); ?></url>
 		<title><?php wp_title( '|', true, 'right' ); ?></title>
 		<link><?php bloginfo_rss( 'url' ); ?></link>
-		<description><?php echo cultiv8_podcast_description(); ?></description>
+		<description><?php echo harvest_tk_podcast_description(); ?></description>
 	</image>
 <?php 
 } 
 
 // Fix feed title
-add_filter('get_wp_title_rss', 'cultiv8_rss_title', 10, 2);
-function cultiv8_rss_title( $title, $dep ){
+add_filter('get_wp_title_rss', 'harvest_tk_rss_title', 10, 2);
+function harvest_tk_rss_title( $title, $dep ){
 	global $wp_query;
 	$query = $wp_query->query;
 	$title = get_bloginfo( 'name' );
@@ -132,11 +132,11 @@ function cultiv8_rss_title( $title, $dep ){
 }
 
 // Use the sermon speaker as the post author in RSS feed
-add_filter( 'the_author', 'cultiv8_rss_author', 10 );
-function cultiv8_rss_author( $name ){
+add_filter( 'the_author', 'harvest_tk_rss_author', 10 );
+function harvest_tk_rss_author( $name ){
 	if( is_feed() ){
 		global $post;
-		$data = cultiv8_get_sermon_data( $post->ID );
+		$data = harvest_tk_get_sermon_data( $post->ID );
 		if( $data[ 'speakers' ] ) 
 			$name = $data[ 'speakers' ];
 	}
@@ -152,8 +152,8 @@ function cultiv8_rss_author( $name ){
 	
 */
 remove_action( 'save_post', 'ctc_sermon_save_audio_enclosure', 11 ); // Replace the built-in CTC enclosure function which is failing on my server
-add_action( 'save_post', 'cultiv8_sermon_save_audio_enclosure', 11, 2 ); // after 'save_post' saves meta fields on 10
-function cultiv8_sermon_save_audio_enclosure( $post_id, $post ) {
+add_action( 'save_post', 'harvest_tk_sermon_save_audio_enclosure', 11, 2 ); // after 'save_post' saves meta fields on 10
+function harvest_tk_sermon_save_audio_enclosure( $post_id, $post ) {
 
 	// Stop if no post, auto-save (meta not submitted) or user lacks permission
 	if ( 'ctc_sermon' != $post->post_type ) {

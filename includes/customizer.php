@@ -353,7 +353,21 @@ function harvest_tk_customizer_script(){
 
 			var api = wp.customize;
 
-			var panel_count = wp.customize.value( 'harvest_tk_panel_count' )();
+			
+			$( 'input[id^="_customize-input-harvest_tk_panel_"][id$="_title"]' ).change( function() {
+				var panel = $(this).attr( 'data-customize-setting-link' ).replace( 'harvest_tk_panel_', '' ).replace( '_title', '' );
+				$( '#accordion-section-harvest_tk_panel_' + panel + ' h3.accordion-section-title' ).text( 'Panel ' + panel + ' - ' + $(this).val() );
+				
+			});
+			
+			
+			$( 'select[id^="_customize-input-harvest_tk_panel_"][id$="_page"]' ).change( function() {
+				var panel = $(this).attr( 'data-customize-setting-link' ).replace( 'harvest_tk_panel_', '' ).replace( '_page', '' );
+				$( '#accordion-section-harvest_tk_panel_' + panel + ' h3.accordion-section-title' ).text( 'Panel ' + panel + ' - ' + $(this).text() );
+				
+			});
+			
+			var panel_count = api.value( 'harvest_tk_panel_count' )();
 			$( '#customize-control-harvest_tk_panel_count select' ).change( function() {
 				panel_count =  $(this).val();
 				for( var i = 1; i <= 12; i++ ){
@@ -376,7 +390,7 @@ function harvest_tk_customizer_script(){
 
 			for( var i = 1; i <= 12; i++ ){
 				var type_control = '#customize-control-harvest_tk_panel_' + i + '_type select';
-
+				
 				$( type_control ).change( function() {
 					var panel = $( this ).attr('data-customize-setting-link').replace( 'harvest_tk_panel_' ,'').replace( '_type', '');
 					var panel_type = $( this ).val();
@@ -387,8 +401,19 @@ function harvest_tk_customizer_script(){
 
 				checkExpanded( i );
 				
+				fixPanelTitles( i );
 				//addSwapControls( i );
 
+			}
+			
+			function fixPanelTitles( panel ){
+				var type = api.value( 'harvest_tk_panel_' + panel + '_type' )();
+				if( 'page' == type ){
+					var title = $( 'select#_customize-input-harvest_tk_panel_' + panel + '_page option:selected' ).text().trim();
+				} else {
+					var title = $( 'input#_customize-input-harvest_tk_panel_' + panel + '_title' ).val();
+				}
+				$( '#accordion-section-harvest_tk_panel_' + panel + ' h3.accordion-section-title' ).text( 'Panel ' + panel + ' - ' + title );
 			}
 			
 			function addSwapControls( panel ){
