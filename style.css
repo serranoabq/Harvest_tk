@@ -457,16 +457,17 @@ h1.page-title {
 	transition: all 0.5s ease;
 }
 .harvest_tk_panel .card-title {
+	/*left: 1rem;*/
+	/*right: 1rem;*/
+	/*text-align: center;*/
+	/*top: 50%;*/
+	/*transform: translatey(-50%);*/
 	position: absolute;
-	left: 1rem;
-	right: 1rem;
-	text-align: center;
-	top: 50%;
-	transform: translatey(-50%);
-	font-size: 2.5rem;
+	bottom: 0.5rem;
+	font-size: 1.5rem;
+	line-height: 1.5rem;
 	font-family: Nunito, sans-serif;
 	font-weight: 200;
-	line-height: 2.5rem;
 	z-index: 2;
 }
 .harvest_tk_panel .card {
