@@ -12,10 +12,6 @@
 
 	</header><!-- .entry-header -->
 
-	<div class="entry-meta">
-		<?php harvest_tk_posted_on(); ?>
-	</div><!-- .entry-meta -->
-	
 	<div class="entry-content col-12">
 		
 		<?php the_content(); ?>
@@ -24,7 +20,7 @@
 		
 	</div><!-- .entry-content -->
 
-	<footer class="entry-footer">
+	<footer class="entry-footer col-12 small">
 		<?php
 			/* translators: used between list items, there is a space after the comma */
 			$category_list = get_the_category_list( __( ', ', 'harvest_tk' ) );
@@ -58,6 +54,9 @@
 				the_title_attribute( 'echo=0' )
 			);
 		?>
+		<div class="entry-meta">
+			<?php harvest_tk_posted_on(); ?>
+		</div><!-- .entry-meta -->		
 
 		<?php edit_post_link( __( 'Edit this post', 'harvest_tk' ), '<span class="edit-link">', '</span>' ); ?>
 		
