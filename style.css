@@ -540,4 +540,13 @@ h1.page-title {
 	.bg-s-scroll { 
 		background-attachment: scroll;
 	}
+	.site-footer-social .fa {
+		font-size: 2.5em;
+		padding: 10px;
+	}
+	#site-footer-menu{
+		text-align: center;
+		flex-wrap: wrap;
+		justify-content: space-around !important;
+	}
 }
