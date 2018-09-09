@@ -182,6 +182,13 @@ function harvest_tk_precontent(){
 	}
 }
 
+// Replaces the excerpt "Read More" text by a link
+function harvest_tk_excerpt_more( $more ) {
+	global $post; 
+	return '<br/><br/><a class="moretag" href="'. get_permalink($post->ID) . '">' . __( '[Read more...]', 'harvest_tk' ) . '</a>';
+}
+add_filter( 'excerpt_more', 'harvest_tk_excerpt_more', 10, 2 );
+
 // Custom pagination display
 function harvest_tk_pagination(){
 	global $paged, $wp_query;
