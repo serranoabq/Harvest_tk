@@ -259,10 +259,9 @@ add_action( 'pre_get_posts', 'harvest_tk_pre_locations_and_people' );
 function harvest_tk_pre_locations_and_people( $query ){
 	if( is_admin() ) return; // don't filter the back end
 	
-	if( ! array_key_exists( 'post_type', $query->query_vars ) )
-		return;
-
-	if( ! in_array( $query->query_vars[ 'post_type' ], array( 'ctc_location', 'ctc_person' ) ) )
+	$query_terms = $query->query_vars;
+	
+	if( ! ( array_key_exists( 'post_type', $query_terms )  && ( 'ctc_location' == $query_terms['post_type'] || 'ctc_person' == $query_terms['post_type'] ) ) )
 		return;
 
 	$args = array(
@@ -271,7 +270,7 @@ function harvest_tk_pre_locations_and_people( $query ){
 		'posts_per_page' => -1,
 	);
 
-	$query_terms = array_merge( $args, $query->query_vars );
+	$query_terms = array_merge( $args, $query_terms );
 	$query->query_vars = $query_terms;
 
 }
