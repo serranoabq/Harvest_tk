@@ -56,7 +56,8 @@ function harvest_tk_feed_request( $qv ) {
 	if( isset( $qv['pagename'] ) ){
 		$post_page = get_post_field( 'post_name', get_option( 'page_for_posts' ) );	
 		if( $post_page == $qv['pagename'] ) return $qv;
-	}
+	}																							
+	if( isset( $qv['category_name'] ) ) return $qv;
 	
 	if( ! isset($qv[ 'post_type' ] ) )
 		$qv[ 'post_type' ] = 'ctc_sermon';
