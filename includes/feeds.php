@@ -47,10 +47,16 @@ function harvest_tk_itunes_head() {
 /*************************************************************
 / RSS Feeds
 /************************************************************/
-// Change the feed to just the sermons
+// Change the feed to just the sermons, unless it's the posts page, 
+// in which case it will show the post feed
 add_filter( 'request', 'harvest_tk_feed_request' );
 function harvest_tk_feed_request( $qv ) {
 	if( ! isset( $qv['feed'] ) ) return $qv;
+	
+	if( isset( $qv['pagename'] ) ){
+		$post_page = get_post_field( 'post_name', get_option( 'page_for_posts' ) );	
+		if( $post_page == $qv['pagename'] ) return $qv;
+	}
 	
 	if( ! isset($qv[ 'post_type' ] ) )
 		$qv[ 'post_type' ] = 'ctc_sermon';
@@ -233,6 +239,7 @@ function harvest_tk_getImage( $post_id = null ) {
 		$ctc_data = harvest_tk_get_group_data( $post_id );
 		break;
 	 default:
+		$ctc_data[ 'img' ] = '';
 		if( has_post_thumbnail( $post_id ) ) {
 			// Use featured image if available
 			$ctc_data[ 'img' ] = get_the_post_thumbnail_url( $post_id );
