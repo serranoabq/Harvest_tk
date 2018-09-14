@@ -7,13 +7,14 @@
 ?>
 	<div id="site-header-container" class="container">
 	
-		<nav class="navbar navbar-toggleable-md navbar-light navbar-white">
+		<nav class="navbar navbar-expand-lg navbar-light navbar-white">
 		
+			<?php harvest_tk_the_custom_logo( 'navbar-brand w-50' ); ?>
+			
 			<button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="top: 3vw">
 					<span class="navbar-toggler-icon"></span>
 			</button>
 			
-			<?php harvest_tk_the_custom_logo( 'navbar-brand w-50' ); ?>
 			
 			<?php wp_nav_menu(
 					array(

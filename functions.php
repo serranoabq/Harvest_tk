@@ -119,10 +119,10 @@ add_action( 'widgets_init', 'harvest_tk_widgets_init' );
 function harvest_tk_scripts() {
 
 	// Import the necessary TK Bootstrap WP CSS additions
-	wp_enqueue_style( 'harvest_tk-bootstrap-wp', THEME_DIR_URI . '/includes/css/bootstrap-wp.css' );
+	wp_enqueue_style( 'harvest_tk-bootstrap-wp-css', THEME_DIR_URI . '/includes/css/bootstrap-wp.css' );
 
 	// load bootstrap css
-	wp_enqueue_style( 'harvest_tk-bootstrap', THEME_DIR_URI . '/includes/resources/bootstrap/css/4.0/bootstrap.min.css' );
+	wp_enqueue_style( 'harvest_tk-bootstrap-css', THEME_DIR_URI . '/includes/resources/bootstrap/css/bootstrap.min.css' );
 
 	// load Font Awesome css
 	wp_enqueue_style( 'harvest_tk-font-awesome', THEME_DIR_URI . '/includes/css/font-awesome.min.css', false, '4.1.0' );
@@ -133,10 +133,10 @@ function harvest_tk_scripts() {
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css?family=Nunito:200,400|Roboto:200,400|Lora:200,400' );
 	
 	// load bootstrap js
-	wp_enqueue_script('harvest_tk-bootstrapjs', THEME_DIR_URI . '/includes/resources/bootstrap/js/4.0/bootstrap.min.js', array('jquery') );
+	wp_enqueue_script('harvest_tk-bootstrap-js', THEME_DIR_URI . '/includes/resources/bootstrap/js/bootstrap.min.js', array('jquery') );
 
 	// load bootstrap wp js
-	wp_enqueue_script( 'harvest_tk-bootstrapwp', THEME_DIR_URI . '/includes/js/bootstrap-wp.js', array('jquery') );
+	wp_enqueue_script( 'harvest_tk-bootstrap-wp-js', THEME_DIR_URI . '/includes/js/bootstrap-wp.js', array('jquery') );
 
 	wp_enqueue_script( 'harvest_tk-skip-link-focus-fix', THEME_DIR_URI . '/includes/js/skip-link-focus-fix.js', array(), '20130115', true );
 
