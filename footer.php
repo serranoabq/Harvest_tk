@@ -31,13 +31,19 @@
 			
 			<div class="row footer-menu">
 			
-				<?php wp_nav_menu( array (
-					'theme_location'  => 'footer-menu',					
-					'container'       => 'div',					
-					'container_class' => 'col-12',
-					'menu_class'      => 'nav justify-content-end',
-					
-				) ); ?>
+				<?php wp_nav_menu(
+					array(
+						'theme_location'  => 'footer-menu',
+						'container'       => 'div',
+						'container_class' => 'col-12',
+						'menu_class'      => 'nav justify-content-end',
+						'fallback_cb'     => 'wp_bootstrap_navwalker::fallback',
+						'walker'          => new wp_bootstrap_navwalker( array( 
+								'item' => 'nav-item', 
+								'link' => 'nav-link' 
+						) ) 
+					)
+				); ?>
 			
 			</div>
 			
