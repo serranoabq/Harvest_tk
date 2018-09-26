@@ -205,7 +205,7 @@ require THEME_DIR_PATH . '/includes/customizer.php';
 require THEME_DIR_PATH . '/includes/jetpack.php';
 
 // Load custom WordPress nav walker.
-require THEME_DIR_PATH . '/includes/bootstrap-wp-navwalker.php';
+require THEME_DIR_PATH . '/includes/class-bootstrap-wp-navwalker.php';
 
 // Load CTC support.
 require THEME_DIR_PATH . '/includes/ctc-support.php';
