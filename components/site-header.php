@@ -15,7 +15,6 @@
 					<span class="navbar-toggler-icon"></span>
 			</button>
 			
-			
 			<?php wp_nav_menu(
 					array(
 						'theme_location'  => 'primary',
@@ -27,9 +26,9 @@
 						'fallback_cb'     => 'wp_bootstrap_navwalker::fallback',
 						'menu_id'         => 'main-menu',
 						'walker'          => new wp_bootstrap_navwalker( array( 
-																																'item' => 'nav-item', 
-																																'link' => 'nav-link' 
-																														) ) 
+							'item' => 'nav-item', 
+							'link' => 'nav-link' 
+						) ) 
 					)
 				); ?>
 				

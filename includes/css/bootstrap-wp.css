@@ -37,3 +37,7 @@
  * Try with giving the .container class just a background colour and have a look. ;)
  */
 .container { padding: 0 15px 15px 15px; }
+
+.card-inverse .card-blockquote, .card-inverse .card-footer, .card-inverse .card-header, .card-inverse .card-title, .dropdown-menu .nav-item a {
+	color: #fff;
+}
